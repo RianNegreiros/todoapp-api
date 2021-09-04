@@ -1,7 +1,7 @@
 {
-  "name": "auth-api-node",
+  "name": "todo-api-node",
   "version": "1.0.0",
-  "description": "Authentication API",
+  "description": "Todo App API",
   "main": "src/main/server.ts",
   "scripts": {
     "start": "ts-node src/main/server.ts",

@@ -1,7 +1,7 @@
 version: '3'
 services:
  db:
-  container_name: node-api-db
+  container_name: todo-node-api-db
   image: postgres
   restart: always
   environment: 
@@ -11,7 +11,7 @@ services:
   ports: 
    - "5432:5432"
  app:
-  container_name: node-api
+  container_name: todo-node-api
   restart: always
   build: .
   ports: 
