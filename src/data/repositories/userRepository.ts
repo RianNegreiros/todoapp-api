@@ -1,11 +1,17 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import env from '../../main/config/env'
-import { getRepository } from 'typeorm'
-import { User } from '../../domain/models/User'
+import { getManager, getRepository } from 'typeorm'
+import { User } from '../../domain/models/user'
 
 class userRepository {
-  async userExist (email: string) {
+  async findById (id: number) {
+    const user = await getManager().findOneOrFail(User, id)
+
+    return user
+  }
+
+  async findUserByEmail (email: string) {
     const user = await getRepository(User).findOne({ where: { email } })
     return user
   }
