@@ -1,0 +1,20 @@
+version: '3'
+services:
+ db:
+  container_name: node-api-db
+  image: postgres
+  restart: always
+  environment: 
+   POSTGRES_PASSWORD: postgres
+   POSTGRES_USER: postgres
+   POSTGRES_DB: postgres-users
+  ports: 
+   - "5432:5432"
+ app:
+  container_name: node-api
+  restart: always
+  build: .
+  ports: 
+    - "5050:5050"
+  depends_on: 
+    - db

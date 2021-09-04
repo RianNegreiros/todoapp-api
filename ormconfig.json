@@ -1,0 +1,17 @@
+{
+   "type": "postgres",
+   "host": "db",
+   "port": 5432,
+   "username": "postgres",
+   "password": "postgres",
+   "database": "postgres-users",
+   "entities": [
+      "src/domain/models/*.ts"
+   ],
+   "migrations": [
+      "./src/data/migrations/*.ts"
+   ],
+   "cli": {
+      "migrationsDir": "./src/data/migrations"
+   }
+}
