@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Todo } from "./todo";
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -13,4 +14,7 @@ export class User extends BaseEntity {
 
   @Column()
   password: string
+
+  @ManyToOne(() => Todo, todo => todo.user)
+  todos: Todo[]
 }
