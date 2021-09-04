@@ -14,7 +14,7 @@ export const register = async (request: Request, response: Response) => {
     return response.status(400).json({ error: 'Invalid email.' })
   }
 
-  if(await userRepository.userExist(email)) {
+  if(await userRepository.findUserByEmail(email)) {
     return response.status(400).json({ error: 'This email is already in use.' })
   }
 
@@ -26,7 +26,7 @@ export const register = async (request: Request, response: Response) => {
 export const login = async (request: Request, response: Response) => {
   const { email, password } = request.body
 
-  const user = await userRepository.userExist(email)
+  const user = await userRepository.findUserByEmail(email)
 
   if (user) {
     userRepository.authenticateUser(password, user)

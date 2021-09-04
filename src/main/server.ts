@@ -1,7 +1,7 @@
 import express from 'express'
 import { dbConnection } from './config/dbConnection'
 import env from './config/env'
-import routes from './routes'
+import routes from './routes/userRoutes'
 
 const app = express()
 
