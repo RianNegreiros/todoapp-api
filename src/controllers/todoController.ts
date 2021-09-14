@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import todoRepository from "../../data/repositories/todoRepository";
-import userRepository from "../../data/repositories/userRepository";
+import todoRepository from "../data/repositories/todoRepository";
+import userRepository from "../data/repositories/userRepository";
 
 export const addTodo = async (request: Request, response: Response) => {
     const { userId, body } = request.body

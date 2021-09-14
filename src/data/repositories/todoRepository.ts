@@ -1,6 +1,6 @@
-import { Todo } from '../../domain/models/todo'
+import { Todo } from '../../models/todo'
 import { getManager } from "typeorm";
-import { User } from "../../domain/models/user";
+import { User } from "../../models/user";
 import userRepository from './userRepository';
 
 class todoRepository {

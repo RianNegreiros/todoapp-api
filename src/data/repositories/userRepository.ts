@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import env from '../../main/config/env'
 import { getManager, getRepository } from 'typeorm'
-import { User } from '../../domain/models/user'
+import { User } from '../../models/user'
 
 class userRepository {
   async findById (id: number) {

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
-import userRepository from '../../data/repositories/userRepository'
-import emailValidator from '../../validation/emailValidator'
-import passwordValidation from '../../validation/passwordValidation'
+import userRepository from '../data/repositories/userRepository'
+import emailValidator from '../validation/emailValidator'
+import passwordValidation from '../validation/passwordValidation'
 
 export const register = async (request: Request, response: Response) => {
   const { username, email, password, confirmPassword } = request.body
