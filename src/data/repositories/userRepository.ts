@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import env from '../../main/config/env'
+import env from '../../config/env'
 import { getManager, getRepository } from 'typeorm'
 import { User } from '../../models/user'
 
