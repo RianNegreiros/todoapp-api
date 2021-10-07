@@ -1,8 +1,8 @@
-version: '3'
+version: '3.8'
 services:
  db:
   container_name: todo-node-api-db
-  image: postgres
+  image: postgres:latest
   restart: always
   environment: 
    POSTGRES_PASSWORD: postgres
