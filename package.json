@@ -2,10 +2,10 @@
   "name": "todo-api-node",
   "version": "1.0.0",
   "description": "Todo App API",
-  "main": "src/main/server.ts",
+  "main": "src/server.ts",
   "scripts": {
-    "start": "ts-node src/main/server.ts",
-    "dev": "nodemon --exec ts-node src/main/server.ts",
+    "start": "ts-node src/server.ts",
+    "dev": "nodemon --exec ts-node src/server.ts",
     "typeorm": "npx ts-node ./node_modules/typeorm/cli.js"
   },
   "keywords": [],
