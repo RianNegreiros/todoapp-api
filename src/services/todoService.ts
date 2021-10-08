@@ -1,4 +1,4 @@
-import todoRepository from "../data/repositories/todoRepository"
+import { TodoRepository } from "../data/repositories/TodoRepository"
 
 interface ICreateTodoRequest {
     userId: number
@@ -10,27 +10,28 @@ interface ITodoRequest {
     todoId: number
 }
 
-class todoService {
+class TodoService {
+    constructor(private todoRepository: TodoRepository) {}
 
-    async addTodo({userId, body}: ICreateTodoRequest) {
-        return await todoRepository.addTodo(body, false, userId)
+    async createTodo({userId, body}: ICreateTodoRequest) {
+        return await this.todoRepository.createTodo(body, false, userId)
     }
 
     async setCompleted({userId, todoId}: ITodoRequest) {
-        return await todoRepository.setToCompleted(userId, todoId)
+        return await this.todoRepository.setToCompleted(userId, todoId)
     }
 
     async deleteTodo({userId, todoId}: ITodoRequest) {
-        return await todoRepository.deleteTodo(userId, todoId)
+        return await this.todoRepository.deleteTodo(userId, todoId)
     }
 
     async getAll({userId}: ITodoRequest) {
-        return await todoRepository.getAllTodos(userId)
+        return await this.todoRepository.getAllTodos(userId)
     }
 
     async getAllCompletedTodos({userId}: ITodoRequest) {
-        return await todoRepository.getAllCompleted(userId)
+        return await this.todoRepository.getAllCompleted(userId)
     }
 }
 
-export default new todoService()
+export { TodoService }

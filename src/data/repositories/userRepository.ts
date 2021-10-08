@@ -3,20 +3,10 @@ import jwt from 'jsonwebtoken'
 import env from '../../config/env'
 import { getManager, getRepository } from 'typeorm'
 import { User } from '../../entities/user'
+import { IUserRepository } from './IUserRepository'
 
-class userRepository {
-  async findById (id: number) {
-    const user = await getManager().findOneOrFail(User, id)
-
-    return user
-  }
-
-  async findUserByEmail (email: string) {
-    const user = await getRepository(User).findOne({ where: { email } })
-    return user
-  }
-
-  async addUser (username: string, email: string, password: string) {    
+class UserRepository implements IUserRepository {
+  async createUser (username: string, email: string, password: string) {    
     const passwordHash = await bcrypt.hash(password, 12)
     
     const user = await getRepository(User).save({
@@ -25,6 +15,17 @@ class userRepository {
       password: passwordHash
     })
   
+    return user
+  }
+
+  async findUserById (id: number) {
+    const user = await getManager().findOneOrFail(User, id)
+
+    return user
+  }
+
+  async findUserByEmail (email: string) {
+    const user = await getRepository(User).find({ where: { email } })
     return user
   }
 
@@ -46,4 +47,4 @@ class userRepository {
   }
 }
 
-export default new userRepository()
+export { UserRepository }

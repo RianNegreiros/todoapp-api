@@ -1,21 +1,16 @@
 import { Todo } from '../../entities/todo'
 import { getManager } from "typeorm"
-import userRepository from './userRepository'
+import { UserRepository } from './UserRepository'
+import { ITodoRepository } from './ITodoRepository'
 
-class todoRepository {
+class TodoRepository implements ITodoRepository {
+    constructor(private userRepository: UserRepository) { }
 
-    async getAllTodos(userId: number) {
-        const user = await userRepository.findById(userId)
-        const todos = user.todos
+    async createTodo(body: string, isCompleted: boolean, userId: number) {
 
-        return todos
-    }
+        const user = await this.userRepository.findUserById(userId)
 
-    async addTodo(body: string, isCompleted: boolean, userId: number) {
-
-        const user = await userRepository.findById(userId)
-
-        if(user === null) {
+        if (user === null) {
             throw new Error("User not found by this id")
         }
 
@@ -29,25 +24,32 @@ class todoRepository {
     }
 
     async deleteTodo(userId: number, todoId: number) {
-        const user = await userRepository.findById(userId)
+        const user = await this.userRepository.findUserById(userId)
         user.todos.find(t => t.id === todoId)
 
         return await getManager().delete(Todo, todoId)
     }
 
     async setToCompleted(userId: number, todoId: number) {
-        const user = await userRepository.findById(userId)
+        const user = await this.userRepository.findUserById(userId)
         user.todos.find(t => t.id === todoId)
 
         return await getManager().update(Todo, todoId, { isCompleted: true })
     }
 
+    async getAllTodos(userId: number) {
+        const user = await this.userRepository.findUserById(userId)
+        const todos = user.todos
+
+        return todos
+    }
+
     async getAllCompleted(userId: number) {
-        const user = await userRepository.findById(userId)
+        const user = await this.userRepository.findUserById(userId)
         const todos = user.todos.find(t => t.isCompleted === true)
 
         return todos
     }
 }
 
-export default new todoRepository()
+export { TodoRepository }

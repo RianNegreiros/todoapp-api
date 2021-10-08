@@ -1,9 +1,9 @@
 import { Router } from 'express'
-import { login, register } from '../controllers/userController'
+import { createUserFactory } from '../factories/createUserFactory'
 
 const userRoutes = Router()
 
-userRoutes.post('/register', register)
-userRoutes.get('/login', login)
+userRoutes.post('/register', createUserFactory().register)
+userRoutes.get('/login', createUserFactory().login)
 
 export default userRoutes
