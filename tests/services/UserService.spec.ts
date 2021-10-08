@@ -1,11 +1,16 @@
+import { IUserRepository } from "../../src/data/repositories/IUserRepository"
 import { UserService } from "../../src/services/UserService"
 import { UserRepositoryInMemory } from "../repositories/UserRepositoryInMemory"
 
 describe("Create user", () => {
-    it("Should be able to create a new user", async () => {
-        const userRepository = new UserRepositoryInMemory()
-        const userService = new UserService(userRepository)
+    let userRepository: IUserRepository
+    let userService: UserService
+    beforeAll(() => {
+        userRepository = new UserRepositoryInMemory()
+        userService = new UserService(userRepository)
 
+    })
+    it("Should be able to create a new user", async () => {
         const userData = {
             username: "testName",
             email: "test@mail.com",
@@ -18,5 +23,20 @@ describe("Create user", () => {
         expect(user).toHaveProperty("id")
         expect(user.username).toBe("testName")
         expect(user.email).toBe("test@mail.com")
+    })
+
+    it("Should be unable to create an existing user", async () => {
+        const userData = {
+            username: "testNameExists",
+            email: "testexists@mail.com",
+            password: "testTEST123@",
+            confirmPassword: "testTEST123@"
+        }
+
+        await userService.createUser(userData)
+
+        await expect(userService.createUser(userData)).rejects.toThrow(
+            new Error("This email is already in use")
+        )
     })
 })
