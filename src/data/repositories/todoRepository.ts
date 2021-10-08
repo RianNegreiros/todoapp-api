@@ -1,7 +1,7 @@
 import { Todo } from '../../entities/todo'
 import { getManager } from "typeorm"
-import { User } from "../../entities/user"
 import UserRepository from './userRepository'
+import userRepository from './userRepository'
 
 class todoRepository {
 
@@ -12,7 +12,13 @@ class todoRepository {
         return todos
     }
 
-    async addTodo(body: string, isCompleted: boolean, user: User) {
+    async addTodo(body: string, isCompleted: boolean, userId: number) {
+
+        const user = await userRepository.findById(userId)
+
+        if(user === null) {
+            throw new Error("User not found by this id")
+        }
 
         const todo = await getManager().save({
             body: body,
