@@ -1,13 +1,16 @@
 import express from 'express'
 import cors from 'cors'
 import { dbConnection } from './config/dbConnection'
-import routes from './routes/userRoutes'
+import todoRoutes from './routes/todoRoutes'
+import userRoutes from './routes/userRoutes'
 
 export const app = express()
 
 app.use(cors())
 app.use(express.json())
+app.use(userRoutes)
+app.use(todoRoutes)
 
 dbConnection()
 
-routes
+export default app

@@ -1,11 +1,11 @@
 import { Router } from 'express'
 import { addTodo, deleteTodo, getAllCompleted, setToCompleted } from '../controllers/todoController'
 
-const routes = Router()
+const todoRoutes = Router()
 
-routes.post('/todos/add', addTodo)
-routes.delete('/todos/delete', deleteTodo)
-routes.put('/todos/completed', setToCompleted)
-routes.get('/todos/completeds', getAllCompleted)
+todoRoutes.post('/todos/add', addTodo)
+todoRoutes.delete('/todos/delete', deleteTodo)
+todoRoutes.put('/todos/completed', setToCompleted)
+todoRoutes.get('/todos/completeds', getAllCompleted)
 
-export default routes
+export default todoRoutes
