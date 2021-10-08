@@ -1,8 +1,8 @@
-import { User } from "../../entities/user";
+import { User } from "../../entities/User";
 
 export interface IUserRepository {
-    createUser(username: string, email: string, password: string): Promise<User>
+    createUser(user: User): Promise<User>
     findUserById(id: number): Promise<User>
-    findUserByEmail(email: string): Promise<any>
+    findUserByEmail(email: string): Promise<User[]>
     authenticateUser(password: string, userData: User): Promise<any>
 }

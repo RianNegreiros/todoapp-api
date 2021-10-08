@@ -2,11 +2,11 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import env from '../../config/env'
 import { getManager, getRepository } from 'typeorm'
-import { User } from '../../entities/user'
+import { User } from '../../entities/User'
 import { IUserRepository } from './IUserRepository'
 
 class UserRepository implements IUserRepository {
-  async createUser (username: string, email: string, password: string) {    
+  async createUser ({ username, email, password }: User) {    
     const passwordHash = await bcrypt.hash(password, 12)
     
     const user = await getRepository(User).save({
