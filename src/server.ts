@@ -1,15 +1,6 @@
-import express from 'express'
-import { dbConnection } from './config/dbConnection'
+import app from './app'
 import env from './config/env'
-import routes from './routes/userRoutes'
 
-const app = express()
-
-app.use(express.json())
-
-dbConnection()
-
-app.use(routes)
 const server = app.listen(env.port, () =>
 console.log(`Server running at http://localhost:${env.port}`))
 
