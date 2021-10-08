@@ -8,7 +8,7 @@ class UserController {
     const { username, email, password, confirmPassword } = request.body
   
     try {
-      const user = await this.userService.saveUser({ username, email, password, confirmPassword });
+      const user = await this.userService.createUser({username, email, password, confirmPassword});
       return response.json(user).status(201)
     } catch (error) {
       return response.status(400).json(error)

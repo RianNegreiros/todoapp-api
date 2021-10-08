@@ -17,7 +17,7 @@ interface IUAuthRequest {
 class UserService {
   constructor(private userRepository: IUserRepository) {}
 
-    async saveUser({username, email, password, confirmPassword}: IUserRequest) {
+    async createUser({username, email, password, confirmPassword}: IUserRequest) {
         if (passwordValidator.isValid(password, confirmPassword) === false) {
             throw new Error("Password does not match requirements or confirmation password")
           }
@@ -30,7 +30,7 @@ class UserService {
             throw new Error("This email is already in use")
           }
 
-        const newUser = this.userRepository.createUser(username, email, password)
+        const newUser = this.userRepository.createUser({username, email, password})
 
         return newUser
     }
