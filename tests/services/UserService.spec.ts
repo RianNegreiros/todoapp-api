@@ -16,5 +16,7 @@ describe("Create user", () => {
         const user = await userService.createUser(userData)
 
         expect(user).toHaveProperty("id")
+        expect(user.username).toBe("testName")
+        expect(user.email).toBe("test@mail.com")
     })
 })
