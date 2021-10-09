@@ -26,6 +26,19 @@ describe("Create user", () => {
         expect(user.email).toBe("test@mail.com")
     })
 
+    it("Should be unable to create an user if password does not match the requirements", async () => {
+        const userData = {
+            username: "testInvalidPassword",
+            email: "testinvalidpassword@mail.com",
+            password: "invalidPassword",
+            confirmPassword: "invalidPassword"
+        }
+
+        await expect(userService.createUser(userData)).rejects.toThrow(
+            new Error("Password does not match requirements")
+        )
+    })
+
     it("Should be unable to create an existing user", async () => {
         const userData = {
             username: "testNameExists",
