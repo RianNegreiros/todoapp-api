@@ -2,16 +2,23 @@ import { User } from "../../src/entities/User"
 import { v4 as uuid } from "uuid"
 import { IUserRepository } from "../../src/data/repositories/IUserRepository"
 import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
-import env from '../../src/config/env'
+
 
 class UserRepositoryInMemory implements IUserRepository {
     private users: User[] = []
 
-    async createUser(user: User): Promise<User> {
+    async createUser({username, email, password}: User): Promise<User> {
+        const passwordHashed = await bcrypt.hash(password, 12)
+
+        const user = {
+            username: username,
+            email: email,
+            password: passwordHashed
+        }
+
         Object.assign(user, {
             id: uuid
-        });
+        })
 
         this.users.push(user)
 
@@ -19,29 +26,13 @@ class UserRepositoryInMemory implements IUserRepository {
     }
 
     async findUserById(id: number): Promise<any> {
-        const user = this.users.some((user) => user.id === id)
+        const user = this.users.find(user => user.id === id)
         return user
     }
 
     async findUserByEmail(email: string): Promise<any> {
-        const user = this.users.some((user) => user.email === email)
+        const user = this.users.find(user => user.email === email)
         return user
-    }
-    async authenticateUser(password: string, userData: User): Promise<any> {
-        if (await bcrypt.compare(password, userData.password)) {
-            const token = jwt.sign({ id: userData.id }, env.jwtSecret, {
-              expiresIn: '15m'
-            })
-      
-            const data = {
-              id: userData.id,
-              username: userData.username,
-              email: userData.email,
-              token
-            }
-      
-            return data
-          }
     }
 }
 
