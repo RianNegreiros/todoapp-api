@@ -103,4 +103,23 @@ describe("Create user", () => {
             new Error("User not found by this email")
         )
     })
+
+    it("Should throw if authentication fail", async () => {
+        const userData = {
+            username: "testNameAuthFail",
+            email: "testauthfail@mail.com",
+            password: "testFAIL123@",
+            confirmPassword: "testFAIL123@"
+        }
+        await userService.createUser(userData)
+
+        const authUser = {
+            email: "testauthfail@mail.com",
+            password: "testTEST123@"
+        }
+
+        await expect(userService.authenticateUser(authUser)).rejects.toThrow(
+            new Error("Fail to authenticate user")
+        )
+    })
 })
