@@ -21,8 +21,8 @@ class UserService {
   constructor(private userRepository: IUserRepository) { }
 
   async createUser({ username, email, password, confirmPassword }: IUserRequest) {
-    if (passwordValidator.isValid(password, confirmPassword) === false) {
-      throw new Error("Password does not match requirements or confirmation password")
+    if (passwordValidator.isValid(password) === false || passwordValidator.isValid(confirmPassword) === false) {
+      throw new Error("Password does not match requirements")
     }
 
     if (emailValidator.isValid(email) === false) {
