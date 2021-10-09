@@ -2,7 +2,7 @@ import { IUserRepository } from "../../src/data/repositories/IUserRepository"
 import { UserService } from "../../src/services/UserService"
 import { UserRepositoryInMemory } from "../repositories/UserRepositoryInMemory"
 
-describe("Create user", () => {
+describe("User service", () => {
     let userRepository: IUserRepository
     let userService: UserService
 
@@ -26,7 +26,7 @@ describe("Create user", () => {
         expect(user.email).toBe("test@mail.com")
     })
 
-    it("Should be unable to create an user if password does not match the requirements", async () => {
+    it("Should throw if password does not match the requirements", async () => {
         const userData = {
             username: "testInvalidPassword",
             email: "testinvalidpassword@mail.com",
@@ -39,7 +39,7 @@ describe("Create user", () => {
         )
     })
 
-    it("Should be unable to create an user if email is invalid", async () => {
+    it("Should throw if email is invalid", async () => {
         const userData = {
             username: "testInvalidEmail",
             email: "testinvalidemail",
@@ -52,7 +52,7 @@ describe("Create user", () => {
         )
     })
 
-    it("Should be unable to create an existing user", async () => {
+    it("Should throw if user already exists", async () => {
         const userData = {
             username: "testNameExists",
             email: "testexists@mail.com",
@@ -85,7 +85,7 @@ describe("Create user", () => {
         expect(auth).toHaveProperty("token")
     })
 
-    it("Should be unable to authenticate if user not found", async () => {
+    it("Should throw if user not found", async () => {
         const userData = {
             username: "testNameAuthError",
             email: "testautherror@mail.com",
