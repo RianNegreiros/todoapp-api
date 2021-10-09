@@ -39,6 +39,19 @@ describe("Create user", () => {
         )
     })
 
+    it("Should be unable to create an user if email is invalid", async () => {
+        const userData = {
+            username: "testInvalidEmail",
+            email: "testinvalidemail",
+            password: "testTEST123@",
+            confirmPassword: "testTEST123@"
+        }
+
+        await expect(userService.createUser(userData)).rejects.toThrow(
+            new Error("Invalid email")
+        )
+    })
+
     it("Should be unable to create an existing user", async () => {
         const userData = {
             username: "testNameExists",

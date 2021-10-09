@@ -7,7 +7,7 @@ import bcrypt from 'bcrypt'
 class UserRepositoryInMemory implements IUserRepository {
     private users: User[] = []
 
-    async createUser({username, email, password}: User): Promise<User> {
+    async createUser({ username, email, password }: User): Promise<User> {
         const passwordHashed = await bcrypt.hash(password, 12)
 
         const user = {
