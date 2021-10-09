@@ -58,4 +58,23 @@ describe("Create user", () => {
 
         expect(auth).toHaveProperty("token")
     })
+
+    it("Should be unable to authenticate if user not found", async () => {
+        const userData = {
+            username: "testNameAuthError",
+            email: "testautherror@mail.com",
+            password: "testTEST123@",
+            confirmPassword: "testTEST123@"
+        }
+        await userService.createUser(userData)
+
+        const authUser = {
+            email: "testau@mail.com",
+            password: "testTEST123@"
+        }
+
+        await expect(userService.authenticateUser(authUser)).rejects.toThrow(
+            new Error("User not found by this email")
+        )
+    })
 })
