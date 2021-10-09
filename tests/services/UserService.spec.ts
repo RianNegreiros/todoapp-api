@@ -5,11 +5,12 @@ import { UserRepositoryInMemory } from "../repositories/UserRepositoryInMemory"
 describe("Create user", () => {
     let userRepository: IUserRepository
     let userService: UserService
+
     beforeAll(() => {
         userRepository = new UserRepositoryInMemory()
         userService = new UserService(userRepository)
-
     })
+
     it("Should be able to create a new user", async () => {
         const userData = {
             username: "testName",
@@ -38,5 +39,23 @@ describe("Create user", () => {
         await expect(userService.createUser(userData)).rejects.toThrow(
             new Error("This email is already in use")
         )
+    })
+
+    it("Should be able to authenticate user", async () => {
+        const userData = {
+            username: "testNameAuth",
+            email: "testauth@mail.com",
+            password: "testTEST123@",
+            confirmPassword: "testTEST123@"
+        }
+        await userService.createUser(userData)
+
+        const authUser = {
+            email: "testauth@mail.com",
+            password: "testTEST123@"
+        }
+        const auth = await userService.authenticateUser(authUser)
+
+        expect(auth).toHaveProperty("token")
     })
 })
