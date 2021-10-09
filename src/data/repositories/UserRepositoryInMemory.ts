@@ -1,6 +1,6 @@
-import { User } from "../../src/entities/User"
+import { User } from "../../entities/User"
 import { v4 as uuid } from "uuid"
-import { IUserRepository } from "../../src/data/repositories/IUserRepository"
+import { IUserRepository } from "./IUserRepository"
 import bcrypt from 'bcrypt'
 
 

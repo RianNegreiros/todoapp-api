@@ -1,6 +1,6 @@
 import { IUserRepository } from "../../src/data/repositories/IUserRepository"
 import { UserService } from "../../src/services/UserService"
-import { UserRepositoryInMemory } from "../repositories/UserRepositoryInMemory"
+import { UserRepositoryInMemory } from "../../src/data/repositories/UserRepositoryInMemory"
 
 describe("User service", () => {
     let userRepository: IUserRepository
