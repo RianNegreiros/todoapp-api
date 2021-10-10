@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
 import { Todo } from "./Todo"
 
 @Entity('users')
@@ -17,8 +17,6 @@ class User {
 
   @ManyToOne(() => Todo, todo => todo.user)
   todos?: Todo[]
-
-
 }
 
 export { User }

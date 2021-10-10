@@ -38,7 +38,7 @@ class UserService {
     return newUser
   }
 
-  async authenticateUser({email, password}: IUAuthRequest) {
+  async authenticateUser({ email, password }: IUAuthRequest) {
     const user = await this.userRepository.findUserByEmail(email)
     if (!user) {
       throw new Error("User not found by this email")

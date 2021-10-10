@@ -11,25 +11,25 @@ interface ITodoRequest {
 }
 
 class TodoService {
-    constructor(private todoRepository: TodoRepository) {}
+    constructor(private todoRepository: TodoRepository) { }
 
-    async createTodo({userId, body}: ICreateTodoRequest) {
+    async createTodo({ userId, body }: ICreateTodoRequest) {
         return await this.todoRepository.createTodo(body, false, userId)
     }
 
-    async setCompleted({userId, todoId}: ITodoRequest) {
+    async setCompleted({ userId, todoId }: ITodoRequest) {
         return await this.todoRepository.setToCompleted(userId, todoId)
     }
 
-    async deleteTodo({userId, todoId}: ITodoRequest) {
+    async deleteTodo({ userId, todoId }: ITodoRequest) {
         return await this.todoRepository.deleteTodo(userId, todoId)
     }
 
-    async getAll({userId}: ITodoRequest) {
+    async getAll({ userId }: ITodoRequest) {
         return await this.todoRepository.getAllTodos(userId)
     }
 
-    async getAllCompletedTodos({userId}: ITodoRequest) {
+    async getAllCompletedTodos({ userId }: ITodoRequest) {
         return await this.todoRepository.getAllCompleted(userId)
     }
 }

@@ -2,7 +2,7 @@ import { Request, Response } from "express"
 import { TodoService } from "../services/TodoService"
 
 class TodoController {
-    constructor(private todoService: TodoService) {}
+    constructor(private todoService: TodoService) { }
     async createTodo(request: Request, response: Response) {
         const { userId, body } = request.body
 

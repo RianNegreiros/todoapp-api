@@ -1,8 +1,8 @@
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
 import { User } from "./User"
 
 @Entity()
-export class Todo extends BaseEntity {
+export class Todo {
   @PrimaryGeneratedColumn('uuid')
   id: number
 
