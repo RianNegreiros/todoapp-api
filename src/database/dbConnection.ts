@@ -3,7 +3,7 @@ import { createConnection } from "typeorm"
 export const dbConnection = async () => {
 
   try {
-    const connection = await createConnection();
+    const connection = await createConnection()
 
     console.log(`Database connect: ${connection.options.database}`)
 
