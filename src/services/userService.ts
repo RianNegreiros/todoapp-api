@@ -2,7 +2,7 @@ import { IUserRepository } from "../data/repositories/IUserRepository"
 import emailValidator from "../validation/emailValidator"
 import passwordValidator from "../validation/passwordValidator"
 import jwt from 'jsonwebtoken'
-import env from '../../src/config/env'
+import env from '../config/env'
 import bcrypt from 'bcrypt'
 
 interface IUserRequest {

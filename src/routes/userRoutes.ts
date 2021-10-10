@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { createUserFactory } from '../factories/createUserFactory'
+import { createUserFactory } from '../factories/CreateUserFactory'
 
 const userRoutes = Router()
 
