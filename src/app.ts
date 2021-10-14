@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { dbConnection } from './config/dbConnection'
+import { dbConnection } from './database/dbConnection'
 import todoRoutes from './routes/todoRoutes'
 import userRoutes from './routes/userRoutes'
 

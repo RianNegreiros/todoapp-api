@@ -18,7 +18,7 @@ export const auth = async (
   try {
     jwt.verify(token, env.jwtSecret)
     next()
-  } catch(error) {
+  } catch (error) {
     return response.status(401).json({ error: 'Token invalid.' })
   }
 }

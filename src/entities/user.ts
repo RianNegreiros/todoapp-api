@@ -1,10 +1,10 @@
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Todo } from "./todo";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
+import { Todo } from "./Todo"
 
 @Entity('users')
-export class User extends BaseEntity {
+class User {
   @PrimaryGeneratedColumn('uuid')
-  id: number
+  id?: number
 
   @Column()
   username: string
@@ -16,5 +16,7 @@ export class User extends BaseEntity {
   password: string
 
   @ManyToOne(() => Todo, todo => todo.user)
-  todos: Todo[]
+  todos?: Todo[]
 }
+
+export { User }
