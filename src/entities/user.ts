@@ -4,7 +4,7 @@ import { Todo } from "./Todo"
 @Entity('users')
 class User {
   @PrimaryGeneratedColumn('uuid')
-  id?: number
+  readonly id?: number
 
   @Column()
   username: string

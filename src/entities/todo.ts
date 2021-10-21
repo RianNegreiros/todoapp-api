@@ -4,7 +4,7 @@ import { User } from "./User"
 @Entity()
 export class Todo {
   @PrimaryGeneratedColumn('uuid')
-  id: number
+  readonly id: number
 
   @Column()
   body: string
