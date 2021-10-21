@@ -6,7 +6,7 @@
    "password": "postgres",
    "database": "postgres-users",
    "entities": [
-      "src/domain/models/*.ts"
+      "src/entities/*.ts"
    ],
    "migrations": [
       "./src/data/migrations/*.ts"
