@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
-import todoRoutes from './routes/todoRoutes'
-import userRoutes from './routes/userRoutes'
+import todoRoutes from './routes/todo.routes'
+import userRoutes from './routes/user.routes'
 import { dbConnection } from './data/database/dbConnection'
 
 export const app = express()
