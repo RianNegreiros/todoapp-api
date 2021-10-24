@@ -4,6 +4,16 @@ import { User } from '../../entities/User'
 import { IUserRepository } from './IUserRepository'
 
 class UserRepository implements IUserRepository {
+
+  private static INSTANCE: UserRepository
+
+  public static getInstance(): UserRepository {
+    if (!UserRepository.INSTANCE) {
+      UserRepository.INSTANCE = new UserRepository()
+    }
+    return UserRepository.INSTANCE
+  }
+
   async createUser({ username, email, password }: User) {
     const passwordHashed = await bcrypt.hash(password, 12)
 

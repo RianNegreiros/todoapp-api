@@ -3,7 +3,7 @@ import { UserRepository } from "../data/repositories/UserRepository"
 import { UserService } from "../services/UserService"
 
 export const createUserFactory = () => {
-    const userRepo = new UserRepository()
+    const userRepo = UserRepository.getInstance()
     const createUser = new UserService(userRepo)
     const createUserController = new UserController(createUser)
 
