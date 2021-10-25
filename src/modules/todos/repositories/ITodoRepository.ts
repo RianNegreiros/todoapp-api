@@ -1,4 +1,4 @@
-import { Todo } from "../../entities/Todo"
+import { Todo } from "../entities/Todo"
 
 export interface ITodoRepository {
     createTodo(body: string, isCompleted: boolean, userId: number): Promise<Todo | any>

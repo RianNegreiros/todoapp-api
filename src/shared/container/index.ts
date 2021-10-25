@@ -1,8 +1,8 @@
 import { container } from 'tsyringe'
-import { ITodoRepository } from '../../data/repositories/ITodoRepository'
-import { IUserRepository } from '../../data/repositories/IUserRepository'
-import { TodoRepository } from '../../data/repositories/TodoRepository'
-import { UserRepository } from '../../data/repositories/UserRepository'
+import { ITodoRepository } from '../../modules/todos/repositories/ITodoRepository'
+import { IUserRepository } from '../../modules/users/repositories/IUserRepository'
+import { TodoRepository } from '../../modules/todos/repositories/TodoRepository'
+import { UserRepository } from '../../modules/users/repositories/UserRepository'
 
 container.registerSingleton<ITodoRepository>(
   "TodoRespository",

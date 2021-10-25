@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
-import env from '../../config/env'
+import env from '../../../../config/env'
 import bcrypt from 'bcrypt'
-import { IUserRepository } from '../../data/repositories/IUserRepository'
+import { IUserRepository } from '../../repositories/IUserRepository'
 import { inject, injectable } from 'tsyringe'
 
 interface IUAuthRequest {

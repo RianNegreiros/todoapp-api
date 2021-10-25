@@ -1,5 +1,5 @@
-import { inject, injectable } from "tsyringe";
-import { ITodoRepository } from "../../data/repositories/ITodoRepository";
+import { inject, injectable } from "tsyringe"
+import { ITodoRepository } from "../../repositories/ITodoRepository"
 
 interface ICreateTodoRequest {
   userId: number

@@ -1,5 +1,5 @@
 import { inject, injectable } from "tsyringe"
-import { ITodoRepository } from "../../data/repositories/ITodoRepository"
+import { ITodoRepository } from "../../repositories/ITodoRepository"
 
 interface ITodoRequest {
   userId: number
@@ -7,15 +7,15 @@ interface ITodoRequest {
 }
 
 @injectable()
-class GetAllTodosUseCase {
+class GetAllTodosCompletedUseCase {
   constructor(
     @inject("TodoRepository")
     private todoRepository: ITodoRepository
   ) { }
-
+  
   async execute({ userId }: ITodoRequest) {
-    return await this.todoRepository.getAllTodos(userId)
+    return await this.todoRepository.getAllCompleted(userId)
   }
 }
 
-export { GetAllTodosUseCase }
+export { GetAllTodosCompletedUseCase }
