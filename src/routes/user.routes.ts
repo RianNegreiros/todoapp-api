@@ -1,9 +1,13 @@
 import { Router } from 'express'
-import { createUserFactory } from '../factories/createUserFactory'
+import { AuthenticateUserController } from '../usecases/authenticateUser/AuthenticateUserController'
+import { CreateUserController } from '../usecases/createUser/CreateUserController'
 
 const userRoutes = Router()
 
-userRoutes.post('/register', createUserFactory().register)
-userRoutes.get('/login', createUserFactory().login)
+const createUserController = new CreateUserController()
+const authenticateUserController = new AuthenticateUserController()
 
-export default userRoutes
+userRoutes.post('/register', createUserController.handle)
+userRoutes.get('/login', authenticateUserController.handle)
+
+export { userRoutes }
