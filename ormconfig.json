@@ -1,16 +1,10 @@
 {
    "type": "postgres",
-   "host": "database_todoapp",
+   "host": "localhost",
    "port": 5432,
    "username": "todoapp",
    "password": "todoapp",
    "database": "todoapp",
-   "entities": [
-      "src/entities/*.ts"
-   ],
-   "migrations": [
-      "./src/data/migrations/*.ts"
-   ],
    "cli": {
       "migrationsDir": "./src/data/migrations"
    }
