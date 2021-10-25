@@ -18,7 +18,7 @@ export class Todos1635186500359 implements MigrationInterface {
                     },
                     {
                         name: "iscompleted",
-                        type: "bool",
+                        type: "boolean",
                     },
                     {
                         name: "created_at",
