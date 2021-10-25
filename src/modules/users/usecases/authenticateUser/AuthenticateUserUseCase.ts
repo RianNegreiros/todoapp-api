@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt'
 import { IUserRepository } from '../../repositories/IUserRepository'
 import { inject, injectable } from 'tsyringe'
 
-interface IUAuthRequest {
+interface IAuthRequest {
   email: string
   password: string
 }
@@ -12,32 +12,30 @@ interface IUAuthRequest {
 @injectable()
 class AuthenticateUserUseCase {
   constructor(
-    @inject("UserRepository")
+    @inject('UserRepository')
     private userRepository: IUserRepository
   ) { }
 
-  async execute({ email, password }: IUAuthRequest) {
+  async execute({ email, password }: IAuthRequest) {
     const user = await this.userRepository.findUserByEmail(email)
     if (!user) {
-      throw new Error("User not found by this email")
+      throw new Error('Email or password incorrect')
     }
 
     const validate = await bcrypt.compare(password, user.password)
     if (!validate) {
-      throw new Error("Fail to authenticate user")
+      throw new Error('Email or password incorrect')
     }
 
-    const token = jwt.sign({ id: user.id }, env.jwtSecret, {
+    const token = jwt.sign({ username: user.username }, env.jwtSecret, {
+      subject: user.id,
       expiresIn: '15m'
     })
-
-    const data = {
-      id: user.id,
+    return {
       username: user.username,
       email: user.email,
       token: token
     }
-    return data
   }
 }
 
