@@ -1,4 +1,5 @@
-import { TodoRepository } from "../data/repositories/TodoRepository"
+import { inject, injectable } from 'tsyringe'
+import { ITodoRepository } from "../data/repositories/ITodoRepository"
 
 interface ICreateTodoRequest {
     userId: number
@@ -10,8 +11,12 @@ interface ITodoRequest {
     todoId: number
 }
 
+@injectable()
 class TodoService {
-    constructor(private todoRepository: TodoRepository) { }
+    constructor(
+        @inject("TodoRepository")
+        private todoRepository: ITodoRepository
+        ) { }
 
     async createTodo({ userId, body }: ICreateTodoRequest) {
         return await this.todoRepository.createTodo(body, false, userId)
