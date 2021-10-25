@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt'
 import { getManager, getRepository } from 'typeorm'
-import { User } from '../../entities/User'
+import { User } from '../entities/User'
 import { IUserRepository } from './IUserRepository'
 
 class UserRepository implements IUserRepository {

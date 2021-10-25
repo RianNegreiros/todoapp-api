@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe"
-import { IUserRepository } from "../../data/repositories/IUserRepository"
-import emailValidator from "../../validation/emailValidator"
-import passwordValidator from "../../validation/passwordValidator"
+import { IUserRepository } from "../../repositories/IUserRepository"
+import emailValidator from "../../../../validation/emailValidator"
+import passwordValidator from "../../../../validation/passwordValidator"
 
 interface IUserRequest {
   username: string

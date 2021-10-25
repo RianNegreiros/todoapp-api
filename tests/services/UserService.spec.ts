@@ -1,4 +1,4 @@
-import { IUserRepository } from "../../src/data/repositories/IUserRepository"
+import { IUserRepository } from "../../src/modules/users/repositories/IUserRepository"
 import { UserService } from "../../src/services/UserService"
 import { UserRepositoryInMemory } from "../repositories/UserRepositoryInMemory"
 
