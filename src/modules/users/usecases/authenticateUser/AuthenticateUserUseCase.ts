@@ -27,7 +27,7 @@ class AuthenticateUserUseCase {
       throw new Error('Email or password incorrect')
     }
 
-    const token = jwt.sign({ username: user.username }, env.jwtSecret, {
+    const token = jwt.sign({}, env.jwtSecret, {
       subject: user.id,
       expiresIn: '15m'
     })

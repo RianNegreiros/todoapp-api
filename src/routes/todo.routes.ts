@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
 import { CreateTodoController } from '../modules/todos/usecases/createTodo/CreateTodoController'
 import { DeleteTodoController } from '../modules/todos/usecases/deleteTodo/DeleteTodoController'
 import { GetAllTodosController } from '../modules/todos/usecases/getAllTodos/GetAllTodosController'
@@ -13,6 +14,7 @@ const setTodoCompletedController = new SetTodoCompletedController()
 const getAllTodosCompletedController = new GetAllTodosCompletedController()
 const getAllTodosController = new GetAllTodosController()
 
+todoRoutes.use(ensureAuthenticated)
 todoRoutes.post('/add', createTodoController.handle)
 
 todoRoutes.delete('/delete', deleteTodoController.handle)
