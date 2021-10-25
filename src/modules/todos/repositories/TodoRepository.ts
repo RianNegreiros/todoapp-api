@@ -6,7 +6,7 @@ import { ITodoRepository } from './ITodoRepository'
 class TodoRepository implements ITodoRepository {
     constructor(private userRepository: UserRepository) { }
 
-    async createTodo(body: string, isCompleted: boolean, userId: number) {
+    async createTodo(body: string, isCompleted: boolean, userId: string) {
 
         const user = await this.userRepository.findUserById(userId)
 
@@ -23,28 +23,28 @@ class TodoRepository implements ITodoRepository {
         return todo
     }
 
-    async deleteTodo(userId: number, todoId: number) {
+    async deleteTodo(userId: string, todoId: string) {
         const user = await this.userRepository.findUserById(userId)
         user.todos?.find(t => t.id === todoId)
 
         return await getManager().delete(Todo, todoId)
     }
 
-    async setToCompleted(userId: number, todoId: number) {
+    async setToCompleted(userId: string, todoId: string) {
         const user = await this.userRepository.findUserById(userId)
         user.todos?.find(t => t.id === todoId)
 
         return await getManager().update(Todo, todoId, { isCompleted: true })
     }
 
-    async getAllTodos(userId: number) {
+    async getAllTodos(userId: string) {
         const user = await this.userRepository.findUserById(userId)
         const todos = user.todos
 
         return todos
     }
 
-    async getAllCompleted(userId: number) {
+    async getAllCompleted(userId: string) {
         const user = await this.userRepository.findUserById(userId)
         const todos = user.todos?.find(t => t.isCompleted === true)
 

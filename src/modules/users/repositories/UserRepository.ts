@@ -1,22 +1,28 @@
 import bcrypt from 'bcrypt'
-import { getManager, getRepository } from 'typeorm'
+import { getManager, getRepository, Repository } from 'typeorm'
+import { ICreateUserRequest } from '../dtos/ICreateUserRequest'
 import { User } from '../entities/User'
 import { IUserRepository } from './IUserRepository'
 
 class UserRepository implements IUserRepository {
-  async createUser({ username, email, password }: User) {
+  private repository: Repository<User>
+
+  constructor() {
+    this.repository = getRepository(User)
+  }
+
+  async createUser({ username, email, password }: ICreateUserRequest) {
     const passwordHashed = await bcrypt.hash(password, 12)
 
-    const user = await getRepository(User).save({
+    const user =this.repository.create({
       username,
       email,
       password: passwordHashed
     })
-
     return user
   }
 
-  async findUserById(id: number) {
+  async findUserById(id: string) {
     const user = await getManager().findOneOrFail(User, id)
     return user
   }
