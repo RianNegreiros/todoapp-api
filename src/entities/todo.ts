@@ -2,7 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
 import { User } from "./User"
 
 @Entity()
-export class Todo {
+class Todo {
   @PrimaryGeneratedColumn('uuid')
   readonly id: number
 
@@ -17,3 +17,5 @@ export class Todo {
   @ManyToOne(() => User)
   user: User
 }
+
+export { Todo }
