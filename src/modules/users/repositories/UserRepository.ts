@@ -14,7 +14,7 @@ class UserRepository implements IUserRepository {
   async createUser({ username, email, password }: ICreateUserRequest) {
     const passwordHashed = await bcrypt.hash(password, 12)
 
-    const user =this.repository.create({
+    const user = this.repository.create({
       username,
       email,
       password: passwordHashed
