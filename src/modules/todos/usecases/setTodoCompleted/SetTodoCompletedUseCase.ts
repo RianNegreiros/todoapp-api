@@ -1,10 +1,6 @@
 import { inject, injectable } from "tsyringe"
+import { ITodoRequest } from "../../dtos/ITodoRequest"
 import { ITodoRepository } from "../../repositories/ITodoRepository"
-
-interface ITodoRequest {
-  userId: number
-  todoId: number
-}
 
 @injectable()
 class SetTodoCompletedUseCase {

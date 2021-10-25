@@ -1,9 +1,10 @@
 import { inject, injectable } from "tsyringe"
+import { ICreateUserRequest } from "../../dtos/ICreateUserRequest"
 import { IUserRepository } from "../../repositories/IUserRepository"
 import emailValidator from "../../validation/emailValidator"
 import passwordValidator from "../../validation/passwordValidator"
 
-interface IUserRequest {
+interface IRegisterUserRequest {
   username: string
   email: string
   password: string
@@ -17,7 +18,7 @@ class CreateUserUseCase {
     private userRepository: IUserRepository
   ) { }
 
-  async execute({ username, email, password, confirmPassword }: IUserRequest) {
+  async execute({ username, email, password, confirmPassword }: IRegisterUserRequest) {
     if (passwordValidator.isValid(password) === false || passwordValidator.isValid(confirmPassword) === false) {
       throw new Error("Password does not match requirements")
     }
