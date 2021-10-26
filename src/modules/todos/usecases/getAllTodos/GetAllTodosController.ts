@@ -1,6 +1,6 @@
-import { Request, Response } from "express"
-import { container } from "tsyringe"
-import { GetAllTodosUseCase } from "./GetAllTodosUseCase"
+import { Request, Response } from 'express'
+import { container } from 'tsyringe'
+import { GetAllTodosUseCase } from './GetAllTodosUseCase'
 
 class GetAllTodosController {
   async handle(request: Request, response: Response) {

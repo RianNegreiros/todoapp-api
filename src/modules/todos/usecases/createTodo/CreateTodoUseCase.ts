@@ -1,17 +1,17 @@
-import { inject, injectable } from "tsyringe"
-import { ITodoRepository } from "../../repositories/ITodoRepository"
+import { inject, injectable } from 'tsyringe'
+import { ITodoRepository } from '../../repositories/ITodoRepository'
 
 interface ICreateTodoRequest {
-  userId: number
+  userId: string
   body: string
 }
 
 @injectable()
 class CreateTodoUseCase {
   constructor(
-    @inject("TodoRepository")
+    @inject('TodoRepository')
     private todoRepository: ITodoRepository
-  ) { }
+  ) {}
 
   async execute({ userId, body }: ICreateTodoRequest) {
     return await this.todoRepository.createTodo(body, false, userId)

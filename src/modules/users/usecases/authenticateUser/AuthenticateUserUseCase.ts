@@ -14,7 +14,7 @@ class AuthenticateUserUseCase {
   constructor(
     @inject('UserRepository')
     private userRepository: IUserRepository
-  ) { }
+  ) {}
 
   async execute({ email, password }: IAuthRequest) {
     const user = await this.userRepository.findUserByEmail(email)
@@ -29,12 +29,12 @@ class AuthenticateUserUseCase {
 
     const token = jwt.sign({ username: user.username }, env.jwtSecret, {
       subject: user.id,
-      expiresIn: '15m'
+      expiresIn: '15m',
     })
     return {
       username: user.username,
       email: user.email,
-      token: token
+      token: token,
     }
   }
 }

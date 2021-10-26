@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { container } from 'tsyringe';
+import { container } from 'tsyringe'
 import { CreateUserUseCase } from './CreateUserUseCase'
 
 class CreateUserController {
@@ -8,7 +8,12 @@ class CreateUserController {
     const createUserUseCase = container.resolve(CreateUserUseCase)
 
     try {
-      const user = await createUserUseCase.execute({ username, email, password, confirmPassword });
+      const user = await createUserUseCase.execute({
+        username,
+        email,
+        password,
+        confirmPassword,
+      })
       return response.status(201).json(user)
     } catch (error) {
       return response.status(400).json(error)

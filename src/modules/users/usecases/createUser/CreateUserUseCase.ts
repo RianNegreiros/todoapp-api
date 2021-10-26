@@ -1,7 +1,7 @@
-import { inject, injectable } from "tsyringe"
-import { IUserRepository } from "../../repositories/IUserRepository"
-import emailValidator from "../../validation/emailValidator"
-import passwordValidator from "../../validation/passwordValidator"
+import { inject, injectable } from 'tsyringe'
+import { IUserRepository } from '../../repositories/IUserRepository'
+import emailValidator from '../../validation/emailValidator'
+import passwordValidator from '../../validation/passwordValidator'
 
 interface IRegisterUserRequest {
   username: string
@@ -13,24 +13,36 @@ interface IRegisterUserRequest {
 @injectable()
 class CreateUserUseCase {
   constructor(
-    @inject("UserRepository")
+    @inject('UserRepository')
     private userRepository: IUserRepository
-  ) { }
+  ) {}
 
-  async execute({ username, email, password, confirmPassword }: IRegisterUserRequest) {
-    if (passwordValidator.isValid(password) === false || passwordValidator.isValid(confirmPassword) === false) {
-      throw new Error("Password does not match requirements")
+  async execute({
+    username,
+    email,
+    password,
+    confirmPassword,
+  }: IRegisterUserRequest) {
+    if (
+      passwordValidator.isValid(password) === false ||
+      passwordValidator.isValid(confirmPassword) === false
+    ) {
+      throw new Error('Password does not match requirements')
     }
 
     if (emailValidator.isValid(email) === false) {
-      throw new Error("Invalid email")
+      throw new Error('Invalid email')
     }
 
     if (await this.userRepository.findUserByEmail(email)) {
-      throw new Error("This email is already in use")
+      throw new Error('This email is already in use')
     }
 
-    const newUser = this.userRepository.createUser({ username, email, password })
+    const newUser = this.userRepository.createUser({
+      username,
+      email,
+      password,
+    })
 
     return newUser
   }

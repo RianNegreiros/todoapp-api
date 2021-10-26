@@ -17,7 +17,7 @@ class UserRepository implements IUserRepository {
     const user = this.repository.create({
       username,
       email,
-      password: passwordHashed
+      password: passwordHashed,
     })
     return user
   }

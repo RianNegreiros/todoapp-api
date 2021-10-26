@@ -1,6 +1,6 @@
-import { Router } from "express"
-import { todoRoutes } from "./todo.routes"
-import { userRoutes } from "./user.routes"
+import { Router } from 'express'
+import { todoRoutes } from './todo.routes'
+import { userRoutes } from './user.routes'
 
 const router = Router()
 
