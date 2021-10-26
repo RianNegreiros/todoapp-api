@@ -7,7 +7,7 @@
     "start": "ts-node -r tsconfig-paths/register src/shared/infra/http/server.ts",
     "dev": "nodemon --exec ts-node -r tsconfig-paths/register src/shared/infra/http/server.ts",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
-    "test": "jest"
+    "test": "NODE_ENV=test jest"
   },
   "keywords": [],
   "author": "Rian Negreiros",

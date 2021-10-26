@@ -1,6 +1,6 @@
 {
    "type": "postgres",
-   "host": "database_todoapp",
+   "host": "locahost",
    "port": 5432,
    "username": "todoapp",
    "password": "todoapp",
