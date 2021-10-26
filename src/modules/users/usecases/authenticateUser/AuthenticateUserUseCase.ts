@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
-import env from '@/config/env'
 import { inject, injectable } from 'tsyringe'
-import { IUserRepository } from '@/modules/users/repositories/IUserRepository'
+import { IUserRepository } from '@modules/users/repositories/IUserRepository'
+import env from '@config/env'
 
 interface IAuthRequest {
   email: string

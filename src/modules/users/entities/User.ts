@@ -1,3 +1,4 @@
+import { Todo } from '@modules/todos/entities/Todo'
 import { v4 as uuidV4 } from 'uuid'
 import {
   Column,
@@ -6,7 +7,6 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
-import { Todo } from '@/modules/todos/entities/Todo'
 
 @Entity('users')
 class User {

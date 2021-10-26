@@ -1,4 +1,4 @@
-import { Todo } from '@/modules/todos/entities/Todo'
+import { Todo } from '../entities/Todo'
 
 interface ITodoRepository {
   createTodo(

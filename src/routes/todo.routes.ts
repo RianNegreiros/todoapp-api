@@ -1,9 +1,9 @@
 import { Router } from 'express'
-import { CreateTodoController } from '@/modules/todos/useCases/createTodo/CreateTodoController'
-import { DeleteTodoController } from '@/modules/todos/useCases/deleteTodo/DeleteTodoController'
-import { GetAllTodosController } from '@/modules/todos/useCases/getAllTodos/GetAllTodosController'
-import { GetAllTodosCompletedController } from '@/modules/todos/useCases/getAllTodosCompleted/GetAllTodosCompletedController'
-import { SetTodoCompletedController } from '@/modules/todos/useCases/setTodoCompleted/SetTodoCompletedController'
+import { CreateTodoController } from '@modules/todos/useCases/createTodo/CreateTodoController'
+import { DeleteTodoController } from '@modules/todos/useCases/deleteTodo/DeleteTodoController'
+import { GetAllTodosController } from '@modules/todos/useCases/getAllTodos/GetAllTodosController'
+import { GetAllTodosCompletedController } from '@modules/todos/useCases/getAllTodosCompleted/GetAllTodosCompletedController'
+import { SetTodoCompletedController } from '@modules/todos/useCases/setTodoCompleted/SetTodoCompletedController'
 
 const todoRoutes = Router()
 

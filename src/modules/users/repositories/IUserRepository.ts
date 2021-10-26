@@ -1,5 +1,5 @@
-import { ICreateUserRequest } from '@/modules/users/dtos/ICreateUserRequest'
-import { User } from '@/modules/users/entities/User'
+import { ICreateUserRequest } from '../dtos/ICreateUserRequest'
+import { User } from '../entities/User'
 
 export interface IUserRepository {
   createUser(user: ICreateUserRequest): Promise<void>
