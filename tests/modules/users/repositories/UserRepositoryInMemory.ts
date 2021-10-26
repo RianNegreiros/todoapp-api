@@ -1,8 +1,7 @@
 import { User } from '../../../../src/modules/users/entities/User'
-import { v4 as uuid } from 'uuid'
 import { IUserRepository } from '../../../../src/modules/users/repositories/IUserRepository'
-import bcrypt from 'bcrypt'
 import { ICreateUserRequest } from '../../../../src/modules/users/dtos/ICreateUserRequest'
+import bcrypt from 'bcrypt'
 
 class UserRepositoryInMemory implements IUserRepository {
   private users: User[] = []
@@ -16,7 +15,6 @@ class UserRepositoryInMemory implements IUserRepository {
     const passwordHashed = await bcrypt.hash(password, 12)
 
     Object.assign(user, {
-      id: uuid,
       username: username,
       email: email,
       password: passwordHashed,
