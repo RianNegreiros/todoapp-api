@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
 import { getManager, getRepository, Repository } from 'typeorm'
-import { ICreateUserRequest } from '../dtos/ICreateUserRequest'
-import { User } from '../entities/User'
+import { ICreateUserRequest } from '@/modules/users/dtos/ICreateUserRequest'
+import { User } from '@/modules/users/entities/User'
 import { IUserRepository } from './IUserRepository'
 
 class UserRepository implements IUserRepository {

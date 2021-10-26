@@ -6,7 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
-import { Todo } from '../../todos/entities/Todo'
+import { Todo } from '@/modules/todos/entities/Todo'
 
 @Entity('users')
 class User {

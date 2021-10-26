@@ -1,6 +1,6 @@
-import { Todo } from '../entities/Todo'
 import { getManager } from 'typeorm'
-import { UserRepository } from '../../users/repositories/UserRepository'
+import { UserRepository } from '@/modules/users/repositories/UserRepository'
+import { Todo } from '@/modules/todos/entities/Todo'
 import { ITodoRepository } from './ITodoRepository'
 
 class TodoRepository implements ITodoRepository {

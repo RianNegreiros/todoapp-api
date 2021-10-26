@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe'
-import { ITodoRequest } from '../../dtos/ITodoRequest'
-import { ITodoRepository } from '../../repositories/ITodoRepository'
+import { ITodoRequest } from '@/modules/todos/dtos/ITodoRequest'
+import { ITodoRepository } from '@/modules/todos/repositories/ITodoRepository'
 @injectable()
 class DeleteTodoUseCase {
   constructor(

@@ -1,6 +1,6 @@
-import { User } from '../../../../src/modules/users/entities/User'
-import { IUserRepository } from '../../../../src/modules/users/repositories/IUserRepository'
-import { ICreateUserRequest } from '../../../../src/modules/users/dtos/ICreateUserRequest'
+import { User } from '@/modules/users/entities/User'
+import { IUserRepository } from '@/modules/users/repositories/IUserRepository'
+import { ICreateUserRequest } from '@/modules/users/dtos/ICreateUserRequest'
 import bcrypt from 'bcrypt'
 
 class UserRepositoryInMemory implements IUserRepository {

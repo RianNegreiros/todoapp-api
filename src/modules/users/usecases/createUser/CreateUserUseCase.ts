@@ -1,8 +1,8 @@
 import { inject, injectable } from 'tsyringe'
-import { IRegisterUserRequest } from '../../dtos/IRegisterUserRequest'
-import { IUserRepository } from '../../repositories/IUserRepository'
-import emailValidator from '../../validation/emailValidator'
-import passwordValidator from '../../validation/passwordValidator'
+import { IRegisterUserRequest } from '@/modules/users/dtos/IRegisterUserRequest'
+import { IUserRepository } from '@/modules/users/repositories/IUserRepository'
+import emailValidator from '@/modules/users/validation/emailValidator'
+import passwordValidator from '@/modules/users/validation/passwordValidator'
 @injectable()
 class CreateUserUseCase {
   constructor(
