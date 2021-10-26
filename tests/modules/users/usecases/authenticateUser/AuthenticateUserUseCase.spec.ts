@@ -44,4 +44,23 @@ describe('Authenticate User', () => {
       new Error('Email or password incorrect')
     )
   })
+
+  it('should not be able to authenticate with incorrect password', () => {
+    expect(async () => {
+      const user: IRegisterUserRequest = {
+        username: 'testName',
+        email: 'test@mail.com',
+        password: 'testTEST123@',
+        confirmPassword: 'testTEST123@',
+      }
+      await createUserUseCase.execute(user)
+
+      await authenticateUserUseCase.execute({
+        email: "test@mail.com",
+        password: "invalid123@"
+      })
+    }).rejects.toThrow(
+      new Error('Email or password incorrect')
+    )
+  })
 })
