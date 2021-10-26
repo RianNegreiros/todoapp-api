@@ -1,6 +1,12 @@
+import { Todo } from '@modules/todos/entities/Todo'
 import { v4 as uuidV4 } from 'uuid'
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
-import { Todo } from "../../todos/entities/Todo"
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm'
 
 @Entity('users')
 class User {
@@ -19,10 +25,10 @@ class User {
   @CreateDateColumn()
   created_at: Date
 
-  @ManyToOne(() => Todo, todo => todo.user)
+  @ManyToOne(() => Todo, (todo) => todo.user)
   todos?: Todo[]
 
-  constructor(){
+  constructor() {
     if (!this.id) {
       this.id = uuidV4()
     }

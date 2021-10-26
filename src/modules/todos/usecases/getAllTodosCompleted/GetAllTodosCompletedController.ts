@@ -1,11 +1,13 @@
-import { Request, Response } from "express"
-import { container } from "tsyringe"
-import { GetAllTodosCompletedUseCase } from "./GetAllTodosCompletedUseCase"
+import { Request, Response } from 'express'
+import { container } from 'tsyringe'
+import { GetAllTodosCompletedUseCase } from './GetAllTodosCompletedUseCase'
 
 class GetAllTodosCompletedController {
   async handle(request: Request, response: Response) {
     const { userId } = request.body
-    const getAllTodosCompletedUseCase = container.resolve(GetAllTodosCompletedUseCase)
+    const getAllTodosCompletedUseCase = container.resolve(
+      GetAllTodosCompletedUseCase
+    )
 
     try {
       const todos = await getAllTodosCompletedUseCase.execute(userId)

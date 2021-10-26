@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken'
-import env from '../../../../config/env'
 import bcrypt from 'bcrypt'
-import { IUserRepository } from '../../repositories/IUserRepository'
 import { inject, injectable } from 'tsyringe'
+import { IUserRepository } from '@modules/users/infra/typeorm/repositories/IUserRepository'
+import env from '@config/env'
 
 interface IAuthRequest {
   email: string
@@ -14,7 +14,7 @@ class AuthenticateUserUseCase {
   constructor(
     @inject('UserRepository')
     private userRepository: IUserRepository
-  ) { }
+  ) {}
 
   async execute({ email, password }: IAuthRequest) {
     const user = await this.userRepository.findUserByEmail(email)
@@ -29,12 +29,12 @@ class AuthenticateUserUseCase {
 
     const token = jwt.sign({}, env.jwtSecret, {
       subject: user.id,
-      expiresIn: '15m'
+      expiresIn: '15m',
     })
     return {
       username: user.username,
       email: user.email,
-      token: token
+      token: token,
     }
   }
 }

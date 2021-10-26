@@ -1,10 +1,18 @@
 import { Router } from 'express'
-import { ensureAuthenticated } from '../shared/http/middlewares/ensureAuthenticated'
+<<<<<<< HEAD:src/routes/todo.routes.ts
+import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
 import { CreateTodoController } from '../modules/todos/usecases/createTodo/CreateTodoController'
 import { DeleteTodoController } from '../modules/todos/usecases/deleteTodo/DeleteTodoController'
 import { GetAllTodosController } from '../modules/todos/usecases/getAllTodos/GetAllTodosController'
 import { GetAllTodosCompletedController } from '../modules/todos/usecases/getAllTodosCompleted/GetAllTodosCompletedController'
 import { SetTodoCompletedController } from '../modules/todos/usecases/setTodoCompleted/SetTodoCompletedController'
+=======
+import { CreateTodoController } from '@modules/todos/useCases/createTodo/CreateTodoController'
+import { DeleteTodoController } from '@modules/todos/useCases/deleteTodo/DeleteTodoController'
+import { GetAllTodosController } from '@modules/todos/useCases/getAllTodos/GetAllTodosController'
+import { GetAllTodosCompletedController } from '@modules/todos/useCases/getAllTodosCompleted/GetAllTodosCompletedController'
+import { SetTodoCompletedController } from '@modules/todos/useCases/setTodoCompleted/SetTodoCompletedController'
+>>>>>>> main:src/shared/http/routes/todo.routes.ts
 
 const todoRoutes = Router()
 

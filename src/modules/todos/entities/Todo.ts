@@ -1,5 +1,11 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
-import { User } from "../../users/entities/User"
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm'
+import { User } from '@modules/users/infra/typeorm/entities/User'
 
 @Entity('todos')
 class Todo {
@@ -10,12 +16,12 @@ class Todo {
   body: string
 
   @Column({
-    default: false
+    default: false,
   })
   isCompleted: boolean
 
   @CreateDateColumn()
-  created_at: Date;
+  created_at: Date
 
   @ManyToOne(() => User)
   user: User

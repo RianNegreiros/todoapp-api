@@ -1,3 +1,5 @@
+import { pathsToModuleNameMapper } from 'ts-jest/utils'
+import { compilerOptions } from './tsconfig.json'
 /*
  * For a detailed explanation regarding each configuration property and type check, visit:
  * https://jestjs.io/docs/configuration
@@ -8,7 +10,7 @@ export default {
   // automock: false,
 
   // Stop running tests after `n` failures
-  // bail: 0,
+   bail: true,
 
   // The directory where Jest should store its cached dependency information
   // cacheDirectory: "C:\\Users\\riann\\AppData\\Local\\Temp\\jest",
@@ -81,7 +83,9 @@ export default {
   // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  // moduleNameMapper: {},
+   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
+     prefix: "<rootDir>/src/",
+    }),
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
@@ -125,7 +129,7 @@ export default {
   // runner: "jest-runner",
 
   // The paths to modules that run some code to configure or set up the testing environment before each test
-  // setupFiles: [],
+   setupFiles: ["<rootDir>/jest.setup.ts"],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
   // setupFilesAfterEnv: [],
@@ -146,7 +150,7 @@ export default {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect test files
-  testMatch: ["**/**/*spec.ts"],
+  testMatch: ["**/*spec.ts"],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   // testPathIgnorePatterns: [

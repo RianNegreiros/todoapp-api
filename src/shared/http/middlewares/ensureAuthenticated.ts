@@ -1,7 +1,7 @@
+import { UserRepository } from '@modules/users/infra/typeorm/repositories/UserRepository'
 import { NextFunction, Request, Response } from 'express'
 import { verify } from 'jsonwebtoken'
-import env from '../config/env'
-import { UserRepository } from '../modules/users/repositories/UserRepository'
+import env from '../../../config/env'
 
 interface IPayLoad {
   sub: string
