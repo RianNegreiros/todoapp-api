@@ -16,10 +16,10 @@ describe('Authenticate User', () => {
     createUserUseCase = new CreateUserUseCase(userRepositoryInMemory)
   })
 
-  it('Should be able to authenticate an user', async () => {
+  it('should be able to authenticate an user', async () => {
     const user: IRegisterUserRequest = {
-      username: 'testNameExists',
-      email: 'testexists@mail.com',
+      username: 'testName',
+      email: 'test@mail.com',
       password: 'testTEST123@',
       confirmPassword: 'testTEST123@',
     }
@@ -32,5 +32,16 @@ describe('Authenticate User', () => {
     })
 
     expect(result).toHaveProperty('token')
+  })
+
+  it('should not be able to authenticate an nonexistent user', () => {
+    expect(async () => {
+      await authenticateUserUseCase.execute({
+        email: 'testexists@mail.com',
+        password: 'testTEST123@',
+      })
+    }).rejects.toThrow(
+      new Error('Email or password incorrect')
+    )
   })
 })
