@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import { inject, injectable } from 'tsyringe'
-import { IUserRepository } from '@modules/users/repositories/IUserRepository'
+import { IUserRepository } from '@modules/users/infra/typeorm/repositories/IUserRepository'
 import env from '@config/env'
 
 interface IAuthRequest {

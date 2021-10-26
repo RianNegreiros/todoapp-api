@@ -1,5 +1,5 @@
 import { IRegisterUserRequest } from '@modules/users/dtos/IRegisterUserRequest'
-import { IUserRepository } from '@modules/users/repositories/IUserRepository'
+import { IUserRepository } from '@modules/users/infra/typeorm/repositories/IUserRepository'
 import { CreateUserUseCase } from '@modules/users/useCases/createUser/CreateUserUseCase'
 import { UserRepositoryInMemory } from '../../repositories/UserRepositoryInMemory'
 
