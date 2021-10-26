@@ -1,10 +1,11 @@
 import { IRegisterUserRequest } from '@/modules/users/dtos/IRegisterUserRequest'
 import { IUserRepository } from '@/modules/users/repositories/IUserRepository'
-import { CreateUserUseCase } from '@/modules/users/usecases/createUser/CreateUserUseCase'
 import { UserRepositoryInMemory } from '@/tests/modules/users/repositories/UserRepositoryInMemory'
+import { CreateUserUseCase } from './CreateUserUseCase'
 
 let userRepositoryInMemory: IUserRepository
 let createUserUseCase: CreateUserUseCase
+
 describe('Create User', () => {
   beforeEach(() => {
     userRepositoryInMemory = new UserRepositoryInMemory()

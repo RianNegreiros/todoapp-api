@@ -1,7 +1,7 @@
 import { IRegisterUserRequest } from '@/modules/users/dtos/IRegisterUserRequest'
-import { AuthenticateUserUseCase } from '@/modules/users/usecases/authenticateUser/AuthenticateUserUseCase'
-import { CreateUserUseCase } from '@/modules/users/usecases/createUser/CreateUserUseCase'
 import { UserRepositoryInMemory } from '@/tests/modules/users/repositories/UserRepositoryInMemory'
+import { CreateUserUseCase } from '../createUser/CreateUserUseCase'
+import { AuthenticateUserUseCase } from './AuthenticateUserUseCase'
 
 let userRepositoryInMemory: UserRepositoryInMemory
 let authenticateUserUseCase: AuthenticateUserUseCase
