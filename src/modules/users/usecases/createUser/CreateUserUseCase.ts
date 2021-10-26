@@ -1,15 +1,8 @@
 import { inject, injectable } from 'tsyringe'
+import { IRegisterUserRequest } from '../../dtos/IRegisterUserRequest'
 import { IUserRepository } from '../../repositories/IUserRepository'
 import emailValidator from '../../validation/emailValidator'
 import passwordValidator from '../../validation/passwordValidator'
-
-interface IRegisterUserRequest {
-  username: string
-  email: string
-  password: string
-  confirmPassword: string
-}
-
 @injectable()
 class CreateUserUseCase {
   constructor(
