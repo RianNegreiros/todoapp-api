@@ -2,8 +2,8 @@ import express from 'express'
 import cors from 'cors'
 import swaggerUi from 'swagger-ui-express'
 import swaggerFile from '../swagger.json'
-import { dbConnection } from './shared/typeorm/database/dbConnection'
-import { router } from './shared/http/routes'
+import { dbConnection } from '@shared/typeorm/database/dbConnection'
+import { router } from '@shared/http/routes'
 
 const app = express()
 

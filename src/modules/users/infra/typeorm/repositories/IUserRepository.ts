@@ -1,5 +1,5 @@
 import { ICreateUserRequest } from '../../../dtos/ICreateUserRequest'
-import { User } from '../entities/User'
+import { User } from '@modules/users/infra/typeorm/entities/User'
 
 export interface IUserRepository {
   createUser(user: ICreateUserRequest): Promise<void>
