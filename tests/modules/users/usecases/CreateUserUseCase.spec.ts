@@ -1,3 +1,4 @@
+import { IRegisterUserRequest } from '../../../../src/modules/users/dtos/IRegisterUserRequest'
 import { IUserRepository } from '../../../../src/modules/users/repositories/IUserRepository'
 import { CreateUserUseCase } from '../../../../src/modules/users/usecases/createUser/CreateUserUseCase'
 import { UserRepositoryInMemory } from '../repositories/UserRepositoryInMemory'
@@ -11,7 +12,7 @@ describe('Create User', () => {
   })
 
   it('Should be able to create a new user', async () => {
-    const userData = {
+    const userData: IRegisterUserRequest = {
       username: 'testName',
       email: 'test@mail.com',
       password: 'testTEST123@',
@@ -28,7 +29,7 @@ describe('Create User', () => {
   })
 
   it('Should throw if user already exists', async () => {
-    const userData = {
+    const userData: IRegisterUserRequest = {
       username: 'testNameExists',
       email: 'testexists@mail.com',
       password: 'testTEST123@',
@@ -43,7 +44,7 @@ describe('Create User', () => {
   })
 
   it('Should throw if password does not match the requirements', async () => {
-    const userData = {
+    const userData: IRegisterUserRequest = {
       username: 'testInvalidPassword',
       email: 'testinvalidpassword@mail.com',
       password: 'invalidPassword',
@@ -56,7 +57,7 @@ describe('Create User', () => {
   })
 
   it('Should throw if email is invalid', async () => {
-    const userData = {
+    const userData: IRegisterUserRequest = {
       username: 'testInvalidEmail',
       email: 'testinvalidemail',
       password: 'testTEST123@',
