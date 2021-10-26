@@ -6,10 +6,10 @@ interface ITodoRepository {
     isCompleted: boolean,
     userId: string
   ): Promise<Todo | any>
-  deleteTodo(userId: string, todoId: string): Promise<any>
-  setToCompleted(userId: string, todoId: string): Promise<any>
+  deleteTodo(userId: string, todoId: string): Promise<void>
+  setToCompleted(userId: string, todoId: string): Promise<void>
   getAllTodos(userId: string): Promise<Todo[] | undefined>
-  getAllCompleted(userId: string): Promise<Todo[] | any>
+  getAllCompleted(userId: string): Promise<Todo[] | undefined>
 }
 
 export { ITodoRepository }

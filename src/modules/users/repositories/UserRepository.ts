@@ -11,15 +11,18 @@ class UserRepository implements IUserRepository {
     this.repository = getRepository(User)
   }
 
-  async createUser({ username, email, password }: ICreateUserRequest) {
+  async createUser({
+    username,
+    email,
+    password,
+  }: ICreateUserRequest): Promise<void> {
     const passwordHashed = await bcrypt.hash(password, 12)
 
-    const user = this.repository.create({
+    this.repository.create({
       username,
       email,
       password: passwordHashed,
     })
-    return user
   }
 
   async findUserById(id: string) {
