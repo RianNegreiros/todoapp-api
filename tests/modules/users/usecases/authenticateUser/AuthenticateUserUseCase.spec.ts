@@ -40,9 +40,7 @@ describe('Authenticate User', () => {
         email: 'testexists@mail.com',
         password: 'testTEST123@',
       })
-    }).rejects.toThrow(
-      new Error('Email or password incorrect')
-    )
+    }).rejects.toThrow(new Error('Email or password incorrect'))
   })
 
   it('should not be able to authenticate with incorrect password', () => {
@@ -56,11 +54,9 @@ describe('Authenticate User', () => {
       await createUserUseCase.execute(user)
 
       await authenticateUserUseCase.execute({
-        email: "test@mail.com",
-        password: "invalid123@"
+        email: 'test@mail.com',
+        password: 'invalid123@',
       })
-    }).rejects.toThrow(
-      new Error('Email or password incorrect')
-    )
+    }).rejects.toThrow(new Error('Email or password incorrect'))
   })
 })
