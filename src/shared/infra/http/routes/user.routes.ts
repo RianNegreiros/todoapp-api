@@ -5,9 +5,7 @@ import { CreateUserController } from '@modules/users/useCases/createUser/CreateU
 const userRoutes = Router()
 
 const createUserController = new CreateUserController()
-const authenticateUserController = new AuthenticateUserController()
 
 userRoutes.post('/register', createUserController.handle)
-userRoutes.post('/login', authenticateUserController.handle)
 
 export { userRoutes }
