@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken'
+import jwt, { sign } from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import { inject, injectable } from 'tsyringe'
 import auth from '@config/auth'
@@ -33,12 +33,12 @@ class AuthenticateUserUseCase {
       throw new Error('Email or password incorrect')
     }
 
-    const token = jwt.sign({}, auth.jwt_token, {
+    const token = sign({}, auth.jwt_token, {
       subject: user.id,
       expiresIn: auth.expires_in_token,
     })
 
-    const refresh_token = jwt.sign({ email }, auth.refresh_token, {
+    const refresh_token = sign({ email }, auth.refresh_token, {
       subject: user.id,
       expiresIn: auth.expires_in_refresh_token,
     })

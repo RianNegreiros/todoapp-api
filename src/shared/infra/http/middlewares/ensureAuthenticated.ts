@@ -1,20 +1,13 @@
-import auth from '@config/auth'
-import { UserRepository } from '@modules/users/infra/typeorm/repositories/UserRepository'
-import { UserTokensRepository } from '@modules/users/infra/typeorm/repositories/UserTokensRespository'
 import { NextFunction, Request, Response } from 'express'
 import { verify } from 'jsonwebtoken'
+import auth from '@config/auth'
 
-interface IPayLoad {
-  sub: string
-}
-
-export const ensureAuthenticated = async (
+export async function ensureAuthenticated(
   request: Request,
   response: Response,
   next: NextFunction
-) => {
+) {
   const authHeader = request.headers.authorization
-  const userTokenRepository = new UserTokensRepository()
 
   if (!authHeader) {
     throw new Error('Token is required')
@@ -23,19 +16,9 @@ export const ensureAuthenticated = async (
   const [, token] = authHeader.split(' ')
 
   try {
-    const { sub: userId } = verify(token, auth.refresh_token) as IPayLoad
-
-    const userExists = userTokenRepository.findByUserIdAndRefreshTokens(
-      userId,
-      token
-    )
-
-    if (!userExists) {
-      throw new Error('User does not exists')
-    }
-
+    verify(token, auth.jwt_token)
     next()
   } catch {
-    throw new Error('Invalid error')
+    throw new Error('Invalid token')
   }
 }
