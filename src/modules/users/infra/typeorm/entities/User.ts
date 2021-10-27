@@ -11,7 +11,7 @@ import {
 @Entity('users')
 class User {
   @PrimaryGeneratedColumn('uuid')
-  readonly id?: string
+  readonly id: string
 
   @Column()
   username: string
