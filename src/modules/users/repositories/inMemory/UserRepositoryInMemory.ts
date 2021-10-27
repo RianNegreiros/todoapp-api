@@ -2,7 +2,6 @@ import bcrypt from 'bcrypt'
 import { ICreateUserRequest } from '@modules/users/dtos/ICreateUserRequest'
 import { User } from '@modules/users/infra/typeorm/entities/User'
 import { IUserRepository } from '@modules/users/repositories/IUserRepository'
-import { create } from 'domain'
 
 class UserRepositoryInMemory implements IUserRepository {
   private users: User[] = []
