@@ -1,20 +1,19 @@
-version: '3.8'
+version: "3.8"
+
 services:
- database_todoapp:
-  container_name: todoapp-api-db
-  image: postgres:latest
-  restart: always
-  environment: 
-   - POSTGRES_PASSWORD=todoapp
-   - POSTGRES_USER=todoapp
-   - POSTGRES_DB=todoapp
-  ports: 
-   - 5432:5432
- app:
-  container_name: todo-api
-  restart: always
-  build: .
-  ports: 
-    - 5050:5050
-  depends_on: 
-    - database_todoapp
+  database: 
+    image: postgres
+    container_name: database_todoapp
+    restart: always
+    ports: 
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=todoapp
+      - POSTGRES_PASSWORD=todoapp
+      - POSTGRES_DB=todoapp
+  app:
+    build: .
+    container_name: todoapp_api
+    restart: always
+    ports: 
+      - 5050:5050
