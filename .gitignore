@@ -1,5 +1,5 @@
 node_modules
-src/main/config/env.ts
+src/config/env.ts
 pagdata
 .vscode
 coverage
