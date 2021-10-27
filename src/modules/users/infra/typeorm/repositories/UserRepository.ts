@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'
 import { getManager, getRepository, Repository } from 'typeorm'
 import { ICreateUserRequest } from '@modules/users/dtos/ICreateUserRequest'
 import { User } from '@modules/users/infra/typeorm/entities/User'
-import { IUserRepository } from './IUserRepository'
+import { IUserRepository } from '../../../repositories/IUserRepository'
 
 class UserRepository implements IUserRepository {
   private repository: Repository<User>
