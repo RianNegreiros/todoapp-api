@@ -1,17 +1,26 @@
-import { IRegisterUserRequest } from "@modules/users/dtos/IRegisterUserRequest"
-import { AuthenticateUserUseCase } from "@modules/users/useCases/authenticateUser/AuthenticateUserUseCase"
-import { CreateUserUseCase } from "@modules/users/useCases/createUser/CreateUserUseCase"
-import { UserRepositoryInMemory } from "../../../../../src/modules/users/repositories/inMemory/UserRepositoryInMemory"
+import { IRegisterUserRequest } from '@modules/users/dtos/IRegisterUserRequest'
+import { AuthenticateUserUseCase } from '@modules/users/useCases/authenticateUser/AuthenticateUserUseCase'
+import { CreateUserUseCase } from '@modules/users/useCases/createUser/CreateUserUseCase'
+import { DateProvider } from '@shared/container/providers/DateProvider/DateProvider'
+import { UserRepositoryInMemory } from '@modules/users/repositories/inMemory/UserRepositoryInMemory'
+import { UserTokensRepositoryInMemory } from '@modules/users/repositories/inMemory/UserTokensRepositoryInMemory'
 
 let userRepositoryInMemory: UserRepositoryInMemory
+let userTokensRepositoryInMemory: UserTokensRepositoryInMemory
 let authenticateUserUseCase: AuthenticateUserUseCase
+let dateProvider: DateProvider
+
 let createUserUseCase: CreateUserUseCase
 
 describe('Authenticate User', () => {
   beforeEach(() => {
     userRepositoryInMemory = new UserRepositoryInMemory()
+    dateProvider = new DateProvider()
+    userTokensRepositoryInMemory = new UserTokensRepositoryInMemory()
     authenticateUserUseCase = new AuthenticateUserUseCase(
-      userRepositoryInMemory
+      userRepositoryInMemory,
+      userTokensRepositoryInMemory,
+      dateProvider
     )
     createUserUseCase = new CreateUserUseCase(userRepositoryInMemory)
   })
