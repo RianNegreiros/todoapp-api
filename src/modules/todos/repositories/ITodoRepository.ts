@@ -1,15 +1,15 @@
-import { Todo } from '@modules/todos/entities/Todo'
+import { Todo } from '@modules/todos/infra/typeorm/entities/Todo'
+import { User } from '@modules/users/infra/typeorm/entities/User'
 
 interface ITodoRepository {
   createTodo(
     body: string,
-    isCompleted: boolean,
-    userId: string
-  ): Promise<Todo | any>
-  deleteTodo(userId: string, todoId: string): Promise<void>
-  setToCompleted(userId: string, todoId: string): Promise<void>
-  getAllTodos(userId: string): Promise<Todo[] | undefined>
-  getAllCompleted(userId: string): Promise<Todo[] | undefined>
+    user: User
+  ): Promise<void>
+  deleteTodo(id: string): Promise<void>
+  setTodoStatus(id: string, status: boolean): Promise<void>
+  getAllTodos(user: User): Promise<Todo[]>
+  getAllCompleted(user: User): Promise<Todo[]>
 }
 
 export { ITodoRepository }
