@@ -1,8 +1,10 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import { inject, injectable } from 'tsyringe'
+import auth from '@config/auth'
 import { IUserRepository } from '@modules/users/repositories/IUserRepository'
-import env from '@config/env'
+import { IUserTokensRepository } from '@modules/users/repositories/IUserTokensRepository'
+import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider'
 
 interface IAuthRequest {
   email: string
@@ -13,7 +15,11 @@ interface IAuthRequest {
 class AuthenticateUserUseCase {
   constructor(
     @inject('UserRepository')
-    private userRepository: IUserRepository
+    private userRepository: IUserRepository,
+    @inject('UserTokensRepository')
+    private userTokensRepository: IUserTokensRepository,
+    @inject('DayjsDateProvider')
+    private dateProvider: IDateProvider
   ) {}
 
   async execute({ email, password }: IAuthRequest) {
@@ -27,10 +33,26 @@ class AuthenticateUserUseCase {
       throw new Error('Email or password incorrect')
     }
 
-    const token = jwt.sign({ username: user.username }, env.jwtSecret, {
+    const token = jwt.sign({}, auth.jwt_token, {
       subject: user.id,
-      expiresIn: '15m',
+      expiresIn: auth.expires_in_token,
     })
+
+    const refresh_token = jwt.sign({ email }, auth.refresh_token, {
+      subject: user.id,
+      expiresIn: auth.expires_in_refresh_token,
+    })
+
+    const refresh_token_expires_date = this.dateProvider.addDays(
+      auth.refresh_token_expires_date
+    )
+
+    await this.userTokensRepository.create({
+      user_id: user.id,
+      expires_date: refresh_token_expires_date,
+      refresh_token: refresh_token
+    })
+
     return {
       username: user.username,
       email: user.email,
