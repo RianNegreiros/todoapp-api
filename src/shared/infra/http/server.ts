@@ -1,8 +1,7 @@
-import env from "@config/env"
 import { app } from "./app"
 
-const server = app.listen(env.port, () =>
-  console.log(`Server running at http://localhost:${env.port}`)
+const server = app.listen(process.env.PORT, () =>
+  console.log(`Server running at http://localhost:${process.env.PORT}`)
 )
 
 process.on('SIGINT', () => {
