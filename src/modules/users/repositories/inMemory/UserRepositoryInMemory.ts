@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt'
 import { ICreateUserRequest } from '@modules/users/dtos/ICreateUserRequest'
 import { User } from '@modules/users/infra/typeorm/entities/User'
 import { IUserRepository } from '@modules/users/repositories/IUserRepository'
+import { create } from 'domain'
 
 class UserRepositoryInMemory implements IUserRepository {
   private users: User[] = []
@@ -23,14 +24,14 @@ class UserRepositoryInMemory implements IUserRepository {
     this.users.push(user)
   }
 
-  async findUserById(id: string): Promise<User | undefined> {
-    const user = this.users.find((user) => user.id === id)
-    return user
+  async findUserById(id: string): Promise<User> {
+    const user =  this.users.filter((user) => user.id === id)
+    return user[0]
   }
 
-  async findUserByEmail(email: string): Promise<User | undefined> {
-    const user = this.users.find((user) => user.email === email)
-    return user
+  async findUserByEmail(email: string): Promise<User> {
+    const user = this.users.filter((user) => user.email === email)
+    return user[0]
   }
 }
 

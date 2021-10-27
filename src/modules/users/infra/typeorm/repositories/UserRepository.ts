@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-import { getManager, getRepository, Repository } from 'typeorm'
+import { getRepository, Repository } from 'typeorm'
 import { ICreateUserRequest } from '@modules/users/dtos/ICreateUserRequest'
 import { User } from '@modules/users/infra/typeorm/entities/User'
 import { IUserRepository } from '../../../repositories/IUserRepository'
@@ -25,13 +25,13 @@ class UserRepository implements IUserRepository {
     })
   }
 
-  async findUserById(id: string) {
-    const user = await getManager().findOneOrFail(User, id)
+  async findUserById(id: string): Promise<User> {
+    const user = await this.repository.findOneOrFail(id)
     return user
   }
 
-  async findUserByEmail(email: string) {
-    const user = await getRepository(User).findOneOrFail({ where: { email } })
+  async findUserByEmail(email: string): Promise<User> {
+    const user = await this.repository.findOneOrFail({ email })
     return user
   }
 }
