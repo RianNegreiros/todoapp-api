@@ -38,6 +38,7 @@
     "uuid": "^8.3.2"
   },
   "dependencies": {
+    "aws-sdk": "^2.1017.0",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dayjs": "^1.10.7",
