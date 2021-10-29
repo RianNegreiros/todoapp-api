@@ -2,11 +2,8 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
-import { User } from '@modules/users/infra/typeorm/entities/User'
 
 @Entity('todos')
 class Todo {
