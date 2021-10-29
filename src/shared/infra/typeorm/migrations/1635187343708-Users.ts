@@ -30,15 +30,7 @@ export class Users1635187343708 implements MigrationInterface {
             type: 'timestamp',
             default: 'now()',
           },
-        ],
-        foreignKeys: [
-          {
-            name: 'FKUserTodos',
-            referencedTableName: "todos",
-            referencedColumnNames: ["id"],
-            columnNames: ["todo_id"],
-          },
-        ],
+        ]
       })
     )
   }
