@@ -5,3 +5,4 @@ pagdata
 coverage
 .env
 ormconfig.json
+dist
