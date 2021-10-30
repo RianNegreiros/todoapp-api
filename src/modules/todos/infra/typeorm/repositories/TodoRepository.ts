@@ -12,8 +12,7 @@ class TodoRepository implements ITodoRepository {
 
   async createTodo(body: string, user: User): Promise<void> {
     this.repository.create({
-      body,
-      user
+      body
     })
   }
 
