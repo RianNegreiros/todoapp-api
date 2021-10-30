@@ -1,10 +1,10 @@
 {
-   "type": "postgres",
-   "host": "localhost",
+   "type": "",
+   "host": "",
    "port": 5432,
-   "username": "todoapp",
-   "password": "todoapp",
-   "database": "todoapp",
+   "username": "",
+   "password": "",
+   "database": "",
    "migrations": ["./src/shared/infra/typeorm/migrations/*.ts"],
    "entities": ["./src/modules/**/entities/*.ts"],
    "cli": {

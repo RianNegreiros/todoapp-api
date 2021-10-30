@@ -4,3 +4,4 @@ pagdata
 .vscode
 coverage
 .env
+ormconfig.json
