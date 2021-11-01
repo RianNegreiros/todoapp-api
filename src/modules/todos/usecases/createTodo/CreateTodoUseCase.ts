@@ -2,11 +2,6 @@ import { inject, injectable } from 'tsyringe'
 import { ITodoRepository } from '@modules/todos/repositories/ITodoRepository'
 import { IUserRepository } from '@modules/users/repositories/IUserRepository'
 
-interface ICreateTodoRequest {
-  userId: string
-  body: string
-}
-
 @injectable()
 class CreateTodoUseCase {
   constructor(
@@ -16,12 +11,11 @@ class CreateTodoUseCase {
     private userRepository: IUserRepository
   ) {}
 
-  async execute({ userId, body }: ICreateTodoRequest) {
+  async execute(userId: string, body: string) {
     const user = await this.userRepository.findUserById(userId)
-    if(!userId) {
+    if (!user) {
       throw new Error('User not found by this id')
     }
-
     return await this.todoRepository.createTodo(body, user)
   }
 }
