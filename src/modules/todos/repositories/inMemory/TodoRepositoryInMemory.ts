@@ -23,14 +23,6 @@ class TodoRepositoryInMemory implements ITodoRepository {
     const todo = this.todos.filter((t) => t.id === id)
     todo[0].isCompleted = status
   }
-
-  async getAllTodos(user: User): Promise<Todo[]> {
-    return user.todos
-  }
-
-  async getAllCompleted(user: User): Promise<Todo[]> {
-    return user.todos.filter((t) => t.isCompleted === true)
-  }
 }
 
 export { TodoRepositoryInMemory }

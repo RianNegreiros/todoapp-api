@@ -1,7 +1,8 @@
 import bcrypt from 'bcrypt'
 import { ICreateUserRequest } from '@modules/users/dtos/ICreateUserRequest'
-import { User } from '@modules/users/infra/typeorm/entities/User'
 import { IUserRepository } from '@modules/users/repositories/IUserRepository'
+import { User } from '@modules/users/infra/typeorm/entities/User'
+import { Todo } from '@modules/todos/infra/typeorm/entities/Todo'
 
 class UserRepositoryInMemory implements IUserRepository {
   private users: User[] = []
@@ -31,6 +32,16 @@ class UserRepositoryInMemory implements IUserRepository {
   async findUserByEmail(email: string): Promise<User> {
     const user = this.users.filter((user) => user.email === email)
     return user[0]
+  }
+
+  async getAllUserTodos(id: string): Promise<Todo[]> {
+    const user = this.users.filter((u) => u.id === id)
+    return user[0].todos
+  }
+
+  async getUserCompletedTodos(id: string): Promise<Todo[]> {
+    const user = this.users.filter((u) => u.id === id)
+    return user[0].todos.filter((t) => t.isCompleted === true)
   }
 }
 

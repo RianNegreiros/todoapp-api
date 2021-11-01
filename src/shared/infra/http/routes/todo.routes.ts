@@ -1,8 +1,8 @@
 import { Router } from 'express'
 import { CreateTodoController } from '@modules/todos/useCases/createTodo/CreateTodoController'
 import { DeleteTodoController } from '@modules/todos/useCases/deleteTodo/DeleteTodoController'
-import { GetAllTodosController } from '@modules/todos/useCases/getAllTodos/GetAllTodosController'
-import { GetAllTodosCompletedController } from '@modules/todos/useCases/getAllTodosCompleted/GetAllTodosCompletedController'
+import { GetAllTodosController } from '@modules/users/useCases/getAllTodos/GetAllTodosController'
+import { GetAllTodosCompletedController } from '@modules/users/useCases/getAllTodosCompleted/GetAllTodosCompletedController'
 import { SetTodoCompletedController } from '@modules/todos/useCases/setTodoCompleted/SetTodoCompletedController'
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
 
@@ -16,12 +16,12 @@ const getAllTodosController = new GetAllTodosController()
 
 todoRoutes.post('/add', ensureAuthenticated, createTodoController.handle)
 
-todoRoutes.delete('/delete', deleteTodoController.handle)
-
 todoRoutes.put('/setcompleted', setTodoCompletedController.handle)
 
-todoRoutes.get('/completeds', getAllTodosCompletedController.handle)
+todoRoutes.delete('/delete', deleteTodoController.handle)
 
 todoRoutes.get('/alltodos', getAllTodosController.handle)
+
+todoRoutes.get('/completeds', getAllTodosCompletedController.handle)
 
 export { todoRoutes }
