@@ -23,6 +23,11 @@ class TodoRepositoryInMemory implements ITodoRepository {
     const todo = this.todos.filter((t) => t.id === id)
     todo[0].isCompleted = status
   }
+
+  async setTodoId(id: string, newId: string): Promise<void> {
+    const todo = this.todos.filter((t) => t.id === id)
+    todo[0].id === newId 
+  }
 }
 
 export { TodoRepositoryInMemory }

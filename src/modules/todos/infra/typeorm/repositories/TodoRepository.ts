@@ -25,6 +25,11 @@ class TodoRepository implements ITodoRepository {
       .execute()
   }
 
+  async setTodoId(id: string, newId: string): Promise<void> {
+    const todo = await this.repository.findOneOrFail(id)
+    todo.id === newId
+  }
+
   async deleteTodo(id: string): Promise<void> {
     await this.repository.delete(id)
   }

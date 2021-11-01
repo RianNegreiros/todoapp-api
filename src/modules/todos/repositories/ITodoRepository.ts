@@ -8,6 +8,7 @@ interface ITodoRepository {
   ): Promise<void>
   setTodoStatus(id: string, status: boolean): Promise<void>
   deleteTodo(id: string): Promise<void>
+  setTodoId(id: string, newId: string): Promise<void>
 }
 
 export { ITodoRepository }
