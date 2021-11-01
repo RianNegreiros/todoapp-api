@@ -2,7 +2,7 @@ import { inject, injectable } from 'tsyringe'
 import { IUserRepository } from '@modules/users/repositories/IUserRepository'
 
 @injectable()
-class GetAllTodosCompletedUseCase {
+class GetTodosCompletedUseCase {
   constructor(
     @inject('UserRepository')
     private userRepository: IUserRepository
@@ -17,4 +17,4 @@ class GetAllTodosCompletedUseCase {
   }
 }
 
-export { GetAllTodosCompletedUseCase }
+export { GetTodosCompletedUseCase }
