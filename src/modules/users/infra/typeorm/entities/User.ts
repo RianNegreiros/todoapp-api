@@ -4,16 +4,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
   JoinTable,
-  ManyToMany,
   ManyToOne,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
 } from 'typeorm'
 
 @Entity('users')
 class User {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn('uuid')
   readonly id: string
 
   @Column()
@@ -24,21 +22,22 @@ class User {
 
   @Column()
   password: string
+  
+  @ManyToOne(() => Todo)
+  @JoinTable({
+    name: 'todos_user',
+    joinColumns: [{ name: 'user_id' }],
+    inverseJoinColumns: [{ name: 'todo_id' }],
+  })
+  todos: Todo[]
 
   @CreateDateColumn()
   created_at: Date
-
-  @ManyToOne(() => Todo)
-  @JoinColumn({
-    name: "todo_id"
-  })
-  todos: Todo[]
 
   constructor() {
     if (!this.id) {
       this.id = uuidV4()
     }
-    this.todos = []
   }
 }
 

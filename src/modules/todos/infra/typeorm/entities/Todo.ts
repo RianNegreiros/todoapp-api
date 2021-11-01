@@ -1,30 +1,33 @@
+import { User } from '@modules/users/infra/typeorm/entities/User'
 import {
   Column,
   CreateDateColumn,
   Entity,
-  PrimaryGeneratedColumn,
+  JoinColumn,
+  ManyToOne,
+  PrimaryColumn,
 } from 'typeorm'
 
 @Entity('todos')
 class Todo {
-  @PrimaryGeneratedColumn('increment')
-  readonly id: string
+  @PrimaryColumn('increment')
+  id: string
 
   @Column()
   body: string
 
-  @Column({
-    default: false,
-  })
+  @Column()
   isCompleted: boolean
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  user: User
 
   @CreateDateColumn()
   created_at: Date
 
   constructor() {
-    if(!this.isCompleted) {
-      this.isCompleted = false
-    }
+    this.isCompleted = false
   }
 }
 
