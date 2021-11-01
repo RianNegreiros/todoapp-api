@@ -8,7 +8,7 @@ class CreateTodoController {
     const createTodoUseCase = container.resolve(CreateTodoUseCase)
 
     try {
-      const todo = await createTodoUseCase.execute({ userId, body })
+      const todo = await createTodoUseCase.execute(userId, body)
       return response.status(201).json(todo)
     } catch (error) {
       return response.status(400).json(error)

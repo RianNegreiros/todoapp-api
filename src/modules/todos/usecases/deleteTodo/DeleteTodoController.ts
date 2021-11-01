@@ -8,7 +8,7 @@ class DeleteTodoController {
     const deleteTodoUseCase = container.resolve(DeleteTodoUseCase)
 
     try {
-      await deleteTodoUseCase.execute({ userId, todoId })
+      await deleteTodoUseCase.execute(userId, todoId)
       return response.status(200)
     } catch (error) {
       return response.status(400).json(error)
