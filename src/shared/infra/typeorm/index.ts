@@ -11,7 +11,6 @@ export default async (): Promise<Connection> => {
           : defaultOptions.database,
     })
   )
-
   console.log(`Database connect: ${connection.options.database}`)
   process.on('SIGINT', () => {
     connection.close().then(() => console.log('Database connection closed.'))
