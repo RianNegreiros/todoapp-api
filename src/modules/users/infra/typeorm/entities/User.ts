@@ -11,8 +11,8 @@ import {
 
 @Entity('users')
 class User {
-  @PrimaryColumn('uuid')
-  readonly id: string
+  @PrimaryColumn()
+  id: string
 
   @Column()
   username: string
@@ -22,7 +22,7 @@ class User {
 
   @Column()
   password: string
-  
+
   @ManyToOne(() => Todo)
   @JoinTable({
     name: 'todos_user',
