@@ -10,7 +10,7 @@ import {
 
 @Entity('todos')
 class Todo {
-  @PrimaryColumn('increment')
+  @PrimaryColumn()
   id: string
 
   @Column()
