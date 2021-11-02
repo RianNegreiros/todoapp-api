@@ -6,15 +6,11 @@ import { UserRepository } from '@modules/users/infra/typeorm/repositories/UserRe
 import { IUserTokensRepository } from '@modules/users/repositories/IUserTokensRepository'
 import { UserTokensRepository } from '@modules/users/infra/typeorm/repositories/UserTokensRespository'
 
-container.registerSingleton<ITodoRepository>(
-  'TodoRespository', 
-  TodoRepository
-  )
+import '@shared/container/providers'
 
-container.registerSingleton<IUserRepository>(
-  'UserRepository', 
-  UserRepository
-  )
+container.registerSingleton<ITodoRepository>('TodoRespository', TodoRepository)
+
+container.registerSingleton<IUserRepository>('UserRepository', UserRepository)
 
 container.registerSingleton<IUserTokensRepository>(
   'UserTokensRepository',
