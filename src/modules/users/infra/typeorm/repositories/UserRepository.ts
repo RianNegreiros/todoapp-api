@@ -1,9 +1,8 @@
-import bcrypt from 'bcrypt'
 import { getRepository, Repository } from 'typeorm'
 import { ICreateUserRequest } from '@modules/users/dtos/ICreateUserRequest'
-import { User } from '@modules/users/infra/typeorm/entities/User'
-import { IUserRepository } from '../../../repositories/IUserRepository'
+import { IUserRepository } from '@modules/users/repositories/IUserRepository'
 import { Todo } from '@modules/todos/infra/typeorm/entities/Todo'
+import { User } from '../entities/User'
 
 class UserRepository implements IUserRepository {
   private repository: Repository<User>
@@ -17,34 +16,37 @@ class UserRepository implements IUserRepository {
     email,
     password,
   }: ICreateUserRequest): Promise<void> {
-    const passwordHashed = await bcrypt.hash(password, 12)
 
     this.repository.create({
       username,
       email,
-      password: passwordHashed,
+      password,
     })
   }
 
   async findUserById(id: string): Promise<User> {
-    const user = await this.repository.findOneOrFail(id)
+    const user = await this.repository.findOne(id)
     return user
   }
 
   async findUserByEmail(email: string): Promise<User> {
-    const user = await this.repository.findOneOrFail({ email })
+    const user = await this.repository.findOne({ email })
     return user
   }
 
   async getAllUserTodos(id: string): Promise<Todo[]> {
-    const user = await this.repository.findOneOrFail(id)
-    return user.todos
+    const user = await this.repository.findOne(id)
+    //return user.todos
+    const todos: Todo[] = []
+    return todos
   }
 
   async getUserCompletedTodos(id: string): Promise<Todo[]> {
-    const user = await this.repository.findOneOrFail(id)
-    return user.todos.filter((t) => t.isCompleted === true)
-  }
+    const user = await this.repository.findOne(id)
+    //return user.todos.filter((t) => t.isCompleted === true)
+    const todos: Todo[] = []
+    return todos
+  } 
 }
 
 export { UserRepository }

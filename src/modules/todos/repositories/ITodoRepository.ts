@@ -1,4 +1,3 @@
-import { Todo } from '@modules/todos/infra/typeorm/entities/Todo'
 import { User } from '@modules/users/infra/typeorm/entities/User'
 
 interface ITodoRepository {

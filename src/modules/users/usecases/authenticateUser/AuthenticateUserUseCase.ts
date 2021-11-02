@@ -1,6 +1,6 @@
-import jwt, { sign } from 'jsonwebtoken'
-import bcrypt from 'bcrypt'
 import { inject, injectable } from 'tsyringe'
+import { sign } from 'jsonwebtoken'
+import bcrypt from 'bcrypt'
 import auth from '@config/auth'
 import { IUserRepository } from '@modules/users/repositories/IUserRepository'
 import { IUserTokensRepository } from '@modules/users/repositories/IUserTokensRepository'
