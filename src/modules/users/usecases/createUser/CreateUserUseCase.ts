@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt'
 import { inject, injectable } from 'tsyringe'
 import { IRegisterUserRequest } from '@modules/users/dtos/IRegisterUserRequest'
 import { IUserRepository } from '@modules/users/repositories/IUserRepository'
@@ -17,6 +18,10 @@ class CreateUserUseCase {
     password,
     confirmPassword,
   }: IRegisterUserRequest) {
+    if (await this.userRepository.findUserByEmail(email)) {
+      throw new Error('This email is already in use')
+    }
+
     if (
       passwordValidator.isValid(password) === false ||
       passwordValidator.isValid(confirmPassword) === false
@@ -28,14 +33,12 @@ class CreateUserUseCase {
       throw new Error('Invalid email')
     }
 
-    if (await this.userRepository.findUserByEmail(email)) {
-      throw new Error('This email is already in use')
-    }
+    const passwordHashed = await bcrypt.hash(password, 12)
 
-    const newUser = this.userRepository.createUser({
+    const newUser = await this.userRepository.createUser({
       username,
       email,
-      password,
+      password: passwordHashed,
     })
 
     return newUser
