@@ -26,7 +26,7 @@ class TodoRepository implements ITodoRepository {
   }
 
   async setTodoId(id: string, newId: string): Promise<void> {
-    const todo = await this.repository.findOneOrFail(id)
+    const todo = await this.repository.findOne(id)
     todo.id === newId
   }
 
