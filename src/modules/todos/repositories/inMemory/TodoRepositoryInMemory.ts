@@ -1,17 +1,18 @@
 import { Todo } from '@modules/todos/infra/typeorm/entities/Todo'
-import { User } from '@modules/users/infra/typeorm/entities/User'
 import { ITodoRepository } from '../ITodoRepository'
 
 class TodoRepositoryInMemory implements ITodoRepository {
   private todos: Todo[] = []
 
-  async createTodo(body: string, user: User): Promise<any> {
+  async createTodo(user_id: string, body: string): Promise<Todo> {
     const todo = new Todo()
     Object.assign(todo, {
+      user_id,
       body,
-      user,
     })
     this.todos.push(todo)
+
+    return todo
   }
 
   async deleteTodo(id: string): Promise<void> {
@@ -22,11 +23,6 @@ class TodoRepositoryInMemory implements ITodoRepository {
   async setTodoStatus(id: string, status: boolean): Promise<void> {
     const todo = this.todos.filter((t) => t.id === id)
     todo[0].isCompleted = status
-  }
-
-  async setTodoId(id: string, newId: string): Promise<void> {
-    const todo = this.todos.filter((t) => t.id === id)
-    todo[0].id = newId 
   }
 
   async findTodosByUser(id: string): Promise<Todo[]> {

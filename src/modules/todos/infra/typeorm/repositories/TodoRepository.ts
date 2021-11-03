@@ -9,35 +9,33 @@ class TodoRepository implements ITodoRepository {
     this.repository = getRepository(Todo)
   }
 
-  async createTodo(body: string): Promise<void> {
-    this.repository.create({
+  async createTodo(userId: string, body: string): Promise<Todo> {
+    const todo = this.repository.create({
+      user_id: userId,
       body,
     })
+    await this.repository.save(todo)
+    return todo
   }
 
-  async setTodoStatus(id: string, status: boolean): Promise<void> {
+  async setTodoStatus(todoId: string, status: boolean): Promise<void> {
     await this.repository
       .createQueryBuilder()
       .update()
       .set({ isCompleted: status })
-      .where('id = :id')
-      .setParameters({ id })
+      .where('todoId = :id')
+      .setParameters({ todoId })
       .execute()
   }
 
-  async setTodoId(id: string, newId: string): Promise<void> {
-    const todo = await this.repository.findOne(id)
-    todo.id === newId
+  async deleteTodo(todoId: string): Promise<void> {
+    await this.repository.delete(todoId)
   }
 
-  async deleteTodo(id: string): Promise<void> {
-    await this.repository.delete(id)
-  }
-
-  async findTodosByUser(id: string): Promise<Todo[]> {
+  async findTodosByUser(userId: string): Promise<Todo[]> {
     const todos = await this.repository.find({
-      where: { id },
-      relations: ["user"]
+      where: { userId },
+      relations: ['user'],
     })
     return todos
   }

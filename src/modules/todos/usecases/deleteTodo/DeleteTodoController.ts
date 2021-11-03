@@ -3,7 +3,7 @@ import { container } from 'tsyringe'
 import { DeleteTodoUseCase } from './DeleteTodoUseCase'
 
 class DeleteTodoController {
-  async handle(request: Request, response: Response) {
+  async handle(request: Request, response: Response): Promise<Response> {
     const { userId, todoId } = request.body
     const deleteTodoUseCase = container.resolve(DeleteTodoUseCase)
 
