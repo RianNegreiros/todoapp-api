@@ -8,7 +8,7 @@ import { UserTokensRepository } from '@modules/users/infra/typeorm/repositories/
 
 import '@shared/container/providers'
 
-container.registerSingleton<ITodoRepository>('TodoRespository', TodoRepository)
+container.registerSingleton<ITodoRepository>('TodoRepository', TodoRepository)
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository)
 
