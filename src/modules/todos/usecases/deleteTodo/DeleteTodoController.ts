@@ -9,7 +9,7 @@ class DeleteTodoController {
 
     try {
       await deleteTodoUseCase.execute(userId, todoId)
-      return response.status(200)
+      return response.status(200).send()
     } catch (error) {
       return response.status(400).json(error)
     }
