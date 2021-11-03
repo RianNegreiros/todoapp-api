@@ -25,7 +25,7 @@ class Todo {
   body: string
 
   @Column()
-  isCompleted: boolean
+  completed: boolean
 
   @CreateDateColumn()
   created_at: Date
@@ -34,7 +34,7 @@ class Todo {
     if (!this.id) {
       this.id = uuidV4()
     }
-    this.isCompleted = false
+    this.completed = false
   }
 }
 
