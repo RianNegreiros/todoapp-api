@@ -22,7 +22,7 @@ class TodoRepository implements ITodoRepository {
     await this.repository
       .createQueryBuilder()
       .update()
-      .set({ isCompleted: status })
+      .set({ completed: status })
       .where('todoId = :id')
       .setParameters({ todoId })
       .execute()
@@ -34,7 +34,7 @@ class TodoRepository implements ITodoRepository {
 
   async findTodosByUser(userId: string): Promise<Todo[]> {
     const todos = await this.repository.find({
-      where: { userId },
+      where: { user_id: userId },
       relations: ['user'],
     })
     return todos
