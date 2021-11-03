@@ -8,8 +8,8 @@ class SetTodoStatusUseCase {
     private todoRepository: ITodoRepository
   ) {}
 
-  async execute(userId: string, status: boolean): Promise<void> {
-    return await this.todoRepository.setTodoStatus(userId, status)
+  async execute(todoId: string, status: boolean): Promise<void> {
+    await this.todoRepository.setTodoStatus(todoId, status)
   }
 }
 

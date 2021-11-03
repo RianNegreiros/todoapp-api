@@ -16,7 +16,7 @@ class DeleteTodoUseCase {
     if (!user) {
       throw new Error('User not found by this id')
     }
-    return await this.todoRepository.deleteTodo(todoId)
+    await this.todoRepository.deleteTodo(todoId)
   }
 }
 

@@ -17,7 +17,7 @@ class CreateUserUseCase {
     email,
     password,
     confirmPassword,
-  }: IRegisterUserRequest) {
+  }: IRegisterUserRequest): Promise<void> {
     if (await this.userRepository.findUserByEmail(email)) {
       throw new Error('This email is already in use')
     }
@@ -35,13 +35,11 @@ class CreateUserUseCase {
 
     const passwordHashed = await bcrypt.hash(password, 12)
 
-    const newUser = await this.userRepository.createUser({
+    await this.userRepository.createUser({
       username,
       email,
       password: passwordHashed,
     })
-
-    return newUser
   }
 }
 
