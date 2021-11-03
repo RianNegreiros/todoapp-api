@@ -26,7 +26,11 @@ class TodoRepositoryInMemory implements ITodoRepository {
 
   async setTodoId(id: string, newId: string): Promise<void> {
     const todo = this.todos.filter((t) => t.id === id)
-    todo[0].id === newId 
+    todo[0].id = newId 
+  }
+
+  async findTodosByUser(id: string): Promise<Todo[]> {
+    return this.todos.filter((todo) => todo.user.id === id)
   }
 }
 

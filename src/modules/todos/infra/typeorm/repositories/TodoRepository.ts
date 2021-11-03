@@ -33,6 +33,14 @@ class TodoRepository implements ITodoRepository {
   async deleteTodo(id: string): Promise<void> {
     await this.repository.delete(id)
   }
+
+  async findTodosByUser(id: string): Promise<Todo[]> {
+    const todos = await this.repository.find({
+      where: { id },
+      relations: ["user"]
+    })
+    return todos
+  }
 }
 
 export { TodoRepository }
