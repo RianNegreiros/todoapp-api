@@ -7,6 +7,7 @@ import {
   ManyToOne,
   PrimaryColumn,
 } from 'typeorm'
+import { v4 as uuidV4 } from 'uuid'
 
 @Entity('todos')
 class Todo {
@@ -30,6 +31,9 @@ class Todo {
   created_at: Date
 
   constructor() {
+    if (!this.id) {
+      this.id = uuidV4()
+    }
     this.isCompleted = false
   }
 }
