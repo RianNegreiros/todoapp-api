@@ -1,6 +1,6 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class Todos1635186500359 implements MigrationInterface {
+export class CreateTodo1635891694541 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
@@ -9,9 +9,13 @@ export class Todos1635186500359 implements MigrationInterface {
                 columns: [
                     {
                         name: "id",
-                        type: "uuid",
+                        type: "serial",
                         isPrimary: true
-                    }, 
+                    },
+                    {
+                        name: "user_id",
+                        type: "uuid"
+                    },
                     {
                         name: "body",
                         type: "varchar",
@@ -30,13 +34,23 @@ export class Todos1635186500359 implements MigrationInterface {
                         type: "timestamp",
                         default: "now()",
                     }
+                ],
+                foreignKeys: [
+                    {
+                        name: "FKUserTodo",
+                        referencedTableName: "users",
+                        referencedColumnNames: ["id"],
+                        columnNames: ["user_id"],
+                        onDelete: "SET NULL",
+                        onUpdate: "SET NULL"
+                    }
                 ]
             })
         )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('todos')
+        await queryRunner.dropTable("todos")
     }
 
 }
