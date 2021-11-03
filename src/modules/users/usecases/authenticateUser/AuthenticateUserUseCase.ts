@@ -11,6 +11,15 @@ interface IAuthRequest {
   password: string
 }
 
+interface IAuthResponse {
+  user: {
+    username: string;
+    email: string;
+  };
+  token: string;
+  refresh_token: string;
+}
+
 @injectable()
 class AuthenticateUserUseCase {
   constructor(
@@ -22,14 +31,14 @@ class AuthenticateUserUseCase {
     private dateProvider: IDateProvider
   ) {}
 
-  async execute({ email, password }: IAuthRequest) {
+  async execute({ email, password }: IAuthRequest): Promise<IAuthResponse> {
     const user = await this.userRepository.findUserByEmail(email)
     if (!user) {
       throw new Error('Email or password incorrect')
     }
 
-    const validate = await bcrypt.compare(password, user.password)
-    if (!validate) {
+    const passwordMatch = await bcrypt.compare(password, user.password)
+    if (!passwordMatch) {
       throw new Error('Email or password incorrect')
     }
 
@@ -53,11 +62,16 @@ class AuthenticateUserUseCase {
       refresh_token: refresh_token
     })
 
-    return {
-      username: user.username,
-      email: user.email,
-      token: token,
+    const tokenReturn: IAuthResponse = {
+      token,
+      user: {
+        username: user.username,
+        email: user.email
+      },
+      refresh_token
     }
+
+    return tokenReturn
   }
 }
 
