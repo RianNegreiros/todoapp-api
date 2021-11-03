@@ -21,8 +21,8 @@ class TodoRepositoryInMemory implements ITodoRepository {
   }
 
   async setTodoStatus(id: string, status: boolean): Promise<void> {
-    const todo = this.todos.filter((t) => t.id === id)
-    todo[0].isCompleted = status
+    const todo = this.todos.find((t) => t.id === id)
+    todo.completed = status
   }
 
   async findTodosByUser(id: string): Promise<Todo[]> {

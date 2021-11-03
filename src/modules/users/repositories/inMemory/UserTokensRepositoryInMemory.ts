@@ -26,15 +26,15 @@ class UserTokensRepositoryInMemory implements IUserTokensRepository {
     user_id: string,
     refresh_token: string
   ): Promise<UserTokens> {
-    const userToken = this.userTokens.filter(
+    const userToken = this.userTokens.find(
       (ut) => ut.user_id == user_id && ut.refresh_token && refresh_token
     )
-    return userToken[0]
+    return userToken
   }
 
   async deleteById(id: string): Promise<void> {
-    const userToken = this.userTokens.filter((ut) => ut.id === id)
-    this.userTokens.splice(this.userTokens.indexOf(userToken[0]))
+    const userToken = this.userTokens.find((ut) => ut.id === id)
+    this.userTokens.splice(this.userTokens.indexOf(userToken))
   }
 }
 

@@ -29,7 +29,7 @@ class UserTokensRepository implements IUserTokensRepository {
     user_id: string,
     refresh_token: string
   ): Promise<UserTokens> {
-    const userTokens = await this.repository.findOneOrFail({
+    const userTokens = await this.repository.findOne({
       user_id,
       refresh_token,
     })
