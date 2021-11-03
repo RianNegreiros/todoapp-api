@@ -15,11 +15,13 @@ class UserRepository implements IUserRepository {
     email,
     password,
   }: ICreateUserRequest): Promise<void> {
-    this.repository.create({
+    const user = this.repository.create({
       username,
       email,
       password,
     })
+
+    await this.repository.save(user)
   }
 
   async findUserById(id: string): Promise<User> {
