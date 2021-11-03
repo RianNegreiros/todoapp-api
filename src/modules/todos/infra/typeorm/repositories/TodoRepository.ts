@@ -23,8 +23,7 @@ class TodoRepository implements ITodoRepository {
       .createQueryBuilder()
       .update()
       .set({ completed: status })
-      .where('todoId = :id')
-      .setParameters({ todoId })
+      .where('id = :id', { id: todoId })
       .execute()
   }
 
