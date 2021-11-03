@@ -28,7 +28,11 @@ class TodoRepository implements ITodoRepository {
   }
 
   async deleteTodo(todoId: string): Promise<void> {
-    await this.repository.delete(todoId)
+    await this.repository
+    .createQueryBuilder()
+    .delete()
+    .where('id = :id', { id: todoId })
+    .execute()
   }
 
   async findTodosByUser(userId: string): Promise<Todo[]> {
