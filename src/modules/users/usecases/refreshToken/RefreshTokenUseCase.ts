@@ -51,7 +51,7 @@ class RefreshTokenUseCase {
     await this.userTokensRepository.create({
       expires_date,
       refresh_token,
-      user_id
+      user_id,
     })
 
     const newToken = sign({}, auth.jwt_token, {
@@ -61,7 +61,7 @@ class RefreshTokenUseCase {
 
     return {
       refresh_token,
-      token: newToken
+      token: newToken,
     }
   }
 }
