@@ -5,19 +5,15 @@ import auth from '@config/auth'
 import { IUserRepository } from '@modules/users/repositories/IUserRepository'
 import { IUserTokensRepository } from '@modules/users/repositories/IUserTokensRepository'
 import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider'
-
-interface IAuthRequest {
-  email: string
-  password: string
-}
+import { IAuthRequest } from '@modules/users/dtos/IAuthRequest'
 
 interface IAuthResponse {
   user: {
-    username: string;
-    email: string;
-  };
-  token: string;
-  refresh_token: string;
+    username: string
+    email: string
+  }
+  token: string
+  refresh_token: string
 }
 
 @injectable()
@@ -59,16 +55,16 @@ class AuthenticateUserUseCase {
     await this.userTokensRepository.create({
       user_id: user.id,
       expires_date: refresh_token_expires_date,
-      refresh_token: refresh_token
+      refresh_token: refresh_token,
     })
 
     const tokenReturn: IAuthResponse = {
       token,
       user: {
         username: user.username,
-        email: user.email
+        email: user.email,
       },
-      refresh_token
+      refresh_token,
     }
 
     return tokenReturn
