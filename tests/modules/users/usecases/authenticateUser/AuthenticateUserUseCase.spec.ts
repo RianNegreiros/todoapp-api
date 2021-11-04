@@ -13,7 +13,7 @@ let dateProvider: DateProvider
 let createUserUseCase: CreateUserUseCase
 
 describe('Authenticate User', () => {
-  beforeEach(() => {
+  beforeAll(() => {
     userRepositoryInMemory = new UserRepositoryInMemory()
     dateProvider = new DateProvider()
     userTokensRepositoryInMemory = new UserTokensRepositoryInMemory()
@@ -27,10 +27,10 @@ describe('Authenticate User', () => {
 
   it('should be able to authenticate an user', async () => {
     const user: IRegisterUserRequest = {
-      username: 'testName',
-      email: 'test@mail.com',
-      password: 'testTEST123@',
-      confirmPassword: 'testTEST123@',
+      username: 'authUser',
+      email: 'authUser@mail.com',
+      password: 'authUSER123@',
+      confirmPassword: 'authUSER123@',
     }
 
     await createUserUseCase.execute(user)
@@ -39,32 +39,39 @@ describe('Authenticate User', () => {
       email: user.email,
       password: user.password,
     })
-
     expect(result).toHaveProperty('token')
   })
 
-  it('should not be able to authenticate an nonexistent user', () => {
-    expect(async () => {
-      await authenticateUserUseCase.execute({
-        email: 'testexists@mail.com',
-        password: 'testTEST123@',
-      })
-    }).rejects.toThrow(new Error('Email or password incorrect'))
-  })
-
-  it('should not be able to authenticate with incorrect password', () => {
+  it('Should not be able to authenticate if email is incorrect', () => {
     expect(async () => {
       const user: IRegisterUserRequest = {
-        username: 'testName',
-        email: 'test@mail.com',
-        password: 'testTEST123@',
-        confirmPassword: 'testTEST123@',
+        username: 'invalidEmail',
+        email: 'emailInvalid@mail.com',
+        password: 'invalidEMAIL123@',
+        confirmPassword: 'invalidEMAIL123@',
       }
       await createUserUseCase.execute(user)
 
       await authenticateUserUseCase.execute({
-        email: 'test@mail.com',
-        password: 'invalid123@',
+        email: 'invalid@mail.com',
+        password: 'invalidEMAIL123@',
+      })
+    }).rejects.toThrow(new Error('Email or password incorrect'))
+  })
+
+  it('should not be able to authenticate if password is incorrect ', () => {
+    expect(async () => {
+      const user: IRegisterUserRequest = {
+        username: 'invalidPassword',
+        email: 'invalidPassword@mail.com',
+        password: 'invPASSWORD123@',
+        confirmPassword: 'invPASSWORD123@',
+      }
+      await createUserUseCase.execute(user)
+
+      await authenticateUserUseCase.execute({
+        email: 'invalidPassword@mail.com',
+        password: 'invalidPassword@',
       })
     }).rejects.toThrow(new Error('Email or password incorrect'))
   })
