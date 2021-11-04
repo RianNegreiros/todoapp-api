@@ -6,7 +6,7 @@ import { UserRepositoryInMemory } from '../../../../../src/modules/users/reposit
 let userRepositoryInMemory: IUserRepository
 let createUserUseCase: CreateUserUseCase
 
-describe('Create User', () => {
+describe('Create User Use Case', () => {
   beforeEach(() => {
     userRepositoryInMemory = new UserRepositoryInMemory()
     createUserUseCase = new CreateUserUseCase(userRepositoryInMemory)

@@ -4,7 +4,7 @@ import { app } from '@shared/infra/http/app'
 import { IRegisterUserRequest } from '@modules/users/dtos/IRegisterUserRequest'
 
 let connection: Connection
-describe('Create user controller', () => {
+describe('Create User Controller', () => {
   beforeEach(async () => {
     connection = await createConnection()
     await connection.runMigrations()

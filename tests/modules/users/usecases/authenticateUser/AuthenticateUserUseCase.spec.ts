@@ -7,12 +7,12 @@ import { UserTokensRepositoryInMemory } from '@modules/users/repositories/inMemo
 
 let userRepositoryInMemory: UserRepositoryInMemory
 let userTokensRepositoryInMemory: UserTokensRepositoryInMemory
-let authenticateUserUseCase: AuthenticateUserUseCase
 let dateProvider: DateProvider
 
+let authenticateUserUseCase: AuthenticateUserUseCase
 let createUserUseCase: CreateUserUseCase
 
-describe('Authenticate User', () => {
+describe('Authenticate User Use Case', () => {
   beforeAll(() => {
     userRepositoryInMemory = new UserRepositoryInMemory()
     dateProvider = new DateProvider()
