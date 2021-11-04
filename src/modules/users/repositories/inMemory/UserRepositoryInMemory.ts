@@ -1,4 +1,3 @@
-import bcrypt from 'bcrypt'
 import { ICreateUserRequest } from '@modules/users/dtos/ICreateUserRequest'
 import { IUserRepository } from '@modules/users/repositories/IUserRepository'
 import { User } from '@modules/users/infra/typeorm/entities/User'
