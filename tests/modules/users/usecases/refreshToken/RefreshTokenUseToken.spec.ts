@@ -51,4 +51,32 @@ describe('Refresh Token Use Case', () => {
 
     expect(result).toHaveProperty('refresh_token')
   })
+
+  it('Should throws if user doesnt have refresh tokens', () => {
+    expect(async () => {
+      const userRequest: IRegisterUserRequest = {
+        username: 'authUser',
+        email: 'authUser@mail.com',
+        password: 'authUSER123@',
+        confirmPassword: 'authUSER123@',
+      }
+      await createUserUseCase.execute(userRequest)
+
+      const auth = await authenticateUserUseCase.execute({
+        email: userRequest.email,
+        password: userRequest.password,
+      })
+
+      const user = await userRepositoryInMemory.findUserByEmail(
+        userRequest.email
+      )
+      const userTokens =
+        await userTokensRepositoryInMemory.findByUserIdAndRefreshTokens(
+          user.id,
+          auth.refresh_token
+        )
+      await userTokensRepositoryInMemory.deleteById(userTokens.id)
+      await refreshTokenUseCase.execute(auth.refresh_token)
+    }).rejects.toThrow(new Error('Refresh Token Error'))
+  })
 })
