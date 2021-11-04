@@ -14,14 +14,25 @@ describe('Create user controller', () => {
     await connection.close()
   })
 
-  it('be able to create a new user', async () => {
+  it('Should return 201 if user registration succeeds', async () => {
     const response = await request(app).post('/users/register').send({
-      username: 'testName',
-      email: 'test@mail.com',
-      password: 'testTEST123@',
-      confirmPassword: 'testTEST123@',
+      username: 'registerUser',
+      email: 'registerUser@mail.com',
+      password: 'registerUSER123@',
+      confirmPassword: 'registerUSER123@',
     })
 
     expect(response.status).toBe(201)
+  })
+
+  it('Should return 400 if user registration fails', async () => {
+    const response = await request(app).post('/users/register').send({
+      username: 'registerUser',
+      email: 'registerUser@mail.com',
+      password: 'registerUSER123@',
+      confirmPassword: 'registerUSER123@',
+    })
+
+    expect(response.status).toBe(400)
   })
 })
