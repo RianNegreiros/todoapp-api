@@ -12,12 +12,11 @@ class UserRepositoryInMemory implements IUserRepository {
     password,
   }: ICreateUserRequest): Promise<void> {
     const user = new User()
-    const passwordHashed = await bcrypt.hash(password, 12)
 
     Object.assign(user, {
-      username: username,
-      email: email,
-      password: passwordHashed,
+      username,
+      email,
+      password,
     })
 
     this.users.push(user)
