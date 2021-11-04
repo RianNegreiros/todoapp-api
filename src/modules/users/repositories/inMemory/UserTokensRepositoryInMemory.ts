@@ -27,7 +27,7 @@ class UserTokensRepositoryInMemory implements IUserTokensRepository {
     refresh_token: string
   ): Promise<UserTokens> {
     const userToken = this.userTokens.find(
-      (ut) => ut.user_id == user_id && ut.refresh_token && refresh_token
+      (ut) => ut.user_id === user_id && ut.refresh_token && refresh_token
     )
     return userToken
   }
