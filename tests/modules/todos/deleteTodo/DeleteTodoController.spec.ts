@@ -58,4 +58,25 @@ describe('Delete Todo Controller', () => {
       })
     expect(response.status).toBe(200)
   })
+
+  it('Should return 400 if todo deletion fails', async () => {
+    const auth = await request(app).post('/authentication/sessions').send({
+      email: 'createTodoTest@mail.com',
+      password: 'createTODO123@',
+    })
+    const user = await userRepository.findUserByEmail('createTodoTest@mail.com')
+    const todoId = uuidV4()
+
+    const { token } = auth.body
+    const response = await request(app)
+      .delete('/todos/delete')
+      .send({
+        userId: user.id,
+        todoId: todoId,
+      })
+      .set({
+        Authorization: `Bearer ${token}`,
+      })
+    expect(response.status).toBe(400)
+  })
 })
