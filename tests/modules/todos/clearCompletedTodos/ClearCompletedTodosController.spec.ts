@@ -55,4 +55,23 @@ describe('Clear Completed Todos Controller', () => {
       })
     expect(response.status).toBe(200)
   })
+
+  it('Should return 400 if completed todos cleaning fails', async () => {
+    const auth = await request(app).post('/authentication/sessions').send({
+      email: 'completedsTodos@mail.com',
+      password: 'compleTEDS123@',
+    })
+
+    const userId = uuidV4()
+    const { token } = auth.body
+    const response = await request(app)
+      .delete('/todos/clear-completeds')
+      .send({
+        userId,
+      })
+      .set({
+        Authorization: `Bearer ${token}`,
+      })
+    expect(response.status).toBe(400)
+  })
 })
