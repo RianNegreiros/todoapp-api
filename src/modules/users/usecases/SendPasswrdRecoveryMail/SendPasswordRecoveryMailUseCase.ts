@@ -1,7 +1,8 @@
+import { resolve } from 'path'
 import { inject, injectable } from 'tsyringe'
-import { IUserRepository } from '@modules/users/repositories/IUserRepository'
 import { sign } from 'jsonwebtoken'
 import auth from '@config/auth'
+import { IUserRepository } from '@modules/users/repositories/IUserRepository'
 import { IUserTokensRepository } from '@modules/users/repositories/IUserTokensRepository'
 import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider'
 import { IMailProvider } from '@shared/container/providers/MailProvider/IMailProvider'
@@ -34,10 +35,25 @@ class SendPasswordRecoveryMailUseCase {
       expires_date,
     })
 
+    const template = resolve(
+      __dirname,
+      '..',
+      '..',
+      'views',
+      'emails',
+      'passwordRecovery.hbs'
+    )
+
+    const variables = {
+      name: user.username,
+      link: `${process.env.PASSWORD_RECOVERY_URL}${refresh_token}`,
+    }
+
     await this.mailProvider.sendMail(
       email,
       'Password recovery',
-      `Link: ${refresh_token}`
+      variables,
+      template
     )
   }
 }
