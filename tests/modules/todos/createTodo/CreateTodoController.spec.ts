@@ -50,4 +50,24 @@ describe('Authenticate User Controller', () => {
       })
     expect(response.status).toBe(201)
   })
+
+  it('Should return 400 if user was not found', async () => {
+    const auth = await request(app).post('/authentication/sessions').send({
+      email: 'createTodoTest@mail.com',
+      password: 'createTODO123@',
+    })
+
+    const id = uuidV4()
+    const { token } = auth.body
+    const response = await request(app)
+      .post('/todos/create')
+      .send({
+        userId: id,
+        body: 'new todo body',
+      })
+      .set({
+        Authorization: `Bearer ${token}`,
+      })
+    expect(response.status).toBe(400)
+  })
 })
