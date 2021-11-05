@@ -41,10 +41,10 @@ class TodoRepositoryInMemory implements ITodoRepository {
   }
 
   async clearCompletedsTodos(userId: string): Promise<void> {
-    const completeds = this.todos.filter(
-      (todo) => todo.user_id === userId && todo.completed === true
-    )
-    completeds.splice(0, completeds.length)
+    this.todos.forEach((todo, index) => {
+      if (todo.user_id === userId && todo.completed === true)
+        this.todos.splice(index, 1)
+    })
   }
 }
 
