@@ -29,15 +29,22 @@ class TodoRepositoryInMemory implements ITodoRepository {
     return this.todos.filter((todo) => todo.user_id === userId)
   }
 
-  async findCompletedTodos(id: string): Promise<Todo[]> {
+  async findCompletedTodos(userId: string): Promise<Todo[]> {
     return this.todos.filter(
-      (todo) => todo.user_id === id && todo.completed === true
+      (todo) => todo.user_id === userId && todo.completed === true
     )
   }
 
-  async findTodoById(id: string): Promise<Todo> {
-    const todo = this.todos.find((todo) => todo.id === id)
+  async findTodoById(todoId: string): Promise<Todo> {
+    const todo = this.todos.find((todo) => todo.id === todoId)
     return todo
+  }
+
+  async clearCompletedsTodos(userId: string): Promise<void> {
+    const completeds = this.todos.filter(
+      (todo) => todo.user_id === userId && todo.completed === true
+    )
+    completeds.splice(0, completeds.length)
   }
 }
 
