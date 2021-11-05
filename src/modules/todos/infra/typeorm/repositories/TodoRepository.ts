@@ -43,6 +43,13 @@ class TodoRepository implements ITodoRepository {
     return todos
   }
 
+  async findCompletedTodos(userId: string): Promise<Todo[]> {
+    const todos = await this.repository.find({
+      where: { user_id: userId },
+    })
+    return todos.filter((completed) => completed.completed === true)
+  }
+
   async findTodoById(id: string): Promise<Todo> {
     const todo = await this.repository.findOne(id)
     return todo

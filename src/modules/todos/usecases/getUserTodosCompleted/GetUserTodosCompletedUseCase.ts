@@ -17,8 +17,7 @@ class GetUserTodosCompletedUseCase {
     if (!user) {
       throw new Error('User not found by this id')
     }
-    const completedTodos = await this.todoRepository.findTodosByUser(userId)
-    return completedTodos.filter((todo) => todo.completed === true)
+    return await this.todoRepository.findCompletedTodos(userId)
   }
 }
 

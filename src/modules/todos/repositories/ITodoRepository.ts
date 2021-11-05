@@ -5,7 +5,8 @@ interface ITodoRepository {
   setTodoStatus(todoId: string, status: boolean): Promise<void>
   deleteTodo(todoId: string): Promise<void>
   findTodosByUser(userId: string): Promise<Todo[]>
-  findTodoById(id: string): Promise<Todo>
+  findCompletedTodos(userId: string): Promise<Todo[]>
+  findTodoById(todoId: string): Promise<Todo>
 }
 
 export { ITodoRepository }
