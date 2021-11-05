@@ -31,10 +31,10 @@ describe('Delete Todo Use Case', () => {
 
   it('Should be able to delete a todo', async () => {
     const userData: IRegisterUserRequest = {
-      username: 'createUser',
-      email: 'createUser@mail.com',
-      password: 'createUSER123@',
-      confirmPassword: 'createUSER123@',
+      username: 'deleteTodo',
+      email: 'deleteTodo@mail.com',
+      password: 'deleteTODO123@',
+      confirmPassword: 'deleteTODO123@',
     }
     await createUserUseCase.execute(userData)
     const userCreated = await userRepositoryInMemory.findUserByEmail(
@@ -63,10 +63,10 @@ describe('Delete Todo Use Case', () => {
   it('Should throws if todo is not found', async () => {
     expect(async () => {
       const userData: IRegisterUserRequest = {
-        username: 'createUser',
-        email: 'createUser@mail.com',
-        password: 'createUSER123@',
-        confirmPassword: 'createUSER123@',
+        username: 'deleteTodo',
+        email: 'deleteTodo@mail.com',
+        password: 'deleteTODO123@',
+        confirmPassword: 'deleteTODO123@',
       }
       await createUserUseCase.execute(userData)
       const user = await userRepositoryInMemory.findUserByEmail(userData.email)

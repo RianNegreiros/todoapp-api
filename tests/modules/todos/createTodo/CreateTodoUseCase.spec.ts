@@ -24,10 +24,10 @@ describe('Create Todo Use Case', () => {
 
   it('Should be able to create a new todo', async () => {
     const userData: IRegisterUserRequest = {
-      username: 'createUser',
-      email: 'createUser@mail.com',
-      password: 'createUSER123@',
-      confirmPassword: 'createUSER123@',
+      username: 'createTodo',
+      email: 'createTodo@mail.com',
+      password: 'createTODO123@',
+      confirmPassword: 'createTODO123@',
     }
     await createUserUseCase.execute(userData)
     const userCreated = await userRepositoryInMemory.findUserByEmail(

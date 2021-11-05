@@ -30,10 +30,10 @@ describe('Create User Use Case', () => {
 
   it('Should throw if user already exists', async () => {
     const userData: IRegisterUserRequest = {
-      username: 'userExists',
-      email: 'userExists@mail.com',
-      password: 'userEXISTS123@',
-      confirmPassword: 'userEXISTS123@',
+      username: 'createUser',
+      email: 'createUser@mail.com',
+      password: 'createUSER123@',
+      confirmPassword: 'createUSER123@',
     }
 
     await createUserUseCase.execute(userData)

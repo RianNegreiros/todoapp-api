@@ -20,7 +20,7 @@ describe('Authenticate User Controller', () => {
     const password = await hash('createTODO123@', 8)
     await connection.query(
       `INSERT INTO USERS(id, username, email, password, created_at)
-      values('${id}', 'createTodoTest', 'createTodoTest@mail.com', '${password}', 'now()')`
+      values('${id}', 'createTodo', 'createTodo@mail.com', '${password}', 'now()')`
     )
   })
 
@@ -31,11 +31,11 @@ describe('Authenticate User Controller', () => {
 
   it('Should return 201 if todo creation succeeds', async () => {
     const auth = await request(app).post('/authentication/sessions').send({
-      email: 'createTodoTest@mail.com',
+      email: 'createTodo@mail.com',
       password: 'createTODO123@',
     })
     const findUser = await userRepository.findUserByEmail(
-      'createTodoTest@mail.com'
+      'createTodo@mail.com'
     )
 
     const { token } = auth.body
@@ -53,7 +53,7 @@ describe('Authenticate User Controller', () => {
 
   it('Should return 400 if user was not found', async () => {
     const auth = await request(app).post('/authentication/sessions').send({
-      email: 'createTodoTest@mail.com',
+      email: 'createTodo@mail.com',
       password: 'createTODO123@',
     })
 

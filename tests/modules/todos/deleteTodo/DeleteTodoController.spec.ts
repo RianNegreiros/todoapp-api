@@ -20,10 +20,10 @@ describe('Delete Todo Controller', () => {
     await connection.runMigrations()
 
     const userId = uuidV4()
-    const password = await hash('createTODO123@', 8)
+    const password = await hash('deleteTODO123@', 8)
     await connection.query(
       `INSERT INTO USERS(id, username, email, password, created_at)
-      values('${userId}', 'createTodoTest', 'createTodoTest@mail.com', '${password}', 'now()')`
+      values('${userId}', 'deleteTodo', 'deleteTodo@mail.com', '${password}', 'now()')`
     )
 
     const todoId = uuidV4()
@@ -40,10 +40,10 @@ describe('Delete Todo Controller', () => {
 
   it('Should return 200 if todo deletion succeeds', async () => {
     const auth = await request(app).post('/authentication/sessions').send({
-      email: 'createTodoTest@mail.com',
-      password: 'createTODO123@',
+      email: 'deleteTodo@mail.com',
+      password: 'deleteTODO123@',
     })
-    const user = await userRepository.findUserByEmail('createTodoTest@mail.com')
+    const user = await userRepository.findUserByEmail('deleteTodo@mail.com')
     const todo = await todoRepository.findTodosByUser(user.id)
 
     const { token } = auth.body
@@ -61,10 +61,10 @@ describe('Delete Todo Controller', () => {
 
   it('Should return 400 if todo deletion fails', async () => {
     const auth = await request(app).post('/authentication/sessions').send({
-      email: 'createTodoTest@mail.com',
-      password: 'createTODO123@',
+      email: 'deleteTodo@mail.com',
+      password: 'deleteTODO123@',
     })
-    const user = await userRepository.findUserByEmail('createTodoTest@mail.com')
+    const user = await userRepository.findUserByEmail('deleteTodo@mail.com')
     const todoId = uuidV4()
 
     const { token } = auth.body
