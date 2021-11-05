@@ -29,10 +29,10 @@ class TodoRepository implements ITodoRepository {
 
   async deleteTodo(todoId: string): Promise<void> {
     await this.repository
-    .createQueryBuilder()
-    .delete()
-    .where('id = :id', { id: todoId })
-    .execute()
+      .createQueryBuilder()
+      .delete()
+      .where('id = :id', { id: todoId })
+      .execute()
   }
 
   async findTodosByUser(userId: string): Promise<Todo[]> {
@@ -41,6 +41,11 @@ class TodoRepository implements ITodoRepository {
       relations: ['user'],
     })
     return todos
+  }
+
+  async findTodoById(id: string): Promise<Todo> {
+    const todo = await this.repository.findOne(id)
+    return todo
   }
 }
 

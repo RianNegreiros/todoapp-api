@@ -39,11 +39,14 @@ describe('Delete Todo Use Case', () => {
       userData.email
     )
 
-    const todo = await createTodoUseCase.execute(userCreated.id, 'new todo body')
+    const todo = await createTodoUseCase.execute(
+      userCreated.id,
+      'new todo body'
+    )
     await deleTodoUseCase.execute(userCreated.id, todo.id)
 
     const exists = await todoRepositoryInMemory.findTodoById(todo.id)
 
-    expect(exists).toBeFalsy()
+    expect(!!exists).toBeFalsy()
   })
 })

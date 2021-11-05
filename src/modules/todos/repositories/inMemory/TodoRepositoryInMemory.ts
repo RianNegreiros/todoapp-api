@@ -29,8 +29,8 @@ class TodoRepositoryInMemory implements ITodoRepository {
     return this.todos.filter((todo) => todo.user_id === id)
   }
 
-  async findTodoById(id: string): Promise<Boolean> {
-    const todo = this.todos.some((todo) => todo.id === id)
+  async findTodoById(id: string): Promise<Todo> {
+    const todo = this.todos.find((todo) => todo.id === id)
     return todo
   }
 }

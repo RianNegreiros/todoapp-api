@@ -16,6 +16,11 @@ class DeleteTodoUseCase {
     if (!user) {
       throw new Error('User not found by this id')
     }
+
+    const exists = await this.todoRepository.findTodoById(todoId)
+    if (!exists) {
+      throw new Error('Todo not found by this id')
+    }
     await this.todoRepository.deleteTodo(todoId)
   }
 }
