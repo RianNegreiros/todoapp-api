@@ -1,13 +1,21 @@
 import { Connection, createConnection } from 'typeorm'
 import request from 'supertest'
 import { app } from '@shared/infra/http/app'
-import { IRegisterUserRequest } from '@modules/users/dtos/IRegisterUserRequest'
+import { hash } from 'bcrypt'
+import {v4 as uuidV4} from 'uuid'
 
 let connection: Connection
 describe('Authenticate User Controller', () => {
   beforeAll(async () => {
     connection = await createConnection()
     await connection.runMigrations()
+
+    const id = uuidV4()
+    const password = await hash('authUSER123@', 8)
+    await connection.query(
+      `INSERT INTO USERS(id, username, email, password, created_at)
+      values('${id}', 'authUser', 'authUser@mail.com', '${password}', 'now()')`
+    )
   })
 
   afterAll(async () => {
@@ -16,40 +24,14 @@ describe('Authenticate User Controller', () => {
   })
 
   it('Should return 200 if user authentication succeeds', async () => {
-    const userData: IRegisterUserRequest = {
-      username: 'authUser',
+    const response = await request(app).post('/authentication/sessions').send({
       email: 'authUser@mail.com',
       password: 'authUSER123@',
-      confirmPassword: 'authUSER123@',
-    }
-    await request(app).post('/users/register').send({
-      username: userData.username,
-      email: userData.email,
-      password: userData.password,
-      confirmPassword: userData.confirmPassword,
-    })
-
-    const response = await request(app).post('/authentication/sessions').send({
-      email: userData.email,
-      password: userData.password,
     })
     expect(response.status).toBe(200)
   })
 
   it('Should return 400 if user authentication fails', async () => {
-    const userData: IRegisterUserRequest = {
-      username: 'authUser',
-      email: 'authUser@mail.com',
-      password: 'authUSER123@',
-      confirmPassword: 'authUSER123@',
-    }
-    await request(app).post('/users/register').send({
-      username: userData.username,
-      email: userData.email,
-      password: userData.password,
-      confirmPassword: userData.confirmPassword,
-    })
-
     const response = await request(app).post('/authentication/sessions').send({
       email: 'invalidAuth',
       password: 'invalidAuth',
