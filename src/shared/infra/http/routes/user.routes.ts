@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { CreateUserController } from '@modules/users/useCases/createUser/CreateUserController'
-import { SendPasswordRecoveryMailController } from '@modules/users/useCases/sendPasswrdRecoveryMail/SendPasswordRecoveryMailController'
+import { SendPasswordRecoveryMailController } from '@modules/users/useCases/sendPasswordRecoveryMail/SendPasswordRecoveryMailController'
 import { ResetPasswordController } from '@modules/users/useCases/resetPassword/ResetPasswordController'
 
 const userRoutes = Router()
