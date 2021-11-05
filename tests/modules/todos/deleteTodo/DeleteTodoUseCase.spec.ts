@@ -18,6 +18,7 @@ describe('Delete Todo Use Case', () => {
     todoRepositoryInMemory = new TodoRepositoryInMemory()
 
     createUserUseCase = new CreateUserUseCase(userRepositoryInMemory)
+
     createTodoUseCase = new CreateTodoUseCase(
       todoRepositoryInMemory,
       userRepositoryInMemory
@@ -61,7 +62,6 @@ describe('Delete Todo Use Case', () => {
 
   it('Should throws if todo is not found', async () => {
     expect(async () => {
-      const id = uuidV4()
       const userData: IRegisterUserRequest = {
         username: 'createUser',
         email: 'createUser@mail.com',
@@ -69,8 +69,12 @@ describe('Delete Todo Use Case', () => {
         confirmPassword: 'createUSER123@',
       }
       await createUserUseCase.execute(userData)
-      const todo = await createTodoUseCase.execute(id, 'new todo body')
-      await deleTodoUseCase.execute(id, todo.id)
+      const user = await userRepositoryInMemory.findUserByEmail(userData.email)
+      
+      await createTodoUseCase.execute(user.id, 'new todo body')
+
+      const todoId = uuidV4()
+      await deleTodoUseCase.execute(user.id, todoId)
     }).rejects.toThrow(new Error('Todo not found by this id'))
   })
 })
