@@ -35,4 +35,15 @@ describe('Send Password Recovery Mail Use Case', () => {
     await sendPasswordRecoveryMailUseCase.execute('passwordRecovery@mail.com')
     expect(sendMail).toHaveBeenCalled()
   })
+
+  it('Should be able to create an user token', async () => {
+    const generateToken = jest.spyOn(userTokensRepositoryInMemory, 'create')
+    await userRepositoryInMemory.createUser({
+      username: 'passwordRecovery',
+      email: 'passwordRecovery@mail.com',
+      password: 'recoVERY123@',
+    })
+    await sendPasswordRecoveryMailUseCase.execute('passwordRecovery@mail.com')
+    expect(generateToken).toHaveBeenCalled()
+  })
 })
