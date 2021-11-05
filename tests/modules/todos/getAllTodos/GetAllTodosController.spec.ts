@@ -45,13 +45,14 @@ describe('Get All User Todos Controller', () => {
     })
     const user = await userRepository.findUserByEmail('setTodoStatus@mail.com')
     const { token } = auth.body
-    const response = await request(app).get('/todos/all').send({
-      userId: user.id
-    })
-    .set({
-      Authorization: `Bearer ${token}`,
-    })
-
+    const response = await request(app)
+      .get('/todos/all')
+      .send({
+        userId: user.id,
+      })
+      .set({
+        Authorization: `Bearer ${token}`,
+      })
     expect(response.status).toBe(200)
   })
 })
