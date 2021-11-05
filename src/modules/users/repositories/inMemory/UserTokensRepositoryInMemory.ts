@@ -36,6 +36,13 @@ class UserTokensRepositoryInMemory implements IUserTokensRepository {
     const userToken = this.userTokens.find((ut) => ut.id === id)
     this.userTokens.splice(this.userTokens.indexOf(userToken))
   }
+
+  async findByRefreshToken(refreshToken: string): Promise<UserTokens> {
+    const userToken = this.userTokens.find(
+      (ut) => ut.refresh_token === refreshToken
+    )
+    return userToken
+  }
 }
 
 export { UserTokensRepositoryInMemory }
