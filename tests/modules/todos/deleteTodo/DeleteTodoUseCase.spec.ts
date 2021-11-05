@@ -4,6 +4,7 @@ import { DeleteTodoUseCase } from '@modules/todos/useCases/deleteTodo/DeleteTodo
 import { IRegisterUserRequest } from '@modules/users/dtos/IRegisterUserRequest'
 import { UserRepositoryInMemory } from '@modules/users/repositories/inMemory/UserRepositoryInMemory'
 import { CreateUserUseCase } from '@modules/users/useCases/createUser/CreateUserUseCase'
+import { v4 as uuidV4 } from 'uuid'
 
 let userRepositoryInMemory: UserRepositoryInMemory
 let todoRepositoryInMemory: TodoRepositoryInMemory
@@ -48,5 +49,13 @@ describe('Delete Todo Use Case', () => {
     const exists = await todoRepositoryInMemory.findTodoById(todo.id)
 
     expect(!!exists).toBeFalsy()
+  })
+
+  it('Should throws if user is not found', async () => {
+    expect(async () => {
+      const id = uuidV4()
+      const todo = await createTodoUseCase.execute(id, 'new todo body')
+      await deleTodoUseCase.execute(id, todo.id)
+    }).rejects.toThrow(new Error('User not found by this id'))
   })
 })
