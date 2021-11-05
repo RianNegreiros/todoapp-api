@@ -3,6 +3,7 @@ import { CreateTodoUseCase } from '@modules/todos/useCases/createTodo/CreateTodo
 import { IRegisterUserRequest } from '@modules/users/dtos/IRegisterUserRequest'
 import { UserRepositoryInMemory } from '@modules/users/repositories/inMemory/UserRepositoryInMemory'
 import { CreateUserUseCase } from '@modules/users/useCases/createUser/CreateUserUseCase'
+import { v4 as uuidV4 } from 'uuid'
 
 let userRepositoryInMemory: UserRepositoryInMemory
 let todoRepositoryInMemory: TodoRepositoryInMemory
@@ -33,11 +34,17 @@ describe('Create Todo Use Case', () => {
       userData.email
     )
 
-    const todo = await todoRepositoryInMemory.createTodo(
+    const todo = await createTodoUseCase.execute(
       userCreated.id,
       'new todo body'
     )
 
     expect(todo).toHaveProperty('user_id')
+  })
+
+  it('Should throws if user is not found', async () => {
+    expect(async () => {
+      await createTodoUseCase.execute(uuidV4(), 'new todo body')
+    }).rejects.toThrow(new Error('User not found by this id'))
   })
 })
