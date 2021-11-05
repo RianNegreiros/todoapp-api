@@ -58,4 +58,19 @@ describe('Delete Todo Use Case', () => {
       await deleTodoUseCase.execute(id, todo.id)
     }).rejects.toThrow(new Error('User not found by this id'))
   })
+
+  it('Should throws if todo is not found', async () => {
+    expect(async () => {
+      const id = uuidV4()
+      const userData: IRegisterUserRequest = {
+        username: 'createUser',
+        email: 'createUser@mail.com',
+        password: 'createUSER123@',
+        confirmPassword: 'createUSER123@',
+      }
+      await createUserUseCase.execute(userData)
+      const todo = await createTodoUseCase.execute(id, 'new todo body')
+      await deleTodoUseCase.execute(id, todo.id)
+    }).rejects.toThrow(new Error('Todo not found by this id'))
+  })
 })
