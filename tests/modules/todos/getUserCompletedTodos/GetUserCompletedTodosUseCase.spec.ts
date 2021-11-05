@@ -35,10 +35,10 @@ describe('Get User Todos Completed Use Case', () => {
 
   it('Should be able to return a list of user completeds todos', async () => {
     const userData: IRegisterUserRequest = {
-      username: 'setStatus',
-      email: 'setStatus@mail.com',
-      password: 'setSTATUS123@',
-      confirmPassword: 'setSTATUS123@',
+      username: 'completeds',
+      email: 'completeds@mail.com',
+      password: 'compleTEDS123@',
+      confirmPassword: 'compleTEDS123@',
     }
     await createUserUseCase.execute(userData)
     const user = await userRepositoryInMemory.findUserByEmail(userData.email)

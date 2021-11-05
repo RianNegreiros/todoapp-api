@@ -17,10 +17,10 @@ describe('Get All User Todos Controller', () => {
     await connection.runMigrations()
 
     const userId = uuidV4()
-    const password = await hash('setTodoSTATUS123@', 8)
+    const password = await hash('getALL123@', 8)
     await connection.query(
       `INSERT INTO USERS(id, username, email, password, created_at)
-      values('${userId}', 'setTodoStatus', 'setTodoStatus@mail.com', '${password}', 'now()')`
+      values('${userId}', 'getAll', 'getAll@mail.com', '${password}', 'now()')`
     )
 
     const todoId = uuidV4()
@@ -37,10 +37,10 @@ describe('Get All User Todos Controller', () => {
 
   it('Should return 200 if user todos listing succeeds', async () => {
     const auth = await request(app).post('/authentication/sessions').send({
-      email: 'setTodoStatus@mail.com',
-      password: 'setTodoSTATUS123@',
+      email: 'getAll@mail.com',
+      password: 'getALL123@',
     })
-    const user = await userRepository.findUserByEmail('setTodoStatus@mail.com')
+    const user = await userRepository.findUserByEmail('getAll@mail.com')
     const { token } = auth.body
     const response = await request(app)
       .get('/todos/all')
@@ -55,8 +55,8 @@ describe('Get All User Todos Controller', () => {
 
   it('Should return 400 if user todos listing fails', async () => {
     const auth = await request(app).post('/authentication/sessions').send({
-      email: 'setTodoStatus@mail.com',
-      password: 'setTodoSTATUS123@',
+      email: 'getAll@mail.com',
+      password: 'getALL123@',
     })
     const userId = uuidV4()
     const { token } = auth.body
