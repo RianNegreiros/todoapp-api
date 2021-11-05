@@ -58,4 +58,24 @@ describe('Set Todo Status Controller', () => {
       })
     expect(response.status).toBe(200)
   })
+
+  it('Should return 400 if todo change of status fails', async () => {
+    const auth = await request(app).post('/authentication/sessions').send({
+      email: 'setTodoStatus@mail.com',
+      password: 'setTodoSTATUS123@',
+    })
+
+    const todoId = uuidV4()
+    const { token } = auth.body
+    const response = await request(app)
+      .put('/todos/status')
+      .send({
+        todoId: todoId,
+        status: true,
+      })
+      .set({
+        Authorization: `Bearer ${token}`,
+      })
+    expect(response.status).toBe(400)
+  })
 })
