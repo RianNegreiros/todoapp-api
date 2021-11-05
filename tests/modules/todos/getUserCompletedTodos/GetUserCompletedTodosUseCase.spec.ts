@@ -4,7 +4,7 @@ import { CreateTodoUseCase } from '@modules/todos/useCases/createTodo/CreateTodo
 import { IRegisterUserRequest } from '@modules/users/dtos/IRegisterUserRequest'
 import { UserRepositoryInMemory } from '@modules/users/repositories/inMemory/UserRepositoryInMemory'
 import { CreateUserUseCase } from '@modules/users/useCases/createUser/CreateUserUseCase'
-import { GetUserTodosCompletedUseCase } from '@modules/todos/useCases/getUserTodosCompleted/GetUserTodosCompletedUseCase'
+import { GetUserCompletedTodosUseCase } from '@modules/todos/useCases/getUserTodosCompleted/GetUserCompletedTodosUseCase'
 import { SetTodoStatusUseCase } from '@modules/todos/useCases/setTodoStatus/SetTodoStatusUseCase'
 
 let userRepositoryInMemory: UserRepositoryInMemory
@@ -12,7 +12,7 @@ let todoRepositoryInMemory: TodoRepositoryInMemory
 
 let createUserUseCase: CreateUserUseCase
 let createTodoUseCase: CreateTodoUseCase
-let getUserTodosCompleted: GetUserTodosCompletedUseCase
+let getUserCompletedTodosUseCase: GetUserCompletedTodosUseCase
 let setTodoStatusUseCase: SetTodoStatusUseCase
 describe('Get User Todos Completed Use Case', () => {
   beforeEach(() => {
@@ -25,7 +25,7 @@ describe('Get User Todos Completed Use Case', () => {
       userRepositoryInMemory
     )
 
-    getUserTodosCompleted = new GetUserTodosCompletedUseCase(
+    getUserCompletedTodosUseCase = new GetUserCompletedTodosUseCase(
       userRepositoryInMemory,
       todoRepositoryInMemory
     )
@@ -45,8 +45,8 @@ describe('Get User Todos Completed Use Case', () => {
 
     const createTodo = await createTodoUseCase.execute(user.id, 'new todo body')
     await setTodoStatusUseCase.execute(createTodo.id, true)
-    
-    const completedTodos = await getUserTodosCompleted.execute(user.id)
+
+    const completedTodos = await getUserCompletedTodosUseCase.execute(user.id)
     expect(completedTodos.length).toBeGreaterThan(0)
   })
 
@@ -54,7 +54,7 @@ describe('Get User Todos Completed Use Case', () => {
     expect(async () => {
       const userId = uuidV4()
       await createTodoUseCase.execute(userId, 'new todo body')
-      await getUserTodosCompleted.execute(userId)
+      await getUserCompletedTodosUseCase.execute(userId)
     }).rejects.toThrow(new Error('User not found by this id'))
   })
 })

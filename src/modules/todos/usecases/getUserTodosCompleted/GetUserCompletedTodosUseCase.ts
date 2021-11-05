@@ -4,7 +4,7 @@ import { Todo } from '@modules/todos/infra/typeorm/entities/Todo'
 import { ITodoRepository } from '@modules/todos/repositories/ITodoRepository'
 
 @injectable()
-class GetUserTodosCompletedUseCase {
+class GetUserCompletedTodosUseCase {
   constructor(
     @inject('UserRepository')
     private userRepository: IUserRepository,
@@ -21,4 +21,4 @@ class GetUserTodosCompletedUseCase {
   }
 }
 
-export { GetUserTodosCompletedUseCase }
+export { GetUserCompletedTodosUseCase }
