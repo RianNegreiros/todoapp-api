@@ -1,9 +1,8 @@
 import { IRegisterUserRequest } from '@modules/users/dtos/IRegisterUserRequest'
-import { IUserRepository } from '@modules/users/repositories/IUserRepository'
 import { CreateUserUseCase } from '@modules/users/useCases/createUser/CreateUserUseCase'
-import { UserRepositoryInMemory } from '../../../../../src/modules/users/repositories/inMemory/UserRepositoryInMemory'
+import { UserRepositoryInMemory } from '@modules/users/repositories/inMemory/UserRepositoryInMemory'
 
-let userRepositoryInMemory: IUserRepository
+let userRepositoryInMemory: UserRepositoryInMemory
 let createUserUseCase: CreateUserUseCase
 
 describe('Create User Use Case', () => {

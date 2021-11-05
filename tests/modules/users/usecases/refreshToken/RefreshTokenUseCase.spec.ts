@@ -52,7 +52,7 @@ describe('Refresh Token Use Case', () => {
     expect(result).toHaveProperty('refresh_token')
   })
 
-  it('Should throws if user doesnt have refresh tokens', () => {
+  it('Should throw if user doesnt have refresh tokens', () => {
     expect(async () => {
       const userRequest: IRegisterUserRequest = {
         username: 'authUser',

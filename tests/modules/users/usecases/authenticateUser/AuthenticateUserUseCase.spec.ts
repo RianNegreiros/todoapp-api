@@ -42,7 +42,7 @@ describe('Authenticate User Use Case', () => {
     expect(result).toHaveProperty('token')
   })
 
-  it('Should not be able to authenticate if email is incorrect', () => {
+  it('Should throw if email is incorrect', () => {
     expect(async () => {
       const user: IRegisterUserRequest = {
         username: 'invalidEmail',
@@ -59,7 +59,7 @@ describe('Authenticate User Use Case', () => {
     }).rejects.toThrow(new Error('Email or password incorrect'))
   })
 
-  it('should not be able to authenticate if password is incorrect ', () => {
+  it('should throw if password is incorrect ', () => {
     expect(async () => {
       const user: IRegisterUserRequest = {
         username: 'invalidPassword',
