@@ -1,18 +1,15 @@
-import { UserRepository } from '@modules/users/infra/typeorm/repositories/UserRepository'
-import { v4 as uuidV4 } from 'uuid'
 import request from 'supertest'
-import { TodoRepository } from '@modules/todos/infra/typeorm/repositories/TodoRepository'
 import { Connection, createConnection } from 'typeorm'
+import { v4 as uuidV4 } from 'uuid'
 import { hash } from 'bcrypt'
+import { UserRepository } from '@modules/users/infra/typeorm/repositories/UserRepository'
 import { app } from '@shared/infra/http/app'
 
 let userRepository: UserRepository
-let todoRepository: TodoRepository
 let connection: Connection
 describe('Get All User Todos Controller', () => {
   beforeEach(() => {
     userRepository = new UserRepository()
-    todoRepository = new TodoRepository()
   })
 
   beforeAll(async () => {
@@ -54,5 +51,23 @@ describe('Get All User Todos Controller', () => {
         Authorization: `Bearer ${token}`,
       })
     expect(response.status).toBe(200)
+  })
+
+  it('Should return 400 if user todos listing fails', async () => {
+    const auth = await request(app).post('/authentication/sessions').send({
+      email: 'setTodoStatus@mail.com',
+      password: 'setTodoSTATUS123@',
+    })
+    const userId = uuidV4()
+    const { token } = auth.body
+    const response = await request(app)
+      .get('/todos/all')
+      .send({
+        userId,
+      })
+      .set({
+        Authorization: `Bearer ${token}`,
+      })
+    expect(response.status).toBe(400)
   })
 })
