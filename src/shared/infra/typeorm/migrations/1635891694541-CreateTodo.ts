@@ -9,7 +9,7 @@ export class CreateTodo1635891694541 implements MigrationInterface {
                 columns: [
                     {
                         name: "id",
-                        type: "serial",
+                        type: "uuid",
                         isPrimary: true
                     },
                     {
@@ -21,7 +21,7 @@ export class CreateTodo1635891694541 implements MigrationInterface {
                         type: "varchar",
                     },
                     {
-                        name: "iscompleted",
+                        name: "completed",
                         type: "boolean",
                     },
                     {
