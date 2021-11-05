@@ -44,4 +44,12 @@ describe('Get All User Todo Use Case', () => {
 
     expect(todos.length).toBeGreaterThan(0)
   })
+
+  it('Should throws if user is not found', async () => {
+    expect(async () => {
+      const userId = uuidV4()
+      await createTodoUseCase.execute(userId, 'new todo body')
+      await getUserAllTodos.execute(userId)
+    }).rejects.toThrow(new Error('User not found by this id'))
+  })
 })
