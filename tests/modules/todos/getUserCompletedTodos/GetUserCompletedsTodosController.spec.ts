@@ -52,4 +52,22 @@ describe('Get User Complete Todos Controller', () => {
       })
     expect(response.status).toBe(200)
   })
+
+  it('Should return 400 if user todos listing fails', async () => {
+    const auth = await request(app).post('/authentication/sessions').send({
+      email: 'getCompleteds@mail.com',
+      password: 'compleTEDS123@',
+    })
+    const userId = uuidV4()
+    const { token } = auth.body
+    const response = await request(app)
+      .get('/todos/completeds')
+      .send({
+        userId,
+      })
+      .set({
+        Authorization: `Bearer ${token}`,
+      })
+    expect(response.status).toBe(400)
+  })
 })
