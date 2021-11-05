@@ -50,4 +50,12 @@ describe('Clear Completed Todos Use Case', () => {
     const userTodos = await todoRepositoryInMemory.findCompletedTodos(user.id)
     expect(userTodos.length).toEqual(0)
   })
+
+  it('Should throws if user is not found', async () => {
+    expect(async () => {
+      const userId = uuidV4()
+      await createTodoUseCase.execute(userId, 'new todo body')
+      await clearCompletedTodosUseCase.execute(userId)
+    }).rejects.toThrow(new Error('User not found by this id'))
+  })
 })
