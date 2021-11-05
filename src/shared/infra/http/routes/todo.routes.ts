@@ -16,12 +16,12 @@ const getAllTodosController = new GetUserAllTodosController()
 
 todoRoutes.post('/create', ensureAuthenticated, createTodoController.handle)
 
-todoRoutes.put('/status', setTodoStatusController.handle)
+todoRoutes.put('/status', ensureAuthenticated, setTodoStatusController.handle)
 
-todoRoutes.delete('/delete', deleteTodoController.handle)
+todoRoutes.delete('/delete', ensureAuthenticated, deleteTodoController.handle)
 
-todoRoutes.get('/all', getAllTodosController.handle)
+todoRoutes.get('/all', ensureAuthenticated, getAllTodosController.handle)
 
-todoRoutes.get('/completeds', getUserTodosCompletedController.handle)
+todoRoutes.get('/completeds', ensureAuthenticated, getUserTodosCompletedController.handle)
 
 export { todoRoutes }
