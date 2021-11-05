@@ -9,6 +9,10 @@ class SetTodoStatusUseCase {
   ) {}
 
   async execute(todoId: string, status: boolean): Promise<void> {
+    const todo = await this.todoRepository.findTodoById(todoId)
+    if (!todo) {
+      throw new Error('Todo not found by this id')
+    }
     await this.todoRepository.setTodoStatus(todoId, status)
   }
 }
