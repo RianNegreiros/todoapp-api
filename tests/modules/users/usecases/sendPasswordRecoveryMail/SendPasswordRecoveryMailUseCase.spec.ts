@@ -46,4 +46,10 @@ describe('Send Password Recovery Mail Use Case', () => {
     await sendPasswordRecoveryMailUseCase.execute('passwordRecovery@mail.com')
     expect(generateToken).toHaveBeenCalled()
   })
+
+  it('Should not be able to send an email if user does not exists', async () => {
+    expect(async () => {
+      await sendPasswordRecoveryMailUseCase.execute('passwordRecovery@mail.com')
+    }).rejects.toThrow(new Error('User not found by this id'))
+  })
 })
