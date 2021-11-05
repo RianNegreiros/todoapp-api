@@ -33,7 +33,7 @@ describe('Get User Todos Completed Use Case', () => {
     setTodoStatusUseCase = new SetTodoStatusUseCase(todoRepositoryInMemory)
   })
 
-  it('Should be able to return a list of user todos completeds', async () => {
+  it('Should be able to return a list of user completeds todos', async () => {
     const userData: IRegisterUserRequest = {
       username: 'setStatus',
       email: 'setStatus@mail.com',
@@ -45,8 +45,16 @@ describe('Get User Todos Completed Use Case', () => {
 
     const createTodo = await createTodoUseCase.execute(user.id, 'new todo body')
     await setTodoStatusUseCase.execute(createTodo.id, true)
-
+    
     const completedTodos = await getUserTodosCompleted.execute(user.id)
     expect(completedTodos.length).toBeGreaterThan(0)
+  })
+
+  it('Should throws if user is not found', async () => {
+    expect(async () => {
+      const userId = uuidV4()
+      await createTodoUseCase.execute(userId, 'new todo body')
+      await getUserTodosCompleted.execute(userId)
+    }).rejects.toThrow(new Error('User not found by this id'))
   })
 })
