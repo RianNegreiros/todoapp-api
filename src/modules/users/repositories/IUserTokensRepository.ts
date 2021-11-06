@@ -3,9 +3,9 @@ import { UserTokens } from '../infra/typeorm/entities/UserTokens'
 
 interface IUserTokensRepository {
   create({
+    refresh_token,
     user_id,
     expires_date,
-    refresh_token,
   }: ICreateUserToken): Promise<UserTokens>
 
   findByUserIdAndRefreshTokens(

@@ -9,7 +9,7 @@ class ResetPasswordController {
     const resetPasswordUseCase = container.resolve(ResetPasswordUseCase)
 
     try {
-      await resetPasswordUseCase.execute(token.toString(), password)
+      await resetPasswordUseCase.execute({ token: String(token), password })
       return ressponse.status(200).send()
     } catch (error) {
       return ressponse.status(400).json(error)

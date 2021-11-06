@@ -4,17 +4,22 @@ import { IDateProvider } from '@shared/container/providers/DateProvider/IDatePro
 import { IUserRepository } from '@modules/users/repositories/IUserRepository'
 import { hash } from 'bcrypt'
 
+interface IRequest {
+  token: string
+  password: string
+}
+
 @injectable()
 class ResetPasswordUseCase {
   constructor(
     @inject('UserTokensRepository')
     private userTokensRepository: IUserTokensRepository,
-    @inject('DateProivder')
+    @inject('DateProvider')
     private dateProvider: IDateProvider,
     @inject('UserRepository')
     private userRepository: IUserRepository
   ) {}
-  async execute(token: string, password: string) {
+  async execute({ token, password }: IRequest): Promise<void> {
     const userToken = await this.userTokensRepository.findByRefreshToken(token)
     if (!userToken) {
       throw new Error('Invalid token')

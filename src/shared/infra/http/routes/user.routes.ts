@@ -12,6 +12,6 @@ const resetPasswordController = new ResetPasswordController()
 
 userRoutes.post('/register', createUserController.handle)
 userRoutes.post('/password-recovery', sendPasswordRecoveryMailController.handle)
-userRoutes.post('/reset-password', resetPasswordController.handle)
+userRoutes.post('/password-reset', resetPasswordController.handle)
 
 export { userRoutes }
