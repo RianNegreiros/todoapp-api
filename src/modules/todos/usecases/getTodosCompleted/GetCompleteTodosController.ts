@@ -1,16 +1,16 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
-import { GetUserCompletedTodosUseCase } from './GetUserCompletedTodosUseCase'
+import { GetCompletedTodosUseCase } from './GetCompletedTodosUseCase'
 
-class GetUserCompleteTodosController {
+class GetCompleteTodosController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { userId } = request.body
-    const getUserCompletedTodosUseCase = container.resolve(
-      GetUserCompletedTodosUseCase
+    const getCompletedTodosUseCase = container.resolve(
+      GetCompletedTodosUseCase
     )
 
     try {
-      const todos = await getUserCompletedTodosUseCase.execute(userId)
+      const todos = await getCompletedTodosUseCase.execute(userId)
       return response.status(200).json(todos)
     } catch (error) {
       return response.status(400).json(error)
@@ -18,4 +18,4 @@ class GetUserCompleteTodosController {
   }
 }
 
-export { GetUserCompleteTodosController }
+export { GetCompleteTodosController }

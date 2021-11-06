@@ -4,15 +4,15 @@ import { CreateTodoUseCase } from '@modules/todos/useCases/createTodo/CreateTodo
 import { IRegisterUserRequest } from '@modules/users/dtos/IRegisterUserRequest'
 import { UserRepositoryInMemory } from '@modules/users/repositories/inMemory/UserRepositoryInMemory'
 import { CreateUserUseCase } from '@modules/users/useCases/createUser/CreateUserUseCase'
-import { GetUserAllTodosUseCase } from '@modules/todos/useCases/getUserAllTodos/GetUserAllTodosUseCase'
+import { GetAllTodosUseCase } from '@modules/todos/useCases/getAllTodos/GetUserAllTodosUseCase'
 
 let userRepositoryInMemory: UserRepositoryInMemory
 let todoRepositoryInMemory: TodoRepositoryInMemory
 
 let createUserUseCase: CreateUserUseCase
 let createTodoUseCase: CreateTodoUseCase
-let getUserAllTodos: GetUserAllTodosUseCase
-describe('Get All User Todo Use Case', () => {
+let getAllTodos: GetAllTodosUseCase
+describe('Get All Todo Use Case', () => {
   beforeEach(() => {
     userRepositoryInMemory = new UserRepositoryInMemory()
     todoRepositoryInMemory = new TodoRepositoryInMemory()
@@ -23,13 +23,13 @@ describe('Get All User Todo Use Case', () => {
       userRepositoryInMemory
     )
 
-    getUserAllTodos = new GetUserAllTodosUseCase(
+    getAllTodos = new GetAllTodosUseCase(
       userRepositoryInMemory,
       todoRepositoryInMemory
     )
   })
 
-  it('Should be able to return a list of user todos', async () => {
+  it('Should be able to return a list of todos', async () => {
     const userData: IRegisterUserRequest = {
       username: 'setStatus',
       email: 'setStatus@mail.com',
@@ -40,7 +40,7 @@ describe('Get All User Todo Use Case', () => {
     const user = await userRepositoryInMemory.findUserByEmail(userData.email)
 
     await createTodoUseCase.execute(user.id, 'new todo body')
-    const todos = await getUserAllTodos.execute(user.id)
+    const todos = await getAllTodos.execute(user.id)
 
     expect(todos.length).toBeGreaterThan(0)
   })
@@ -49,7 +49,7 @@ describe('Get All User Todo Use Case', () => {
     expect(async () => {
       const userId = uuidV4()
       await createTodoUseCase.execute(userId, 'new todo body')
-      await getUserAllTodos.execute(userId)
+      await getAllTodos.execute(userId)
     }).rejects.toThrow(new Error('User not found by this id'))
   })
 })

@@ -12,7 +12,7 @@ let todoRepositoryInMemory: TodoRepositoryInMemory
 let createUserUseCase: CreateUserUseCase
 let createTodoUseCase: CreateTodoUseCase
 let getAllUncompletedTodosUseCase: GetAllUncompletedTodosUseCase
-describe('Get User Uncompleted Todos Use Case', () => {
+describe('Get Uncompleted Todos Use Case', () => {
   beforeEach(() => {
     userRepositoryInMemory = new UserRepositoryInMemory()
     todoRepositoryInMemory = new TodoRepositoryInMemory()
@@ -29,7 +29,7 @@ describe('Get User Uncompleted Todos Use Case', () => {
     )
   })
 
-  it('Should be able to return a list of user uncompleted todos', async () => {
+  it('Should be able to return a list of uncompleted todos', async () => {
     const userData: IRegisterUserRequest = {
       username: 'uncompletedTodos',
       email: 'uncompletedTodos@mail.com',

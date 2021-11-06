@@ -33,7 +33,7 @@ describe('Clear Completed Todos Use Case', () => {
     setTodoStatusUseCase = new SetTodoStatusUseCase(todoRepositoryInMemory)
   })
 
-  it('Should be able to clear user completed todos', async () => {
+  it('Should be able to clear completed todos', async () => {
     const userData: IRegisterUserRequest = {
       username: 'completedsTodos',
       email: 'completedsTodos@mail.com',

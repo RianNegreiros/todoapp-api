@@ -4,7 +4,7 @@ import { Todo } from '@modules/todos/infra/typeorm/entities/Todo'
 import { ITodoRepository } from '@modules/todos/repositories/ITodoRepository'
 
 @injectable()
-class GetUserAllTodosUseCase {
+class GetCompletedTodosUseCase {
   constructor(
     @inject('UserRepository')
     private userRepository: IUserRepository,
@@ -17,8 +17,8 @@ class GetUserAllTodosUseCase {
     if (!user) {
       throw new Error('User not found by this id')
     }
-    return await this.todoRepository.findTodosByUser(userId)
+    return await this.todoRepository.findCompletedTodos(userId)
   }
 }
 
-export { GetUserAllTodosUseCase }
+export { GetCompletedTodosUseCase }

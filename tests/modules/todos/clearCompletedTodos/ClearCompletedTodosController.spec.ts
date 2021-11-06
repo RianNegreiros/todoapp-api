@@ -17,10 +17,10 @@ describe('Clear Completed Todos Controller', () => {
     await connection.runMigrations()
 
     const userId = uuidV4()
-    const password = await hash('compleTEDS123@', 8)
+    const password = await hash('compleTED123@', 8)
     await connection.query(
       `INSERT INTO USERS(id, username, email, password, created_at)
-      values('${userId}', 'completedsTodos', 'completedsTodos@mail.com', '${password}', 'now()')`
+      values('${userId}', 'completedTodos', 'completedTodos@mail.com', '${password}', 'now()')`
     )
 
     const todoId = uuidV4()
@@ -37,16 +37,16 @@ describe('Clear Completed Todos Controller', () => {
 
   it('Should return 200 if completed todos cleaning succeeds', async () => {
     const auth = await request(app).post('/authentication/sessions').send({
-      email: 'completedsTodos@mail.com',
-      password: 'compleTEDS123@',
+      email: 'completedTodos@mail.com',
+      password: 'compleTED123@',
     })
     const user = await userRepository.findUserByEmail(
-      'completedsTodos@mail.com'
+      'completedTodos@mail.com'
     )
 
     const { token } = auth.body
     const response = await request(app)
-      .delete('/todos/clear-completeds')
+      .delete('/todos/clear-completed')
       .send({
         userId: user.id,
       })
@@ -58,14 +58,14 @@ describe('Clear Completed Todos Controller', () => {
 
   it('Should return 400 if completed todos cleaning fails', async () => {
     const auth = await request(app).post('/authentication/sessions').send({
-      email: 'completedsTodos@mail.com',
-      password: 'compleTEDS123@',
+      email: 'completedTodos@mail.com',
+      password: 'compleTED123@',
     })
 
     const userId = uuidV4()
     const { token } = auth.body
     const response = await request(app)
-      .delete('/todos/clear-completeds')
+      .delete('/todos/clear-completed')
       .send({
         userId,
       })

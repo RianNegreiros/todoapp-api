@@ -7,7 +7,7 @@ import { app } from '@shared/infra/http/app'
 
 let userRepository: UserRepository
 let connection: Connection
-describe('Get User Complete Todos Controller', () => {
+describe('Ge Complete Todos Controller', () => {
   beforeEach(() => {
     userRepository = new UserRepository()
   })
@@ -17,10 +17,10 @@ describe('Get User Complete Todos Controller', () => {
     await connection.runMigrations()
 
     const userId = uuidV4()
-    const password = await hash('compleTEDS123@', 8)
+    const password = await hash('compleTED123@', 8)
     await connection.query(
       `INSERT INTO USERS(id, username, email, password, created_at)
-      values('${userId}', 'getCompleteds', 'getCompleteds@mail.com', '${password}', 'now()')`
+      values('${userId}', 'getCompleted', 'getCompleted@mail.com', '${password}', 'now()')`
     )
 
     const todoId = uuidV4()
@@ -35,15 +35,15 @@ describe('Get User Complete Todos Controller', () => {
     await connection.close()
   })
 
-  it('Should return 200 if user todos listing succeeds', async () => {
+  it('Should return 200 if todos listing succeeds', async () => {
     const auth = await request(app).post('/authentication/sessions').send({
-      email: 'getCompleteds@mail.com',
-      password: 'compleTEDS123@',
+      email: 'getCompleted@mail.com',
+      password: 'compleTED123@',
     })
-    const user = await userRepository.findUserByEmail('getCompleteds@mail.com')
+    const user = await userRepository.findUserByEmail('getCompleted@mail.com')
     const { token } = auth.body
     const response = await request(app)
-      .get('/todos/completeds')
+      .get('/todos/completed')
       .send({
         userId: user.id,
       })
@@ -53,15 +53,15 @@ describe('Get User Complete Todos Controller', () => {
     expect(response.status).toBe(200)
   })
 
-  it('Should return 400 if user todos listing fails', async () => {
+  it('Should return 400 if todos listing fails', async () => {
     const auth = await request(app).post('/authentication/sessions').send({
-      email: 'getCompleteds@mail.com',
-      password: 'compleTEDS123@',
+      email: 'getCompleted@mail.com',
+      password: 'compleTED123@',
     })
     const userId = uuidV4()
     const { token } = auth.body
     const response = await request(app)
-      .get('/todos/completeds')
+      .get('/todos/completed')
       .send({
         userId,
       })

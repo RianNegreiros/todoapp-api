@@ -7,7 +7,7 @@ import { app } from '@shared/infra/http/app'
 
 let userRepository: UserRepository
 let connection: Connection
-describe('Get User Todos Uncompleted Controller', () => {
+describe('Get Todos Uncompleted Controller', () => {
   beforeEach(() => {
     userRepository = new UserRepository()
   })
@@ -35,7 +35,7 @@ describe('Get User Todos Uncompleted Controller', () => {
     await connection.close()
   })
 
-  it('Should return 200 if user todos listing succeeds', async () => {
+  it('Should return 200 if todos listing succeeds', async () => {
     const auth = await request(app).post('/authentication/sessions').send({
       email: 'getUncompleted@mail.com',
       password: 'uncompleTED123@',
@@ -53,7 +53,7 @@ describe('Get User Todos Uncompleted Controller', () => {
     expect(response.status).toBe(200)
   })
 
-  it('Should return 400 if user todos listing fails', async () => {
+  it('Should return 400 if todos listing fails', async () => {
     const auth = await request(app).post('/authentication/sessions').send({
       email: 'getUncompleted@mail.com',
       password: 'uncompleTED123@',

@@ -3,8 +3,8 @@ import { CreateTodoController } from '@modules/todos/useCases/createTodo/CreateT
 import { DeleteTodoController } from '@modules/todos/useCases/deleteTodo/DeleteTodoController'
 import { SetTodoStatusController } from '@modules/todos/useCases/setTodoStatus/SetTodoStatusController'
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
-import { GetUserCompleteTodosController } from '@modules/todos/useCases/getUserTodosCompleted/GetUserCompleteTodosController'
-import { GetUserAllTodosController } from '@modules/todos/useCases/getUserAllTodos/GetUserAllTodosController'
+import { GetCompleteTodosController } from '@modules/todos/useCases/getTodosCompleted/GetCompleteTodosController'
+import { GetAllTodosController } from '@modules/todos/useCases/getAllTodos/GetUserAllTodosController'
 import { ClearCompletedTodosController } from '@modules/todos/useCases/clearCompletedTodos/ClearCompletedTodosController'
 import { GetAllUncompletedController } from '@modules/todos/useCases/getAllUncompletedTodos/GetAllUncompletedTodosController'
 
@@ -13,8 +13,8 @@ const todoRoutes = Router()
 const createTodoController = new CreateTodoController()
 const deleteTodoController = new DeleteTodoController()
 const setTodoStatusController = new SetTodoStatusController()
-const getUserCompleteTodosController = new GetUserCompleteTodosController()
-const getAllTodosController = new GetUserAllTodosController()
+const getCompleteTodosController = new GetCompleteTodosController()
+const getAllTodosController = new GetAllTodosController()
 const getAllUncompletedController = new GetAllUncompletedController()
 const clearCompletedsTodos = new ClearCompletedTodosController()
 
@@ -29,7 +29,7 @@ todoRoutes.get('/all', ensureAuthenticated, getAllTodosController.handle)
 todoRoutes.get(
   '/completed',
   ensureAuthenticated,
-  getUserCompleteTodosController.handle
+  getCompleteTodosController.handle
 )
 
 todoRoutes.get(
