@@ -1,14 +1,19 @@
-import jwt, { sign } from 'jsonwebtoken'
-import bcrypt from 'bcrypt'
 import { inject, injectable } from 'tsyringe'
+import { sign } from 'jsonwebtoken'
+import bcrypt from 'bcrypt'
 import auth from '@config/auth'
 import { IUserRepository } from '@modules/users/repositories/IUserRepository'
 import { IUserTokensRepository } from '@modules/users/repositories/IUserTokensRepository'
 import { IDateProvider } from '@shared/container/providers/DateProvider/IDateProvider'
+import { IAuthRequest } from '@modules/users/dtos/IAuthRequest'
 
-interface IAuthRequest {
-  email: string
-  password: string
+interface IAuthResponse {
+  user: {
+    username: string
+    email: string
+  }
+  token: string
+  refresh_token: string
 }
 
 @injectable()
@@ -22,14 +27,14 @@ class AuthenticateUserUseCase {
     private dateProvider: IDateProvider
   ) {}
 
-  async execute({ email, password }: IAuthRequest) {
+  async execute({ email, password }: IAuthRequest): Promise<IAuthResponse> {
     const user = await this.userRepository.findUserByEmail(email)
     if (!user) {
       throw new Error('Email or password incorrect')
     }
 
-    const validate = await bcrypt.compare(password, user.password)
-    if (!validate) {
+    const passwordMatch = await bcrypt.compare(password, user.password)
+    if (!passwordMatch) {
       throw new Error('Email or password incorrect')
     }
 
@@ -50,14 +55,19 @@ class AuthenticateUserUseCase {
     await this.userTokensRepository.create({
       user_id: user.id,
       expires_date: refresh_token_expires_date,
-      refresh_token: refresh_token
+      refresh_token: refresh_token,
     })
 
-    return {
-      username: user.username,
-      email: user.email,
-      token: token,
+    const tokenReturn: IAuthResponse = {
+      token,
+      user: {
+        username: user.username,
+        email: user.email,
+      },
+      refresh_token,
     }
+
+    return tokenReturn
   }
 }
 

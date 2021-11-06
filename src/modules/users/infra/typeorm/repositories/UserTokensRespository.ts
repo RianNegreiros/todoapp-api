@@ -1,7 +1,7 @@
 import { getRepository, Repository } from 'typeorm'
 import { ICreateUserToken } from '@modules/users/dtos/ICreateUserToken'
 import { UserTokens } from '../entities/UserTokens'
-import { IUserTokensRepository } from '../../../repositories/IUserTokensRepository'
+import { IUserTokensRepository } from '@modules/users/repositories/IUserTokensRepository'
 
 class UserTokensRepository implements IUserTokensRepository {
   private repository: Repository<UserTokens>
@@ -11,9 +11,9 @@ class UserTokensRepository implements IUserTokensRepository {
   }
 
   async create({
+    refresh_token,
     user_id,
     expires_date,
-    refresh_token,
   }: ICreateUserToken): Promise<UserTokens> {
     const userToken = this.repository.create({
       user_id,
@@ -29,7 +29,7 @@ class UserTokensRepository implements IUserTokensRepository {
     user_id: string,
     refresh_token: string
   ): Promise<UserTokens> {
-    const userTokens = await this.repository.findOneOrFail({
+    const userTokens = await this.repository.findOne({
       user_id,
       refresh_token,
     })
@@ -38,6 +38,11 @@ class UserTokensRepository implements IUserTokensRepository {
 
   async deleteById(id: string): Promise<void> {
     await this.repository.delete(id)
+  }
+
+  async findByRefreshToken(refreshToken: string): Promise<UserTokens> {
+    const userToken = await this.repository.findOne({ refresh_token: refreshToken })
+    return userToken
   }
 }
 

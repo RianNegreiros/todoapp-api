@@ -11,12 +11,17 @@ class DeleteTodoUseCase {
     private userRepository: IUserRepository
   ) {}
 
-  async execute(userId: string, todoId: string) {
+  async execute(userId: string, todoId: string): Promise<void> {
     const user = await this.userRepository.findUserById(userId)
     if (!user) {
       throw new Error('User not found by this id')
     }
-    return await this.todoRepository.deleteTodo(todoId)
+
+    const exists = await this.todoRepository.findTodoById(todoId)
+    if (!exists) {
+      throw new Error('Todo not found by this id')
+    }
+    await this.todoRepository.deleteTodo(todoId)
   }
 }
 

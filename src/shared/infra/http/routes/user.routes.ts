@@ -1,18 +1,17 @@
 import { Router } from 'express'
 import { CreateUserController } from '@modules/users/useCases/createUser/CreateUserController'
-import { GetAllTodosController } from '@modules/users/useCases/getAllTodos/GetAllTodosController'
-import { GetTodosCompletedController } from '@modules/users/useCases/getTodosCompleted/GetTodosCompletedController'
+import { SendPasswordRecoveryMailController } from '@modules/users/useCases/sendPasswordRecoveryMail/SendPasswordRecoveryMailController'
+import { ResetPasswordController } from '@modules/users/useCases/resetPassword/ResetPasswordController'
 
 const userRoutes = Router()
 
 const createUserController = new CreateUserController()
-const getTodosCompletedController = new GetTodosCompletedController()
-const getAllTodosController = new GetAllTodosController()
+const sendPasswordRecoveryMailController =
+  new SendPasswordRecoveryMailController()
+const resetPasswordController = new ResetPasswordController()
 
 userRoutes.post('/register', createUserController.handle)
-
-userRoutes.get('/alltodos', getAllTodosController.handle)
-
-userRoutes.get('/todoscompleteds', getTodosCompletedController.handle)
+userRoutes.post('/password-recovery', sendPasswordRecoveryMailController.handle)
+userRoutes.post('/password-reset', resetPasswordController.handle)
 
 export { userRoutes }

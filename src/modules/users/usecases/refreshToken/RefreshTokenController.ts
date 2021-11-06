@@ -3,7 +3,7 @@ import { container } from 'tsyringe'
 import { RefreshTokenUseCase } from './RefreshTokenUseCase'
 
 class RefreshTokenController {
-  async handle(request: Request, response: Response) {
+  async handle(request: Request, response: Response): Promise<Response> {
     const token =
       request.body.token ||
       request.headers['x-access-token'] ||
@@ -11,9 +11,12 @@ class RefreshTokenController {
 
     const refreshTokenUseCase = container.resolve(RefreshTokenUseCase)
 
-    const refresh_token = await refreshTokenUseCase.execute(token)
-
-    return response.json(refresh_token)
+    try {
+      const refresh_token = await refreshTokenUseCase.execute(token)
+      return response.status(200).json(refresh_token)
+    } catch (error) {
+      return response.status(400).json(error)
+    }
   }
 }
 

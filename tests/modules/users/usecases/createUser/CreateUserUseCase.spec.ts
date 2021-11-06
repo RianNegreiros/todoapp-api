@@ -1,12 +1,11 @@
 import { IRegisterUserRequest } from '@modules/users/dtos/IRegisterUserRequest'
-import { IUserRepository } from '@modules/users/repositories/IUserRepository'
 import { CreateUserUseCase } from '@modules/users/useCases/createUser/CreateUserUseCase'
-import { UserRepositoryInMemory } from '../../../../../src/modules/users/repositories/inMemory/UserRepositoryInMemory'
+import { UserRepositoryInMemory } from '@modules/users/repositories/inMemory/UserRepositoryInMemory'
 
-let userRepositoryInMemory: IUserRepository
+let userRepositoryInMemory: UserRepositoryInMemory
 let createUserUseCase: CreateUserUseCase
 
-describe('Create User', () => {
+describe('Create User Use Case', () => {
   beforeEach(() => {
     userRepositoryInMemory = new UserRepositoryInMemory()
     createUserUseCase = new CreateUserUseCase(userRepositoryInMemory)
@@ -14,10 +13,10 @@ describe('Create User', () => {
 
   it('Should be able to create a new user', async () => {
     const userData: IRegisterUserRequest = {
-      username: 'testName',
-      email: 'test@mail.com',
-      password: 'testTEST123@',
-      confirmPassword: 'testTEST123@',
+      username: 'createUser',
+      email: 'createUser@mail.com',
+      password: 'createUSER123@',
+      confirmPassword: 'createUSER123@',
     }
 
     await createUserUseCase.execute(userData)
@@ -31,10 +30,10 @@ describe('Create User', () => {
 
   it('Should throw if user already exists', async () => {
     const userData: IRegisterUserRequest = {
-      username: 'testNameExists',
-      email: 'testexists@mail.com',
-      password: 'testTEST123@',
-      confirmPassword: 'testTEST123@',
+      username: 'createUser',
+      email: 'createUser@mail.com',
+      password: 'createUSER123@',
+      confirmPassword: 'createUSER123@',
     }
 
     await createUserUseCase.execute(userData)
@@ -45,28 +44,26 @@ describe('Create User', () => {
   })
 
   it('Should throw if password does not match the requirements', async () => {
-    const userData: IRegisterUserRequest = {
-      username: 'testInvalidPassword',
-      email: 'testinvalidpassword@mail.com',
-      password: 'invalidPassword',
-      confirmPassword: 'invalidPassword',
-    }
-
-    await expect(createUserUseCase.execute(userData)).rejects.toThrow(
-      new Error('Password does not match requirements')
-    )
+    expect(async () => {
+      const userData: IRegisterUserRequest = {
+        username: 'invalidPassword',
+        email: 'invalidpassword@mail.com',
+        password: 'invalidPassword',
+        confirmPassword: 'invalidPassword',
+      }
+      await createUserUseCase.execute(userData)
+    }).rejects.toThrow(new Error('Password does not match requirements'))
   })
 
   it('Should throw if email is invalid', async () => {
-    const userData: IRegisterUserRequest = {
-      username: 'testInvalidEmail',
-      email: 'testinvalidemail',
-      password: 'testTEST123@',
-      confirmPassword: 'testTEST123@',
-    }
-
-    await expect(createUserUseCase.execute(userData)).rejects.toThrow(
-      new Error('Invalid email')
-    )
+    expect(async () => {
+      const userData: IRegisterUserRequest = {
+        username: 'invalidEmail',
+        email: 'invalidemail',
+        password: 'invalidEMAIL123@',
+        confirmPassword: 'invalidEMAIL123@',
+      }
+      await createUserUseCase.execute(userData)
+    }).rejects.toThrow(new Error('Invalid email'))
   })
 })

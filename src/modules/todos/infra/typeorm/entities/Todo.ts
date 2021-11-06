@@ -7,27 +7,34 @@ import {
   ManyToOne,
   PrimaryColumn,
 } from 'typeorm'
+import { v4 as uuidV4 } from 'uuid'
 
 @Entity('todos')
 class Todo {
-  @PrimaryColumn('increment')
+  @PrimaryColumn()
   id: string
-
-  @Column()
-  body: string
-
-  @Column()
-  isCompleted: boolean
 
   @ManyToOne(() => User)
   @JoinColumn({ name: 'user_id' })
   user: User
 
+  @Column()
+  user_id: string
+
+  @Column()
+  body: string
+
+  @Column()
+  completed: boolean
+
   @CreateDateColumn()
   created_at: Date
 
   constructor() {
-    this.isCompleted = false
+    if (!this.id) {
+      this.id = uuidV4()
+    }
+    this.completed = false
   }
 }
 

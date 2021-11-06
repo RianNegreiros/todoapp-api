@@ -9,29 +9,66 @@ class TodoRepository implements ITodoRepository {
     this.repository = getRepository(Todo)
   }
 
-  async createTodo(body: string): Promise<void> {
-    this.repository.create({
+  async createTodo(userId: string, body: string): Promise<Todo> {
+    const todo = this.repository.create({
+      user_id: userId,
       body,
     })
+    await this.repository.save(todo)
+    return todo
   }
 
-  async setTodoStatus(id: string, status: boolean): Promise<void> {
+  async setTodoStatus(todoId: string, status: boolean): Promise<void> {
     await this.repository
       .createQueryBuilder()
       .update()
-      .set({ isCompleted: status })
-      .where('id = :id')
-      .setParameters({ id })
+      .set({ completed: status })
+      .where('id = :id', { id: todoId })
       .execute()
   }
 
-  async setTodoId(id: string, newId: string): Promise<void> {
-    const todo = await this.repository.findOneOrFail(id)
-    todo.id === newId
+  async deleteTodo(todoId: string): Promise<void> {
+    await this.repository
+      .createQueryBuilder()
+      .delete()
+      .where('id = :id', { id: todoId })
+      .execute()
   }
 
-  async deleteTodo(id: string): Promise<void> {
-    await this.repository.delete(id)
+  async clearCompletedsTodos(userId: string): Promise<void> {
+    await this.repository
+      .createQueryBuilder()
+      .delete()
+      .where('id = :id', { id: userId })
+      .andWhere('completed = :completed', { completed: true })
+      .execute()
+  }
+
+  async findTodosByUser(userId: string): Promise<Todo[]> {
+    const todos = await this.repository.find({
+      where: { user_id: userId },
+      relations: ['user'],
+    })
+    return todos
+  }
+
+  async findCompletedTodos(userId: string): Promise<Todo[]> {
+    const todos = await this.repository.find({
+      where: { user_id: userId },
+    })
+    return todos.filter((completed) => completed.completed === true)
+  }
+
+  async findUncompletedTodos(userId: string): Promise<Todo[]> {
+    const todos = await this.repository.find({
+      where: { user_id: userId },
+    })
+    return todos.filter((completed) => completed.completed === false)
+  }
+
+  async findTodoById(id: string): Promise<Todo> {
+    const todo = await this.repository.findOne(id)
+    return todo
   }
 }
 

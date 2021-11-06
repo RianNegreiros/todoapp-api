@@ -1,13 +1,13 @@
 {
-   "type": "",
-   "host": "",
+   "type": "postgres",
    "port": 5432,
-   "username": "",
-   "password": "",
-   "database": "",
-   "migrations": ["./src/shared/infra/typeorm/migrations/{.ts, .js}"],
-   "entities": ["./src/modules/**/entities/{.ts, .js}"],
+   "host": "localhost",
+   "username": "todoapp",
+   "password": "todoapp",
+   "database": "todoapp", 
+   "migrations": ["./src/shared/infra/typeorm/migrations/*.ts"],
+   "entities": ["./src/modules/**/entities/*.ts"],
    "cli": {
-      "migrationsDir": "./src/shared/infra/typeorm/migrations"
+     "migrationsDir": "./src/shared/infra/typeorm/migrations"
    }
-}
+ }

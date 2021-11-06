@@ -3,7 +3,7 @@ import { container } from 'tsyringe'
 import { CreateTodoUseCase } from './CreateTodoUseCase'
 
 class CreateTodoController {
-  async handle(request: Request, response: Response) {
+  async handle(request: Request, response: Response): Promise<Response> {
     const { userId, body } = request.body
     const createTodoUseCase = container.resolve(CreateTodoUseCase)
 
