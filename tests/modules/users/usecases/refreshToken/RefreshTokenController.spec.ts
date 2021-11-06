@@ -4,17 +4,12 @@ import { hash } from 'bcrypt'
 import {v4 as uuidV4} from 'uuid'
 import { app } from '@shared/infra/http/app'
 import { UserTokensRepository } from '@modules/users/infra/typeorm/repositories/UserTokensRespository'
-import { CreateUserUseCase } from '@modules/users/useCases/createUser/CreateUserUseCase'
-import { UserRepository } from '@modules/users/infra/typeorm/repositories/UserRepository'
 
-let userRepository: UserRepository
 let userTokensRepository: UserTokensRepository
-let createUserUseCase: CreateUserUseCase
 let connection: Connection
 describe('Refresh Token Controller', () => {
   beforeEach(() => {
     userTokensRepository = new UserTokensRepository()
-    createUserUseCase = new CreateUserUseCase(userRepository)
   })
   beforeAll(async () => {
     connection = await createConnection()
