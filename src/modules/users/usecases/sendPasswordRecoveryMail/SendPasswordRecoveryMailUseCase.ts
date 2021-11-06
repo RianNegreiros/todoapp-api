@@ -22,7 +22,7 @@ class SendPasswordRecoveryMailUseCase {
   async execute(email: string) {
     const user = await this.userRepository.findUserByEmail(email)
     if (!user) {
-      throw new Error('User not found by this id')
+      throw new Error('User not found by this email')
     }
     const refresh_token = sign({ email }, auth.refresh_token, {
       subject: user.id,
