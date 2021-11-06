@@ -7,6 +7,7 @@ interface ITodoRepository {
   clearCompletedsTodos(userId: string): Promise<void>
   findTodosByUser(userId: string): Promise<Todo[]>
   findCompletedTodos(userId: string): Promise<Todo[]>
+  findUncompletedTodos(userId: string): Promise<Todo[]>
   findTodoById(todoId: string): Promise<Todo>
 }
 

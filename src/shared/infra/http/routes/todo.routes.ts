@@ -6,6 +6,7 @@ import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
 import { GetUserCompleteTodosController } from '@modules/todos/useCases/getUserTodosCompleted/GetUserCompleteTodosController'
 import { GetUserAllTodosController } from '@modules/todos/useCases/getUserAllTodos/GetUserAllTodosController'
 import { ClearCompletedTodosController } from '@modules/todos/useCases/clearCompletedTodos/ClearCompletedTodosController'
+import { GetAllUncompletedController } from '@modules/todos/useCases/getAllUncompletedTodos/GetAllUncompletedTodosController'
 
 const todoRoutes = Router()
 
@@ -14,6 +15,7 @@ const deleteTodoController = new DeleteTodoController()
 const setTodoStatusController = new SetTodoStatusController()
 const getUserCompleteTodosController = new GetUserCompleteTodosController()
 const getAllTodosController = new GetUserAllTodosController()
+const getAllUncompletedController = new GetAllUncompletedController()
 const clearCompletedsTodos = new ClearCompletedTodosController()
 
 todoRoutes.post('/create', ensureAuthenticated, createTodoController.handle)
@@ -22,18 +24,24 @@ todoRoutes.put('/status', ensureAuthenticated, setTodoStatusController.handle)
 
 todoRoutes.delete('/delete', ensureAuthenticated, deleteTodoController.handle)
 
-todoRoutes.delete(
-  '/clear-completeds',
-  ensureAuthenticated,
-  clearCompletedsTodos.handle
-)
-
 todoRoutes.get('/all', ensureAuthenticated, getAllTodosController.handle)
 
 todoRoutes.get(
-  '/completeds',
+  '/completed',
   ensureAuthenticated,
   getUserCompleteTodosController.handle
+)
+
+todoRoutes.get(
+  '/uncompleted',
+  ensureAuthenticated,
+  getAllUncompletedController.handle
+)
+
+todoRoutes.delete(
+  '/clear-completed',
+  ensureAuthenticated,
+  clearCompletedsTodos.handle
 )
 
 export { todoRoutes }

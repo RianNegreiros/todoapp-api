@@ -40,6 +40,13 @@ class TodoRepositoryInMemory implements ITodoRepository {
     return todo
   }
 
+  async findUncompletedTodos(userId: string): Promise<Todo[]> {
+    const todos = this.todos.filter(
+      (todo) => todo.user_id === userId && todo.completed === false
+    )
+    return todos
+  }
+
   async clearCompletedsTodos(userId: string): Promise<void> {
     this.todos.forEach((todo, index) => {
       if (todo.user_id === userId && todo.completed === true)
