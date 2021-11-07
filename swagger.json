@@ -9,7 +9,7 @@
     }
   },
   "paths": {
-    "/users/register": {
+    "/users": {
       "post": {
         "tags": ["User"],
         "summary": "Create a User",
@@ -116,7 +116,7 @@
         }
       }
     },
-    "/todos/create": {
+    "/todos": {
       "post": {
         "tags": ["Todos"],
         "summary": "Create Todo",
@@ -189,11 +189,11 @@
         }
       }
     },
-    "/todos/clear-completed": {
+    "/todos/completeds": {
       "delete": {
         "tags": ["Todos"],
-        "summary": "Clear Completed Todos",
-        "description": "Delete all completed Todos from a User",
+        "summary": "Clear Completeds Todos",
+        "description": "Delete all completeds Todos from a User",
         "security": [{
           "BearerAuth": []
         }],
@@ -262,7 +262,7 @@
         }
       }
     },
-    "/todos/all": {
+    "/todos": {
       "get": {
         "tags": ["Todos"],
         "summary": "List All Todos",
@@ -292,11 +292,11 @@
         }
       }
     },
-    "/todos/completed": {
+    "/todos/completeds": {
       "get": {
         "tags": ["Todos"],
-        "summary": "List All Completed Todos",
-        "description": "List all completed Todos from a User",
+        "summary": "List All Completeds Todos",
+        "description": "List all completeds Todos from a User",
         "requestBody": {
           "content": {
             "application/json": {
@@ -322,11 +322,11 @@
         }
       }
     },
-    "/todos/uncompleted": {
+    "/todos/uncompleteds": {
       "get": {
         "tags": ["Todos"],
-        "summary": "List All Uncompleted Todos",
-        "description": "List all uncompleted Todos from a User",
+        "summary": "List All Uncompleteds Todos",
+        "description": "List all uncompleteds Todos from a User",
         "requestBody": {
           "content": {
             "application/json": {
