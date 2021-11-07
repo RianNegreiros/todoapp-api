@@ -55,7 +55,7 @@
         }
       }
     },
-    "/authentication/sessions" : {
+    "/authentication/sessions": {
       "post": {
         "tags": ["Authentication"],
         "summary": "User Authentication",
@@ -121,14 +121,14 @@
         "tags": ["Todos"],
         "summary": "Create Todo",
         "description": "Create a new Todo",
-        "security": [
-          { "bearerAuth": [] }
-        ],
+        "security": [{
+          "bearerAuth": []
+        }],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "type":"object",
+                "type": "object",
                 "properties": {
                   "userId": {
                     "type": "string",
@@ -157,9 +157,9 @@
         "tags": ["Todos"],
         "summary": "Delete a Todo",
         "description": "Delete a existing Todo",
-        "security": [
-          { "BearerAuth": [] }
-        ],
+        "security": [{
+          "BearerAuth": []
+        }],
         "requestBody": {
           "content": {
             "application/json": {
@@ -179,36 +179,37 @@
             }
           }
         },
-          "responses": {
-            "200": {
-              "description": "Success"
-            },
-            "400": {
-              "description": "User/Todo not found by this id"
-            }
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "User/Todo not found by this id"
           }
+        }
       }
     },
-    "/todos/status": {
-      "put": {
+    "/todos/clear-completed": {
+      "delete": {
         "tags": ["Todos"],
-        "summary": "Change Todo Status",
-        "description": "Change todo status",
-        "security": [
-          { "bearerAuth": [] }
-        ],
+        "summary": "Clear Completed Todos",
+        "description": "Delete all completed Todos from a User",
+        "security": [{
+          "BearerAuth": []
+        }],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
-                  "todoId": {
+                  "userId": {
                     "type": "string",
                     "format": "uuid"
                   },
-                  "status": {
-                    "type": "boolean"
+                  "todoId": {
+                    "type": "string",
+                    "format": "uuid"
                   }
                 }
               }
@@ -220,7 +221,7 @@
             "description": "Success"
           },
           "400": {
-            "description": "Todo not found by this id"
+            "description": "User not found by this id"
           }
         }
       }
