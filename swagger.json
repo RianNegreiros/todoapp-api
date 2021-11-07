@@ -151,6 +151,43 @@
           }
         }
       }
+    },
+    "/todos/delete": {
+      "delete": {
+        "tags": ["Todos"],
+        "summary": "Delete a Todo",
+        "description": "Delete a existing Todo",
+        "security": [
+          { "BearerAuth": [] }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "todoId": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            }
+          }
+        },
+          "responses": {
+            "200": {
+              "description": "Success"
+            },
+            "400": {
+              "description": "User/Todo not found by this id"
+            }
+          }
+      }
     }
   },
   "components": {
