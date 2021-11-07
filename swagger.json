@@ -12,8 +12,8 @@
     "/users/register": {
       "post": {
         "tags": ["User"],
-        "summary": "Create a user",
-        "description": "Create a new user",
+        "summary": "Create a User",
+        "description": "Create a new User",
         "requestBody": {
           "content": {
             "application/json": {
@@ -51,6 +51,112 @@
             "description": "User already exists"
           }
         }
+      }
+    },
+    "/authentication/sessions" : {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "User Authentication",
+        "description": "Authenticate a User",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Email or Password incorrect"
+          }
+        }
+      }
+    },
+    "/authentication/refresh-token": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Refresh Token",
+        "description": "Refresh a User token",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Refresh Token Error"
+          }
+        }
+      }
+    },
+    "/todos/create": {
+      "post": {
+        "tags": ["Todos"],
+        "summary": "Create Todo",
+        "description": "Create a new Todo",
+        "security": [
+          { "bearerAuth": [] }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type":"object",
+                "properties": {
+                  "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "body": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "User not found by this id"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }
