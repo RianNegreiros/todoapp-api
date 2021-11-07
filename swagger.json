@@ -7,5 +7,51 @@
     "contact": {
       "email": "riannegreiros@gmail.com"
     }
+  },
+  "paths": {
+    "/users/register": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Create a user",
+        "description": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "confirmPassword": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "username": "username sample",
+                  "email": "emailSample@mail.com",
+                  "password": "passwordSAMPLE1@",
+                  "confirmPassword": "passwordSAMPLE1@"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "User already exists"
+          }
+        }
+      }
+    }
   }
 }
