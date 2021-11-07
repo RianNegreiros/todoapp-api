@@ -7,5 +7,359 @@
     "contact": {
       "email": "riannegreiros@gmail.com"
     }
+  },
+  "paths": {
+    "/users/register": {
+      "post": {
+        "tags": ["User"],
+        "summary": "Create a User",
+        "description": "Create a new User",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string",
+                    "formt": "email"
+                  },
+                  "password": {
+                    "type": "string",
+                    "pattern": " /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/"
+                  },
+                  "confirmPassword": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "username": "username sample",
+                  "email": "emailSample@mail.com",
+                  "password": "passwordSAMPLE1@",
+                  "confirmPassword": "passwordSAMPLE1@"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "User already exists"
+          }
+        }
+      }
+    },
+    "/authentication/sessions": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "User Authentication",
+        "description": "Authenticate a User",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Email or Password incorrect"
+          }
+        }
+      }
+    },
+    "/authentication/refresh-token": {
+      "post": {
+        "tags": ["Authentication"],
+        "summary": "Refresh Token",
+        "description": "Refresh a User token",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Refresh Token Error"
+          }
+        }
+      }
+    },
+    "/todos/create": {
+      "post": {
+        "tags": ["Todos"],
+        "summary": "Create Todo",
+        "description": "Create a new Todo",
+        "security": [{
+          "bearerAuth": []
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "body": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "User not found by this id"
+          }
+        }
+      }
+    },
+    "/todos/delete": {
+      "delete": {
+        "tags": ["Todos"],
+        "summary": "Delete a Todo",
+        "description": "Delete a existing Todo",
+        "security": [{
+          "BearerAuth": []
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "todoId": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "User/Todo not found by this id"
+          }
+        }
+      }
+    },
+    "/todos/clear-completed": {
+      "delete": {
+        "tags": ["Todos"],
+        "summary": "Clear Completed Todos",
+        "description": "Delete all completed Todos from a User",
+        "security": [{
+          "BearerAuth": []
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "todoId": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "User not found by this id"
+          }
+        }
+      }
+    },
+    "/todos/status": {
+      "put": {
+        "tags": ["Todos"],
+        "summary": "Change Todo Status",
+        "description": "Change todo status",
+        "security": [{
+          "bearerAuth": []
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "todoId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "status": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Todo not found by this id"
+          }
+        }
+      }
+    },
+    "/todos/all": {
+      "get": {
+        "tags": ["Todos"],
+        "summary": "List All Todos",
+        "description": "List all Todos from a User",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "User not found by this id"
+          }
+        }
+      }
+    },
+    "/todos/completed": {
+      "get": {
+        "tags": ["Todos"],
+        "summary": "List All Completed Todos",
+        "description": "List all completed Todos from a User",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "User not found by this id"
+          }
+        }
+      }
+    },
+    "/todos/uncompleted": {
+      "get": {
+        "tags": ["Todos"],
+        "summary": "List All Uncompleted Todos",
+        "description": "List all uncompleted Todos from a User",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "User not found by this id"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
   }
 }

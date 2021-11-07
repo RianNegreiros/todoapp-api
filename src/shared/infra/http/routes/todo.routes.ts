@@ -24,17 +24,15 @@ todoRoutes.put('/status', ensureAuthenticated, setTodoStatusController.handle)
 
 todoRoutes.delete('/delete', ensureAuthenticated, deleteTodoController.handle)
 
-todoRoutes.get('/all', ensureAuthenticated, getAllTodosController.handle)
+todoRoutes.get('/all', getAllTodosController.handle)
 
 todoRoutes.get(
   '/completed',
-  ensureAuthenticated,
   getCompleteTodosController.handle
 )
 
 todoRoutes.get(
   '/uncompleted',
-  ensureAuthenticated,
   getAllUncompletedController.handle
 )
 
