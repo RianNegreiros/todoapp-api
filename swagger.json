@@ -225,6 +225,42 @@
           }
         }
       }
+    },
+    "/todos/status": {
+      "put": {
+        "tags": ["Todos"],
+        "summary": "Change Todo Status",
+        "description": "Change todo status",
+        "security": [{
+          "bearerAuth": []
+        }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "todoId": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "status": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Todo not found by this id"
+          }
+        }
+      }
     }
   },
   "components": {
