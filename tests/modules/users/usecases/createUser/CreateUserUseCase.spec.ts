@@ -1,5 +1,5 @@
 import { IRegisterUserRequest } from '@modules/users/dtos/IRegisterUserRequest'
-import { CreateUserUseCase } from '@modules/users/useCases/createUser/CreateUserUseCase'
+import { CreateUserUseCase } from '@modules/users/usecases/createUser/CreateUserUseCase'
 import { UserRepositoryInMemory } from '@modules/users/repositories/inMemory/UserRepositoryInMemory'
 
 let userRepositoryInMemory: UserRepositoryInMemory

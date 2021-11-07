@@ -4,7 +4,7 @@ import { CreateTodoUseCase } from '@modules/todos/useCases/createTodo/CreateTodo
 import { SetTodoStatusUseCase } from '@modules/todos/useCases/setTodoStatus/SetTodoStatusUseCase'
 import { IRegisterUserRequest } from '@modules/users/dtos/IRegisterUserRequest'
 import { UserRepositoryInMemory } from '@modules/users/repositories/inMemory/UserRepositoryInMemory'
-import { CreateUserUseCase } from '@modules/users/useCases/createUser/CreateUserUseCase'
+import { CreateUserUseCase } from '@modules/users/usecases/createUser/CreateUserUseCase'
 
 let userRepositoryInMemory: UserRepositoryInMemory
 let todoRepositoryInMemory: TodoRepositoryInMemory

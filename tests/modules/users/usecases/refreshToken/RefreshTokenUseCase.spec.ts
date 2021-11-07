@@ -1,9 +1,9 @@
 import { IRegisterUserRequest } from '@modules/users/dtos/IRegisterUserRequest'
 import { UserRepositoryInMemory } from '@modules/users/repositories/inMemory/UserRepositoryInMemory'
 import { UserTokensRepositoryInMemory } from '@modules/users/repositories/inMemory/UserTokensRepositoryInMemory'
-import { AuthenticateUserUseCase } from '@modules/users/useCases/authenticateUser/AuthenticateUserUseCase'
-import { CreateUserUseCase } from '@modules/users/useCases/createUser/CreateUserUseCase'
-import { RefreshTokenUseCase } from '@modules/users/useCases/refreshToken/RefreshTokenUseCase'
+import { AuthenticateUserUseCase } from '@modules/users/usecases/authenticateUser/AuthenticateUserUseCase'
+import { CreateUserUseCase } from '@modules/users/usecases/createUser/CreateUserUseCase'
+import { RefreshTokenUseCase } from '@modules/users/usecases/refreshToken/RefreshTokenUseCase'
 import { DateProvider } from '@shared/container/providers/DateProvider/DateProvider'
 
 let userRepositoryInMemory: UserRepositoryInMemory

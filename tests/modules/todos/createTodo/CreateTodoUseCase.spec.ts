@@ -2,7 +2,7 @@ import { TodoRepositoryInMemory } from '@modules/todos/repositories/inMemory/Tod
 import { CreateTodoUseCase } from '@modules/todos/useCases/createTodo/CreateTodoUseCase'
 import { IRegisterUserRequest } from '@modules/users/dtos/IRegisterUserRequest'
 import { UserRepositoryInMemory } from '@modules/users/repositories/inMemory/UserRepositoryInMemory'
-import { CreateUserUseCase } from '@modules/users/useCases/createUser/CreateUserUseCase'
+import { CreateUserUseCase } from '@modules/users/usecases/createUser/CreateUserUseCase'
 import { v4 as uuidV4 } from 'uuid'
 
 let userRepositoryInMemory: UserRepositoryInMemory

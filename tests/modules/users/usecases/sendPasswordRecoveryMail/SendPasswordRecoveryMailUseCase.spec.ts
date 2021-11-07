@@ -1,6 +1,6 @@
 import { UserRepositoryInMemory } from '@modules/users/repositories/inMemory/UserRepositoryInMemory'
 import { UserTokensRepositoryInMemory } from '@modules/users/repositories/inMemory/UserTokensRepositoryInMemory'
-import { SendPasswordRecoveryMailUseCase } from '@modules/users/useCases/sendPasswordRecoveryMail/SendPasswordRecoveryMailUseCase'
+import { SendPasswordRecoveryMailUseCase } from '@modules/users/usecases/sendPasswordRecoveryMail/SendPasswordRecoveryMailUseCase'
 import { DateProvider } from '@shared/container/providers/DateProvider/DateProvider'
 import { MailProviderInMemory } from '@shared/container/providers/MailProvider/inMemory/MailProviderInMemory'
 
