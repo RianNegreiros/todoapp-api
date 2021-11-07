@@ -1,12 +1,12 @@
 import { Router } from 'express'
-import { CreateTodoController } from '@modules/todos/useCases/createTodo/CreateTodoController'
-import { DeleteTodoController } from '@modules/todos/useCases/deleteTodo/DeleteTodoController'
-import { SetTodoStatusController } from '@modules/todos/useCases/setTodoStatus/SetTodoStatusController'
+import { CreateTodoController } from '@modules/todos/usecases/createTodo/CreateTodoController'
+import { DeleteTodoController } from '@modules/todos/usecases/deleteTodo/DeleteTodoController'
+import { SetTodoStatusController } from '@modules/todos/usecases/setTodoStatus/SetTodoStatusController'
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated'
-import { GetCompleteTodosController } from '@modules/todos/useCases/getTodosCompleted/GetCompleteTodosController'
-import { GetAllTodosController } from '@modules/todos/useCases/getAllTodos/GetUserAllTodosController'
-import { ClearCompletedTodosController } from '@modules/todos/useCases/clearCompletedTodos/ClearCompletedTodosController'
-import { GetAllUncompletedController } from '@modules/todos/useCases/getAllUncompletedTodos/GetAllUncompletedTodosController'
+import { GetCompleteTodosController } from '@modules/todos/usecases/getTodosCompleted/GetCompleteTodosController'
+import { GetAllTodosController } from '@modules/todos/usecases/getAllTodos/GetUserAllTodosController'
+import { ClearCompletedTodosController } from '@modules/todos/usecases/clearCompletedTodos/ClearCompletedTodosController'
+import { GetAllUncompletedController } from '@modules/todos/usecases/getAllUncompletedTodos/GetAllUncompletedTodosController'
 
 const todoRoutes = Router()
 

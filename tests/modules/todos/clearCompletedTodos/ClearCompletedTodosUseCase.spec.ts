@@ -1,11 +1,12 @@
 import { v4 as uuidV4 } from 'uuid'
 import { TodoRepositoryInMemory } from '@modules/todos/repositories/inMemory/TodoRepositoryInMemory'
-import { CreateTodoUseCase } from '@modules/todos/useCases/createTodo/CreateTodoUseCase'
 import { IRegisterUserRequest } from '@modules/users/dtos/IRegisterUserRequest'
 import { UserRepositoryInMemory } from '@modules/users/repositories/inMemory/UserRepositoryInMemory'
-import { SetTodoStatusUseCase } from '@modules/todos/useCases/setTodoStatus/SetTodoStatusUseCase'
-import { ClearCompletedTodosUseCase } from '@modules/todos/useCases/clearCompletedTodos/ClearCompletedTodosUseCase'
 import { CreateUserUseCase } from '@modules/users/usecases/createUser/CreateUserUseCase'
+import { ClearCompletedTodosUseCase } from '@modules/todos/usecases/clearCompletedTodos/ClearCompletedTodosUseCase'
+import { CreateTodoUseCase } from '@modules/todos/usecases/createTodo/CreateTodoUseCase'
+import { SetTodoStatusUseCase } from '@modules/todos/usecases/setTodoStatus/SetTodoStatusUseCase'
+
 
 let userRepositoryInMemory: UserRepositoryInMemory
 let todoRepositoryInMemory: TodoRepositoryInMemory

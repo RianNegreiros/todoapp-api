@@ -1,6 +1,6 @@
 import { TodoRepositoryInMemory } from '@modules/todos/repositories/inMemory/TodoRepositoryInMemory'
-import { CreateTodoUseCase } from '@modules/todos/useCases/createTodo/CreateTodoUseCase'
-import { DeleteTodoUseCase } from '@modules/todos/useCases/deleteTodo/DeleteTodoUseCase'
+import { CreateTodoUseCase } from '@modules/todos/usecases/createTodo/CreateTodoUseCase'
+import { DeleteTodoUseCase } from '@modules/todos/usecases/deleteTodo/DeleteTodoUseCase'
 import { IRegisterUserRequest } from '@modules/users/dtos/IRegisterUserRequest'
 import { UserRepositoryInMemory } from '@modules/users/repositories/inMemory/UserRepositoryInMemory'
 import { CreateUserUseCase } from '@modules/users/usecases/createUser/CreateUserUseCase'
