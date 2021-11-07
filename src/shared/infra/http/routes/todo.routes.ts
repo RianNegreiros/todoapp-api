@@ -18,16 +18,16 @@ const getAllTodosController = new GetAllTodosController()
 const getAllUncompletedController = new GetAllUncompletedController()
 const clearCompletedsTodos = new ClearCompletedTodosController()
 
-todoRoutes.post('/create', ensureAuthenticated, createTodoController.handle)
+todoRoutes.post('/', ensureAuthenticated, createTodoController.handle)
 
 todoRoutes.put('/status', ensureAuthenticated, setTodoStatusController.handle)
 
-todoRoutes.delete('/delete', ensureAuthenticated, deleteTodoController.handle)
+todoRoutes.delete('/', ensureAuthenticated, deleteTodoController.handle)
 
-todoRoutes.get('/all', getAllTodosController.handle)
+todoRoutes.get('/', getAllTodosController.handle)
 
 todoRoutes.get(
-  '/completed',
+  '/completeds',
   getCompleteTodosController.handle
 )
 
@@ -37,7 +37,7 @@ todoRoutes.get(
 )
 
 todoRoutes.delete(
-  '/clear-completed',
+  '/completeds',
   ensureAuthenticated,
   clearCompletedsTodos.handle
 )
