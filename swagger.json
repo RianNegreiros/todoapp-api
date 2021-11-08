@@ -150,6 +150,34 @@
             "description": "User not found by this id"
           }
         }
+      },
+      "get": {
+        "tags": ["Todos"],
+        "summary": "List All Todos",
+        "description": "List all Todos from a User",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "User not found by this id"
+          }
+        }
       }
     },
     "/todos/delete": {
@@ -224,6 +252,34 @@
             "description": "User not found by this id"
           }
         }
+      },
+      "get": {
+        "tags": ["Todos"],
+        "summary": "List All Completeds Todos",
+        "description": "List all completeds Todos from a User",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "userId": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "User not found by this id"
+          }
+        }
       }
     },
     "/todos/status": {
@@ -258,66 +314,6 @@
           },
           "400": {
             "description": "Todo not found by this id"
-          }
-        }
-      }
-    },
-    "/todos": {
-      "get": {
-        "tags": ["Todos"],
-        "summary": "List All Todos",
-        "description": "List all Todos from a User",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "userId": {
-                    "type": "string",
-                    "format": "uuid"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "400": {
-            "description": "User not found by this id"
-          }
-        }
-      }
-    },
-    "/todos/completeds": {
-      "get": {
-        "tags": ["Todos"],
-        "summary": "List All Completeds Todos",
-        "description": "List all completeds Todos from a User",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "userId": {
-                    "type": "string",
-                    "format": "uuid"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          },
-          "400": {
-            "description": "User not found by this id"
           }
         }
       }
