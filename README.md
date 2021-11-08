@@ -56,7 +56,7 @@ npm run typeorm migration:run
 ```
 npm run dev
 ```
-To run with JavaScript
+Or
 ```
 npm run build
 node dist/shared/infra/http/server.js
