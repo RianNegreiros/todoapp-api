@@ -13,7 +13,7 @@
 
 ## Deploy
   **AWS**
-> https://todoapp.riannegreiros.dev/
+> https://todoapp.riannegreiros.dev/api-docs
 
 ## Features
 - User
