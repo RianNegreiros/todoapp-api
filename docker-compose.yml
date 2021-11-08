@@ -11,9 +11,15 @@ services:
       - POSTGRES_USER=todoapp
       - POSTGRES_PASSWORD=todoapp
       - POSTGRES_DB=todoapp
-  app:
-    build: .
-    container_name: todoapp_api
-    restart: always
-    ports: 
-      - 5050:5050
+
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
+      
+ # app:
+  #  build: .
+  #  container_name: todoapp_api
+  #  restart: always
+  #  ports: 
+  #    - 5050:5050
