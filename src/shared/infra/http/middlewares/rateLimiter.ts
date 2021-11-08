@@ -12,7 +12,7 @@ const limiter = new RateLimiterRedis({
   storeClient: redisClinet,
   keyPrefix: 'rateLimiter',
   points: 5,
-  duration: 5,
+  duration: 1,
 })
 
 export default async function rateLimiter(
