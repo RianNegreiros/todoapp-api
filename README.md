@@ -61,10 +61,14 @@ Or
 npm run build
 node dist/shared/infra/http/server.js
 ```
-And to run the tests
+
+## Tests
+To run automated tests
 ```
 npm run test
 ```
+To manually test with insomnia <br/>
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=To-do%20list&uri=https%3A%2F%2Fraw.githubusercontent.com%2FRianNegreiros%2Ftodoapp-api-node%2Fmain%2FInsomnia_2021-11-09.json)
 
 ### Author
  <sub id="author"><b>Rian Negreiros</b></sub></a>
