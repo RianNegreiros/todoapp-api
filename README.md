@@ -69,7 +69,7 @@ To run automated tests
 npm run test
 ```
 To manually test with Insomnia <br/>
-[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=To-do%20list&uri=https%3A%2F%2Fraw.githubusercontent.com%2FRianNegreiros%2Ftodoapp-api-node%2Fmain%2FInsomnia_2021-11-09.json)
+[![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=To-do%20list&uri=https%3A%2F%2Fraw.githubusercontent.com%2FRianNegreiros%2Ftodoapp-api-node%2Fmain%2FInsomnia.json)
 
 To manually test with Postman <br/>
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/15917186-1b9573b8-c569-4f4f-b348-54b6b4d4e9d8?action=collection%2Ffork&collection-url=entityId%3D15917186-1b9573b8-c569-4f4f-b348-54b6b4d4e9d8%26entityType%3Dcollection%26workspaceId%3D8ff9523b-59ac-4c75-9a4e-9f4fad82850a)
