@@ -14,7 +14,7 @@
 
 ## Deploy
   **AWS**
-> https://todoapp.riannegreiros.dev/api-docs
+> https://todoapp.riannegreiros.dev/api-docs/
 
 ## Features
 - User
