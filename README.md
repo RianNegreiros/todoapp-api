@@ -1,6 +1,6 @@
 <h1 align="center"> To-do list API </h1>
 
-<p align="center" id="description"> An API for a to-do list application </p>
+<p align="center" id="description"> An API for a to-do list application inspired by <a href="https://todomvc.com/">Todo MVC<a/></p> 
 
 <p align="center">
  <a href="#description">Description</a> •
@@ -38,22 +38,24 @@
   [Docker](https://www.docker.com)
 
 1. Clone the project.
-  ```
-  git clone https://github.com/RianNegreiros/todoapp-api-node.git
-  ```
+```
+git clone https://github.com/RianNegreiros/todoapp-api-node.git
+```
 2. Install the dependencies
-  ```
-  npm install
-  ```
-3. Run Docker Compose
+```
+npm install
+```
+3. Set .env, ormconfig ant auth files by the examples
+ 
+4. Run Docker Compose
 ```
 docker-compose up
 ```
-4. Run the migrations
+5. Run the migrations
 ```
 npm run typeorm migration:run
 ```
-5. Run the application
+6. Run the application
 ```
 npm run dev
 ```
