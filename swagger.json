@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Todo API Documentation",
+    "title": "Todo app API Documentation",
     "description": "This is an API for an Todo App",
     "version": "1.0.0",
     "contact": {
