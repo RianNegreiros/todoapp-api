@@ -283,7 +283,7 @@
       }
     },
     "/todos/status": {
-      "put": {
+      "patch": {
         "tags": ["Todos"],
         "summary": "Change Todo Status",
         "description": "Change todo status",

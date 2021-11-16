@@ -20,7 +20,7 @@ const clearCompletedsTodos = new ClearCompletedTodosController()
 
 todoRoutes.post('/', ensureAuthenticated, createTodoController.handle)
 
-todoRoutes.put('/status', ensureAuthenticated, setTodoStatusController.handle)
+todoRoutes.patch('/status', ensureAuthenticated, setTodoStatusController.handle)
 
 todoRoutes.delete('/', ensureAuthenticated, deleteTodoController.handle)
 
