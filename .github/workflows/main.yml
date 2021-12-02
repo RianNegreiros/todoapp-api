@@ -18,7 +18,7 @@ jobs:
       - name: Setup Nodejs
         uses: actions/setup-node@v2
         with:
-          node-version: 14.x
+          node-version: 16.x
           
       - name: Install Dependencies
         run: npm install
@@ -45,6 +45,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }} 
           script: |
             cd ~/app/todoapp-api
-            yarn
+            npm install
             ./node_modules/.bin/typeorm migration:run
             pm2 restart todoapp-api
