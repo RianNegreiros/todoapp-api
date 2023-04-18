@@ -1,20 +1,15 @@
 <h1 align="center"> To-do list API </h1>
 
-<p align="center" id="description"> This API is inspired by a <a href="https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW">Frontend Mentor challenge<a/>, Todo app</p> 
+<p align="center" id="description"> This API is inspired by a <a href="https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW">Frontend Mentor challenge Todo app<a/></p> 
 
 <p align="center">
  <a href="#description">Description</a> •
- <a href="#deploy">Deploy</a> • 
  <a href="#features">Features</a> • 
  <a href="#how-to-run">How to run</a> • 
  <a href="#requirements">Requirements</a> • 
  <a href="#tests">Tests</a> • 
  <a href="#author">Author</a>
 </p>
-
-## Deploy
-  **AWS**
-> https://todoapp.riannegreiros.dev/api-docs/
 
 ## Features
 - User
