@@ -1,6 +1,6 @@
 <h1 align="center"> To-do list API </h1>
 
-<p align="center" id="description"> This API is inspired by a <a href="https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW">Frontend Mentor challenge Todo app<a/></p> 
+<p align="center" id="description">API built from the Rocketseat Ignite Trail NodeJs course, but for a Todo application instead of car rental</p> 
 
 <p align="center">
  <a href="#description">Description</a> •
