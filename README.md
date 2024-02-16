@@ -1,7 +1,5 @@
 <h1 align="center"> To-do list API </h1>
 
-<p align="center" id="description">API built from the Rocketseat Ignite Trail NodeJs course, but for a Todo application instead of car rental</p> 
-
 <p align="center">
  <a href="#description">Description</a> •
  <a href="#features">Features</a> • 
